@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Teams.css";
+import styles from './Teams.module.css';
 
 const teamData = {
 	stats: { members: 35, departments: 7, events: 100 },
@@ -76,97 +76,50 @@ const teamData = {
 
 function Teams() {
 	return (
-		<div className="wrap">
-			<header>
-				<div className="header-inner">
-					<div className="brand">
-						<img src="/images/VVITULogo_Final.png" alt="VVIT Logo" />
-						<span>VVIT</span>
-					</div>
-					<nav id="main-nav">
-						<Link to="/">Home</Link>
-						<Link to="/events">Events</Link>
-						<Link to="/calender">Calendar</Link>
-						<Link to="/gallery">Gallery</Link>
-						<Link to="/teams">Teams</Link>
-						<Link to="/contact">Contact</Link>
-					</nav>
-				</div>
-			</header>
+		<div className={styles.wrap}>
+			
 			<main>
-				<div className="hero-teams">
+				<div className={styles['hero-teams']}>
 					<h1>IIC Teams 2025</h1>
 					<p>Meet the passionate faculty and student teams driving innovation, entrepreneurship, and impactful events at VVIT IIC.</p>
-					<div className="hero-stats">
-						<div className="stat-item">
-							<span className="stat-number">{teamData.stats.members}</span>
-							<span className="stat-label">Team Members</span>
+					<div className={styles['hero-stats']}>
+						<div className={styles['stat-item']}>
+							<span className={styles['stat-number']}>{teamData.stats.members}</span>
+							<span className={styles['stat-label']}>Team Members</span>
 						</div>
-						<div className="stat-item">
-							<span className="stat-number">{teamData.stats.departments}</span>
-							<span className="stat-label">Departments</span>
+						<div className={styles['stat-item']}>
+							<span className={styles['stat-number']}>{teamData.stats.departments}</span>
+							<span className={styles['stat-label']}>Departments</span>
 						</div>
-						<div className="stat-item">
-							<span className="stat-number">{teamData.stats.events}+</span>
-							<span className="stat-label">Events Organized</span>
+						<div className={styles['stat-item']}>
+							<span className={styles['stat-number']}>{teamData.stats.events}+</span>
+							<span className={styles['stat-label']}>Events Organized</span>
 						</div>
 					</div>
 				</div>
 				{teamData.team.map((section, idx) => (
-					<div className="team-section" key={section.section}>
+					<div className={styles['team-section']} key={section.section}>
 						<div className={"section-intro" + (section.reverse ? " reverse" : "") }>
-							<div className="section-icon">{section.icon}</div>
-							<div className="section-text">
+							<div className={styles['section-icon']}>{section.icon}</div>
+							<div className={styles['section-text']}>
 								<h2>{section.section}</h2>
 								<p>{section.description}</p>
 							</div>
 						</div>
 						<div className={section.section.includes("President") ? "team-grid leadership" : "team-grid"}>
 							{section.members.map((member) => (
-								<div className="member-card" key={member.name}>
-									<div className="member-avatar">{member.initials}</div>
-									<div className="member-name">{member.name}</div>
-									<div className="member-role">{member.role}</div>
-									<div className="member-bio">{member.bio}</div>
+								<div className={styles['member-card']} key={member.name}>
+									<div className={styles['member-avatar']}>{member.initials}</div>
+									<div className={styles['member-name']}>{member.name}</div>
+									<div className={styles['member-role']}>{member.role}</div>
+									<div className={styles['member-bio']}>{member.bio}</div>
 								</div>
 							))}
 						</div>
 					</div>
 				))}
 			</main>
-			<footer style={{background:'#111', color:'#fff', padding:'60px 0 0 0', marginTop:0}}>
-				<div className="footer-grid" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'40px 24px',maxWidth:'1200px',margin:'0 auto',padding:'0 24px'}}>
-					<div>
-						<h4 style={{fontSize:'20px',fontWeight:700,marginBottom:'16px'}}>VVIT IIC</h4>
-						<p style={{color:'#bbb',lineHeight:1.7,fontSize:'15px'}}>Institution's Innovation Council (IIC) promotes innovation and entrepreneurship within academic institutions.</p>
-					</div>
-					<div>
-						<h5 style={{fontSize:'15px',fontWeight:600,marginBottom:'12px'}}>Quick Links</h5>
-						<ul style={{listStyle:'none',padding:0,margin:0}}>
-							<li><a href="/" style={{color:'#bbb',display:'block',padding:'4px 0'}}>Home</a></li>
-							<li><a href="/events" style={{color:'#bbb',display:'block',padding:'4px 0'}}>Events</a></li>
-							<li><a href="/gallery" style={{color:'#bbb',display:'block',padding:'4px 0'}}>Gallery</a></li>
-							<li><a href="/teams" style={{color:'#bbb',display:'block',padding:'4px 0'}}>Teams</a></li>
-							<li><a href="/contact" style={{color:'#bbb',display:'block',padding:'4px 0'}}>Contact</a></li>
-						</ul>
-					</div>
-					<div>
-						<h5 style={{fontSize:'15px',fontWeight:600,marginBottom:'12px'}}>Resources</h5>
-						<ul style={{listStyle:'none',padding:0,margin:0}}>
-							<li><span style={{color:'#bbb',display:'block',padding:'4px 0'}}>Coming Soon</span></li>
-						</ul>
-					</div>
-					<div>
-						<h5 style={{fontSize:'15px',fontWeight:600,marginBottom:'12px'}}>Contact</h5>
-						<ul style={{listStyle:'none',padding:0,margin:0}}>
-							<li><span style={{color:'#bbb',display:'block',padding:'4px 0'}}>info@vvit.edu.in</span></li>
-							<li><span style={{color:'#bbb',display:'block',padding:'4px 0'}}>+91 12345 67890</span></li>
-						</ul>
-					</div>
-				</div>
-				<hr style={{border:0,borderTop:'1px solid #222',margin:'40px 0 24px 0'}} />
-				<p style={{color:'#888',fontSize:'14px',margin:'32px 0 0 0'}}>&copy; {new Date().getFullYear()} Institution's Innovation Council. All rights reserved.</p>
-			</footer>
+			
 		</div>
 	);
 }

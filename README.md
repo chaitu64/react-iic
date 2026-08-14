@@ -2,6 +2,29 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Backend setup (`server` folder)
+
+The backend uses Express and lives in `server/`.
+
+### Install backend dependencies
+
+```bash
+cd server
+npm install
+```
+
+### Run backend
+
+```bash
+npm run dev
+```
+
+Backend health check:
+
+```bash
+http://localhost:5000/api/health
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -31,7 +31,7 @@ body::before {
   inset: 0;
   background:
     radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.02) 100%),
-    url("/images/IIC.png") center/500px auto no-repeat;
+    url("/public/images/IIC.png") center/500px auto no-repeat;
   opacity: 0.15;
   z-index: -1;
   transform: translateZ(0);

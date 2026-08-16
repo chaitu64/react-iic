@@ -1,48 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-
 function Footer() {
     return (
-        <footer style={{ background: '#111', color: '#fff', padding: '60px 0 0 0', marginTop: 0 }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
-                <div className="footer-grid">
-                    <div>
-                        <h4 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '16px' }}>VVIT IIC</h4>
-                        <p style={{ color: '#bbb', lineHeight: '1.7', fontSize: '15px' }}>
-                            Institution's Innovation Council (IIC) promotes innovation and entrepreneurship within academic institutions.
-                        </p>
-                    </div>
-                    <div>
-                        <h5 style={{ fontSize: '15px', fontWeight: '600', marginBottom: '12px' }}>Quick Links</h5>
-                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                            <li><Link to="/" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Home</Link></li>
-                            <li><Link to="/events" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Events</Link></li>
-                            <li><Link to="/gallery" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Gallery</Link></li>
-                            <li><Link to="/teams" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Teams</Link></li>
-                            <li><Link to="/contact" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Contact</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 style={{ fontSize: '15px', fontWeight: '600', marginBottom: '12px' }}>Resources</h5>
-                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                            <li><a href="https://yukti.mic.gov.in/" target="_blank" rel="noopener noreferrer" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>YUKTI</a></li>
-                            <li><a href="https://mic.gov.in/" target="_blank" rel="noopener noreferrer" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>MIC</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 style={{ fontSize: '15px', fontWeight: '600', marginBottom: '12px' }}>Contact</h5>
-                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                            <li><Link to="/contact" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Contact Us</Link></li>
-                            <li><Link to="/teams" style={{ color: '#bbb', display: 'block', padding: '4px 0', textDecoration: 'none' }}>Teams</Link></li>
-                        </ul>
-                    </div>
-                </div>
-                <hr style={{ border: 0, borderTop: '1px solid #222', margin: '40px 0 24px 0' }} />
-                <p style={{ color: '#888', fontSize: '14px', margin: '32px 0 0 0', paddingBottom: '32px' }}>
-                    &copy; {new Date().getFullYear()} Institution's Innovation Council. All rights reserved.
+        <footer className="footer sm:footer-horizontal custom-footer" style={{ background: '#111', color: '#fff', padding: '60px 40px', marginTop: 0 }}>
+            <aside className="footer-aside">
+                <img src="/images/IIC.png" alt="IIC Logo" style={{ height: '80px', width: 'auto', display: 'block', objectFit: 'contain' ,alignItems:'left',justifyContent:'left',marginLeft:'0',marginRight:'auto'}} />
+                <p style={{ marginTop: '16px', lineHeight: '1.6', color: '#bbb' }}>
+                    {/* <strong style={{ color: '#fff', fontSize: '18px' }}>VVIT IIC</strong> */}
+                    <br />
+                    Institution's Innovation Council
+                    <br />
+                    Promoting entrepreneurship since 2018
                 </p>
-            </div>
+                <p style={{ color: '#666', fontSize: '14px', marginTop: '16px' }}>
+                    &copy; {new Date().getFullYear()} VVITU IIC. All rights reserved.
+                </p>
+            </aside>
+            <nav className="footer-nav">
+                <h6 className="footer-title">Quick Links</h6>
+                <Link to="/" className="link link-hover">Home</Link>
+                <Link to="/events" className="link link-hover">Events</Link>
+                <Link to="/gallery" className="link link-hover">Gallery</Link>
+                <Link to="/teams" className="link link-hover">Teams</Link>
+                <Link to="/contact" className="link link-hover">Contact</Link>
+            </nav>
+            <nav className="footer-nav">
+                <h6 className="footer-title">Resources</h6>
+                <a href="https://yukti.mic.gov.in/" target="_blank" rel="noopener noreferrer" className="link link-hover">YUKTI Database</a>
+                <a href="https://mic.gov.in/" target="_blank" rel="noopener noreferrer" className="link link-hover">MoE Innovation Cell</a>
+            </nav>
+            <nav className="footer-nav">
+                <h6 className="footer-title">Contact</h6>
+                <Link to="/contact" className="link link-hover">Get in touch</Link>
+                <Link to="/teams" className="link link-hover">Meet the board</Link>
+                <Link to="/contact" className="link link-hover">Help & Support</Link>
+            </nav>
         </footer>
     );
 }

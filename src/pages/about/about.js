@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import styles from './About.module.css';
 function About() {
 	return (
 		<div className={styles.wrap}>
-			
+
 			<section className={styles['page-hero']}>
 				<h1>About VVIT IIC</h1>
 				<p>Fostering a culture of innovation and entrepreneurship at Vasireddy Venkatadri Institute of Technology through comprehensive programs, world-class infrastructure, and strategic partnerships.</p>
@@ -27,7 +27,7 @@ function About() {
 					</div>
 				</div>
 			</section>
-			<section className={styles['content-section']} style={{background:'linear-gradient(135deg,rgba(107,91,168,0.05),rgba(244,162,56,0.03))',padding:'60px 40px',margin:0}}>
+			<section className={styles['content-section']} style={{ background: 'linear-gradient(135deg,rgba(107,91,168,0.05),rgba(244,162,56,0.03))', padding: '60px 40px', margin: 0 }}>
 				<h2 className={styles['section-title']}>Our Achievements</h2>
 				<div className={styles['stats-grid']}>
 					<div className={styles['stat-card']}>
@@ -119,7 +119,7 @@ function About() {
 					</div>
 				</div>
 			</section>
-			<section className={styles['content-section']} style={{background:'linear-gradient(135deg,rgba(46,42,143,0.03),rgba(107,91,168,0.02))',padding:'60px 40px',margin:0}}>
+			<section className={styles['content-section']} style={{ background: 'linear-gradient(135deg,rgba(46,42,143,0.03),rgba(107,91,168,0.02))', padding: '60px 40px', margin: 0 }}>
 				<h2 className={styles['section-title']}>Strategic Partnerships</h2>
 				<p className={styles['text-block']}>We collaborate with leading institutions and organizations to provide our students with world-class opportunities and resources.</p>
 				<div className={styles['partners-grid']}>
@@ -137,10 +137,10 @@ function About() {
 				<h2 className={styles['section-title']}>Recognition & Rankings</h2>
 				<div className={styles['text-block']}>
 					<p>VVIT has achieved significant recognition for its innovation efforts at both national and state levels. The institute secured a prestigious position in the Atal Ranking of Institutions on Innovation Achievements (ARIIA) 2020, ranking in Band-A (6th-25th position) among private self-financed colleges across India.</p>
-					<p style={{marginTop:16}}>Out of 674 institutions that participated nationally, only 17 institutions from Andhra Pradesh received this honor, with VVIT being one of only three colleges from the state in its category. This recognition validates our commitment to fostering innovation and entrepreneurship.</p>
+					<p style={{ marginTop: 16 }}>Out of 674 institutions that participated nationally, only 17 institutions from Andhra Pradesh received this honor, with VVIT being one of only three colleges from the state in its category. This recognition validates our commitment to fostering innovation and entrepreneurship.</p>
 				</div>
 			</section>
-			
+
 		</div>
 	);
 }

@@ -8,6 +8,7 @@ import Events from './pages/events/events';
 import Gallery from './pages/gallery/gallery';
 import Teams from './pages/teams/teams';
 import About from './pages/about/about';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>
     </Router>

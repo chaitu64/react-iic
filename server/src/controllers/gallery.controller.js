@@ -23,13 +23,32 @@ export const createGalleryImage = async (req, res) => {
 
 export const getAllGalleryImages = async (req, res) => {
     try {
-        const { data: galleryImages, error } = await supabase.from('gallery').select('*');
-        if (error) throw error;
+        // Read directly from the 'gallery' Storage Bucket just like you asked!
+        const { data: files, error } = await supabase.storage.from('gallery').list('', {
+            limit: 100,
+            offset: 0,
+            sortBy: { column: 'created_at', order: 'desc' }
+        });
 
-        if (!galleryImages) {
-            return res.status(404).json({ message: "Gallery Image not found" });
+        if (error) throw error;
+        if (!files || files.length === 0) {
+            return res.status(404).json({ message: "No images found in the gallery bucket", galleryImages: [] });
         }
-        return res.status(200).json({ message: "Gallery Images fetched successfully", galleryImages });
+
+        // Generate the Public URL for every single file sitting in the bucket!
+        const bucketImages = files.map(file => {
+            const { data } = supabase.storage.from('gallery').getPublicUrl(file.name);
+            return {
+                id: file.id,
+                title: file.name,
+                date: file.created_at,
+                // The frontend gallery mapping expects an array named `images`
+                images: [data.publicUrl],
+                category: "all" // Automatically assign to the "All Events" filter
+            };
+        });
+
+        return res.status(200).json({ message: "Gallery Bucket fetched successfully", galleryImages: bucketImages });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" })

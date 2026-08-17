@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import styles from './Teams.module.css';
 
 const teamData = {
@@ -75,9 +75,34 @@ const teamData = {
 };
 
 function Teams() {
+	const [fetchedTeams, setFetchedTeams] = React.useState(teamData.team);
+	const [loading, setLoading] = React.useState(true);
+
+	React.useEffect(() => {
+		fetch('http://localhost:5000/api/team')
+			.then(res => res.json())
+			.then(data => {
+				const backendMembers = data.teamMembers || [];
+				if (backendMembers.length > 0) {
+					// Map backend members to their respective structural sections
+					const updatedTeams = teamData.team.map(sec => ({
+						...sec,
+						members: backendMembers.filter(m => m.section === sec.section || m.section === sec.section.toLowerCase())
+					}));
+					// Only keep sections with members
+					setFetchedTeams(updatedTeams.filter(sec => sec.members.length > 0));
+				}
+				setLoading(false);
+			})
+			.catch(err => {
+				console.error("Failed to fetch teams:", err);
+				setLoading(false);
+			});
+	}, []);
+
 	return (
 		<div className={styles.wrap}>
-			
+
 			<main>
 				<div className={styles['hero-teams']}>
 					<h1>IIC Teams 2025</h1>
@@ -97,29 +122,56 @@ function Teams() {
 						</div>
 					</div>
 				</div>
-				{teamData.team.map((section, idx) => (
-					<div className={styles['team-section']} key={section.section}>
-						<div className={"section-intro" + (section.reverse ? " reverse" : "") }>
-							<div className={styles['section-icon']}>{section.icon}</div>
-							<div className={styles['section-text']}>
-								<h2>{section.section}</h2>
-								<p>{section.description}</p>
+
+				{loading && (
+					<div style={{ textAlign: 'center', padding: '100px', fontSize: '18px', color: '#666' }}>
+						Loading Team Directory... <i className="fa-solid fa-circle-notch fa-spin"></i>
+					</div>
+				)}
+
+				{!loading && fetchedTeams.map((section, idx) => {
+					const shouldMarquee = section.members.length > 3;
+					// Duplicate members to create seamless infinite scroll loop
+					const renderMembers = shouldMarquee
+						? [...section.members, ...section.members, ...section.members, ...section.members, ...section.members, ...section.members]
+						: section.members;
+
+					return (
+						<div className={styles['team-section']} key={section.section}>
+							<div className={styles['section-intro'] + (section.reverse ? ` ${styles['reverse']}` : "")}>
+								<div className={styles['section-icon']}>{section.icon}</div>
+								<div className={styles['section-text']}>
+									<h2>{section.section}</h2>
+									<p>{section.description}</p>
+								</div>
+							</div>
+
+							<div className={shouldMarquee ? styles['marquee-wrapper'] : styles['centered-wrapper']}>
+								<div className={`${styles['marquee-content']} ${!shouldMarquee ? styles['static-content'] : ""} ${shouldMarquee && idx % 2 !== 0 ? styles['reverse-scroll'] : ""}`}>
+									{renderMembers.map((member, mIdx) => (
+										<div className={`${styles['member-card']} hover-3d`} key={`${member.name}-${mIdx}`}>
+											<figure className={styles['member-figure']}>
+												<img
+													src={member.image || `https://i.pravatar.cc/300?u=${encodeURIComponent(member.name)}`}
+													alt={member.name}
+													className={styles['member-image']}
+												/>
+											</figure>
+											<div className={styles['member-body']}>
+												<h2 className={styles['member-name']}>{member.name}</h2>
+												<div className={styles['member-role']}>{member.role}</div>
+												<p className={styles['member-bio']}>{member.bio}</p>
+											</div>
+											<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+										</div>
+									))}
+								</div>
 							</div>
 						</div>
-						<div className={section.section.includes("President") ? "team-grid leadership" : "team-grid"}>
-							{section.members.map((member) => (
-								<div className={styles['member-card']} key={member.name}>
-									<div className={styles['member-avatar']}>{member.initials}</div>
-									<div className={styles['member-name']}>{member.name}</div>
-									<div className={styles['member-role']}>{member.role}</div>
-									<div className={styles['member-bio']}>{member.bio}</div>
-								</div>
-							))}
-						</div>
-					</div>
-				))}
+					)
+				})}
 			</main>
-			
+
 		</div>
 	);
 }

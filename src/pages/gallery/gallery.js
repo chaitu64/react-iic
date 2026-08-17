@@ -63,30 +63,17 @@ const filterOptions = [
 ];
 
 function Gallery() {
-	const [galleryData, setGalleryData] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [localGalleryData] = useState(galleryData);
+	const [loading] = useState(false);
 	const [filter, setFilter] = useState("all");
 	const [modal, setModal] = useState({ open: false, event: null, photoIdx: 0 });
 
-	React.useEffect(() => {
-		fetch('http://localhost:5000/api/gallery')
-			.then(res => res.json())
-			.then(data => {
-				// Access the precise 'galleryImages' array returned by our new Bucket controller!
-				setGalleryData(data.galleryImages || []);
-				setLoading(false);
-			})
-			.catch(err => {
-				console.error("Failed to fetch gallery", err);
-				setGalleryData(galleryData); // Fallback to raw constant on fail
-				setLoading(false);
-			});
-	}, []);
+	// Backend fetch removed to allow manual URL insertion via the 'galleryData' array above.
 
 	const filteredGallery =
 		filter === "all"
-			? galleryData
-			: galleryData.filter((item) => item.category === filter);
+			? localGalleryData
+			: localGalleryData.filter((item) => item.category === filter);
 
 	const openModal = (event) => {
 		setModal({ open: true, event, photoIdx: 0 });

@@ -12,9 +12,9 @@ const teamData = {
 				"Our faculty coordinators provide academic guidance and institutional support, bridging the gap between innovation initiatives and curriculum integration. They ensure IIC's alignment with educational objectives while fostering an entrepreneurial ecosystem.",
 			reverse: false,
 			members: [
-				{ name: "Dr. Y. Madhavi Rani", role: "Faculty Coordinator", bio: "Guides innovation and entrepreneurship initiatives.", initials: "YMR" },
-				{ name: "Dr. A. Anil", role: "Faculty Coordinator", bio: "Supports curriculum integration and student mentorship.", initials: "AA" },
-				{ name: "Dr. S. Suresh", role: "Faculty Coordinator", bio: "Facilitates institutional partnerships and R&D.", initials: "SS" }
+				{ name: "Dr. Y. Madhavi Rani", role: "Faculty Coordinator", bio: "Guides innovation and entrepreneurship initiatives.", initials: "YMR", image: "" },
+				{ name: "Dr. A. Anil", role: "Faculty Coordinator", bio: "Supports curriculum integration and student mentorship.", initials: "AA", image: "" },
+				{ name: "Dr. S. Suresh", role: "Faculty Coordinator", bio: "Facilitates institutional partnerships and R&D.", initials: "SS", image: "" }
 			]
 		},
 		{
@@ -24,9 +24,9 @@ const teamData = {
 				"Student leaders who spearhead IIC activities and represent the innovation council. They coordinate between various teams, drive strategic initiatives, and ensure effective execution of all programs while maintaining a vibrant entrepreneurial culture on campus.",
 			reverse: true,
 			members: [
-				{ name: "Pavan Kumar", role: "President", bio: "Leads council and strategic initiatives.", initials: "PK" },
-				{ name: "Jaya Gopal", role: "President", bio: "Coordinates team activities and outreach.", initials: "JG" },
-				{ name: "Sravani", role: "President", bio: "Ensures vibrant entrepreneurial culture.", initials: "S" }
+				{ name: "Pavan Kumar", role: "President", bio: "Leads council and strategic initiatives.", initials: "PK", image: "" },
+				{ name: "Jaya Gopal", role: "President", bio: "Coordinates team activities and outreach.", initials: "JG", image: "" },
+				{ name: "Sravani", role: "President", bio: "Ensures vibrant entrepreneurial culture.", initials: "S", image: "" }
 			]
 		},
 		{
@@ -36,12 +36,12 @@ const teamData = {
 				"Our PR team builds and maintains relationships with external stakeholders, media, industry partners, and alumni. They manage IIC's public image, coordinate outreach programs, and create strategic partnerships that enhance our institution's innovation ecosystem.",
 			reverse: false,
 			members: [
-				{ name: "Pranav", role: "PR Lead", bio: "Manages public image and outreach.", initials: "PN" },
-				{ name: "Jaya Gopal", role: "PR Member", bio: "Coordinates media and alumni relations.", initials: "JG" },
-				{ name: "Bhavya", role: "PR Member", bio: "Supports stakeholder engagement.", initials: "BM" },
-				{ name: "Sravani", role: "PR Member", bio: "Handles event communications.", initials: "S" },
-				{ name: "Yashwanth", role: "PR Member", bio: "Creates strategic partnerships.", initials: "YU" },
-				{ name: "Kiran", role: "PR Member", bio: "Manages outreach programs.", initials: "KN" }
+				{ name: "Pranav", role: "PR Lead", bio: "Manages public image and outreach.", initials: "PN", image: "" },
+				{ name: "Jaya Gopal", role: "PR Member", bio: "Coordinates media and alumni relations.", initials: "JG", image: "" },
+				{ name: "Bhavya", role: "PR Member", bio: "Supports stakeholder engagement.", initials: "BM", image: "" },
+				{ name: "Sravani", role: "PR Member", bio: "Handles event communications.", initials: "S", image: "" },
+				{ name: "Yashwanth", role: "PR Member", bio: "Creates strategic partnerships.", initials: "YU", image: "" },
+				{ name: "Kiran", role: "PR Member", bio: "Manages outreach programs.", initials: "KN", image: "" }
 			]
 		},
 		{
@@ -51,10 +51,10 @@ const teamData = {
 				"The web designing team develops and maintains IIC's digital infrastructure. They create user-friendly websites, design interfaces, implement features, ensure responsive design, and provide technical solutions that enhance online user experience and accessibility.",
 			reverse: false,
 			members: [
-				{ name: "Chaitanya", role: "Web Lead", bio: "Develops and maintains digital infrastructure.", initials: "CC" },
-				{ name: "Jaya Harsha", role: "Web Member", bio: "Designs interfaces and features.", initials: "JH" },
-				{ name: "Sravani", role: "Web Member", bio: "Ensures responsive design.", initials: "S" },
-				{ name: "Vamsi", role: "Web Member", bio: "Enhances user experience.", initials: "V" }
+				{ name: "Chaitanya", role: "Web Lead", bio: "Develops and maintains digital infrastructure.", initials: "CC", image: "" },
+				{ name: "Jaya Harsha", role: "Web Member", bio: "Designs interfaces and features.", initials: "JH", image: "" },
+				{ name: "Sravani", role: "Web Member", bio: "Ensures responsive design.", initials: "S", image: "" },
+				{ name: "Vamsi", role: "Web Member", bio: "Enhances user experience.", initials: "V", image: "" }
 			]
 		},
 		{
@@ -64,41 +64,21 @@ const teamData = {
 				"The events team conceptualizes and executes all IIC programs including hackathons, workshops, competitions, and seminars. They handle logistics, vendor coordination, participant management, and ensure every event creates memorable learning experiences that inspire innovation.",
 			reverse: true,
 			members: [
-				{ name: "Vamsi", role: "Events Lead", bio: "Conceptualizes and executes programs.", initials: "VC" },
-				{ name: "Pavan Kumar", role: "Events Member", bio: "Handles logistics and coordination.", initials: "PK" },
-				{ name: "Sravani", role: "Events Member", bio: "Manages participant experience.", initials: "SS" },
-				{ name: "Vijay", role: "Events Member", bio: "Ensures memorable events.", initials: "VP" },
-				{ name: "Chaitanya", role: "Events Member", bio: "Supports event planning.", initials: "CVB" }
+				{ name: "Vamsi", role: "Events Lead", bio: "Conceptualizes and executes programs.", initials: "VC", image: "" },
+				{ name: "Pavan Kumar", role: "Events Member", bio: "Handles logistics and coordination.", initials: "PK", image: "" },
+				{ name: "Sravani", role: "Events Member", bio: "Manages participant experience.", initials: "SS", image: "" },
+				{ name: "Vijay", role: "Events Member", bio: "Ensures memorable events.", initials: "VP", image: "" },
+				{ name: "Chaitanya", role: "Events Member", bio: "Supports event planning.", initials: "CVB", image: "" }
 			]
 		}
 	]
 };
 
 function Teams() {
-	const [fetchedTeams, setFetchedTeams] = React.useState(teamData.team);
-	const [loading, setLoading] = React.useState(true);
+	const [fetchedTeams] = React.useState(teamData.team);
+	const [loading] = React.useState(false);
 
-	React.useEffect(() => {
-		fetch('http://localhost:5000/api/team')
-			.then(res => res.json())
-			.then(data => {
-				const backendMembers = data.teamMembers || [];
-				if (backendMembers.length > 0) {
-					// Map backend members to their respective structural sections
-					const updatedTeams = teamData.team.map(sec => ({
-						...sec,
-						members: backendMembers.filter(m => m.section === sec.section || m.section === sec.section.toLowerCase())
-					}));
-					// Only keep sections with members
-					setFetchedTeams(updatedTeams.filter(sec => sec.members.length > 0));
-				}
-				setLoading(false);
-			})
-			.catch(err => {
-				console.error("Failed to fetch teams:", err);
-				setLoading(false);
-			});
-	}, []);
+	// Backend fetch removed to allow for manual manual static image update
 
 	return (
 		<div className={styles.wrap}>

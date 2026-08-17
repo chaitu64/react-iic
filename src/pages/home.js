@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './Home.module.css';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
@@ -69,9 +70,42 @@ function AnimatedSection({ children, delay = 0, className = "" }) {
 }
 
 function Home() {
+	const [showPopup, setShowPopup] = useState(false);
+
+	useEffect(() => {
+		// Show popup on every enter/refresh
+		setShowPopup(true);
+	}, []);
+
+	useEffect(() => {
+		if (showPopup) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+		return () => {
+			document.body.style.overflow = 'unset';
+		};
+	}, [showPopup]);
+
 	return (
 		<div className={styles.wrap}>
 
+			{showPopup && createPortal(
+				<div className={styles['popup-overlay']} onClick={() => setShowPopup(false)}>
+					<div className={styles['popup-content']} onClick={(e) => e.stopPropagation()}>
+						<button className={styles['popup-close']} onClick={() => setShowPopup(false)}>×</button>
+						<span className={styles['popup-badge']}>Ongoing Now</span>
+						<h2 className={styles['popup-title']}>Smart India Hackathon 2026</h2>
+						<img src="/images/poster.jpg" alt="SIH 2026" className={styles['popup-image']} onError={(e) => { e.target.src = 'https://via.placeholder.com/600x400?text=SIH+2026'; }} />
+						<p className={styles['popup-desc']}>currently onging is SIH 2026. Participate and showcase your innovative skills!</p>
+						<Link to="/events#sih2026" className={styles['popup-cta']} onClick={() => setShowPopup(false)}>
+							View Event Details
+						</Link>
+					</div>
+				</div>,
+				document.body
+			)}
 
 			<section className={styles.hero} aria-label="Welcome to VVIT Innovation Council">
 				<h1>Igniting Innovation at VVIT</h1>

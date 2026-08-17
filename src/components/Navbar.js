@@ -72,7 +72,7 @@ function Navbar() {
         <header className={scrolled ? 'scrolled' : ''}>
             <div className="header-inner">
                 <div className="brand">
-                    <img src="/images/VVITULogo_Final.png" alt="VVIT Logo" />
+                    <img src="/images/VVITULogo_Final.png" alt="VVITU Logo" />
                     <img src="/images/IIC.png" alt="IIC Logo" />
                 </div>
 
@@ -112,10 +112,10 @@ function Navbar() {
                         </button>
                     </div>
 
-                    <button 
-                        className="nav-toggle" 
-                        aria-label="Open navigation" 
-                        aria-controls="main-nav" 
+                    <button
+                        className="nav-toggle"
+                        aria-label="Open navigation"
+                        aria-controls="main-nav"
                         aria-expanded={menuOpen}
                         onClick={() => setMenuOpen(!menuOpen)}
                     >

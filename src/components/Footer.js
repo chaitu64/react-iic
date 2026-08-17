@@ -5,9 +5,9 @@ function Footer() {
     return (
         <footer className="footer sm:footer-horizontal custom-footer" style={{ background: '#111', color: '#fff', padding: '60px 40px', marginTop: 0 }}>
             <aside className="footer-aside">
-                <img src="/images/IIC.png" alt="IIC Logo" style={{ height: '80px', width: 'auto', display: 'block', objectFit: 'contain' ,alignItems:'left',justifyContent:'left',marginLeft:'0',marginRight:'auto'}} />
+                <img src="/images/IIC.png" alt="IIC Logo" style={{ height: '80px', width: 'auto', display: 'block', objectFit: 'contain', alignItems: 'left', justifyContent: 'left', marginLeft: '0', marginRight: 'auto' }} />
                 <p style={{ marginTop: '16px', lineHeight: '1.6', color: '#bbb' }}>
-                    {/* <strong style={{ color: '#fff', fontSize: '18px' }}>VVIT IIC</strong> */}
+                    {/* <strong style={{ color: '#fff', fontSize: '18px' }}>VVITU IIC</strong> */}
                     <br />
                     Institution's Innovation Council
                     <br />

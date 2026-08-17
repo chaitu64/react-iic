@@ -163,14 +163,14 @@ body::before {
 }
 
 .cta-secondary {
-  background: white;
+  background: var(--solid-bg);
   color: var(--navy);
   border: 2px solid var(--navy);
   box-shadow: 0 4px 16px rgba(46, 42, 143, 0.1)
 }
 
 .cta-secondary:hover {
-  background: var(--navy);
+  background: var(--panel-bg);
   color: white;
   box-shadow: 0 8px 28px rgba(46, 42, 143, 0.2)
 }
@@ -429,7 +429,7 @@ body::before {
     top: 60px;
     left: 0;
     width: 100vw;
-    background: #fff;
+    background: var(--solid-bg);
     flex-direction: column;
     gap: 0;
     box-shadow: 0 4px 24px rgba(46, 42, 143, 0.08);

@@ -4,53 +4,76 @@ import styles from './Gallery.module.css';
 
 const galleryData = [
 	{
-		id: "sih2025",
-		category: "hackathon",
-		title: "SIH Hackathon",
-		date: "Sept 24, 2025",
-		description:
-			"The Institution's Innovation Council at VVIT University successfully organized Smart India Hackathon 2025. This national-level event provided a platform for students to demonstrate their technical prowess and entrepreneurial spirit.",
-		images: [
-			"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
-		]
-	},
-	{
-		id: "coding2025",
-		category: "hackathon",
-		title: "Innovate it",
-		date: "Oct 15, 2025",
-		description:
-			"Held on October 15th, 'INNOVATE-IT' was a dedicated ideation platform designed to foster the entrepreneurial spirit. Student teams of 2-3 members showcased their problem-solving skills, presenting unique concepts under the theme 'Ignite Ideas, Inspire Action.'",
-		images: [
-			"https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1515187029136-1c3905436df7?auto=format&fit=crop&q=80&w=800"
-		]
-	},
-	{
-		id: "pitch2025",
-		category: "workshop",
-		title: "Tech Talks",
-		date: "Nov 17, 2025",
-		description:
-			"From student to founder! Our students received invaluable mentorship from the host MR.Dileep Sajja who broke down the importance of entrepreneurship and shared the essential strategies needed to build a business from scratch.",
-		images: ["https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800"]
-	},
-	{
-		id: "idea2025",
+		id: "gallery-1",
 		category: "bootcamp",
-		title: "Incubation Visit",
-		date: "May 25, 2025",
-		description:
-			"VVIT IIC organized a field visit to Vignan TBI, providing students with a practical understanding of the incubation process. The session focused on bridging the gap between academic learning and real-world startup strategies.",
-		images: [
-			"https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&q=80&w=800",
-			"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800"
-		]
+		title: "IIC Activities 2021",
+		date: "Oct 30, 2021",
+		description: "A look back at our earliest innovation bootcamps and student gatherings that sparked the foundation for our current entrepreneurial ecosystem.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/20211030_140219.jpg"]
+	},
+	{
+		id: "gallery-2",
+		category: "workshop",
+		title: "Student Startup Meet",
+		date: "Nov 17, 2021",
+		description: "An incredible session focused on rapid prototyping and startup ideas from our creative minds.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/20211117_113131.jpg"]
+	},
+	{
+		id: "gallery-3",
+		category: "hackathon",
+		title: "Innovation Meetup 2024",
+		date: "Mar 13, 2024",
+		description: "Teams engaged in a fast-paced problem-solving environment, brainstorming digital solutions and pushing boundaries.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.17.02_a7338a25.jpg"]
+	},
+	{
+		id: "gallery-4",
+		category: "hackathon",
+		title: "Hackathon Highlight",
+		date: "Mar 13, 2024",
+		description: "Another brilliant moment captured from the high-energy problem-solving session.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.17.02_a7338a25.jpg"]
+	},
+	{
+		id: "gallery-5",
+		category: "summit",
+		title: "Tech Ideation Session",
+		date: "Mar 13, 2024",
+		description: "Interactive session focusing on ideation strategies and bringing software concepts to life.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.17.40_440a1463.jpg"]
+	},
+	{
+		id: "gallery-6",
+		category: "summit",
+		title: "Tech Innovation Highlight",
+		date: "Mar 13, 2024",
+		description: "Sharing breakthrough thoughts and modern web technologies with the community.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.17.40_c861f92e.jpg"]
+	},
+	{
+		id: "gallery-7",
+		category: "workshop",
+		title: "Founders Talk",
+		date: "Mar 13, 2024",
+		description: "Mentorship and guidance talk aimed at bridging the gap between academic projects and real-world startup incubation.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.22.25_c3b41748.jpg"]
+	},
+	{
+		id: "gallery-8",
+		category: "workshop",
+		title: "Mentorship Discussion",
+		date: "Mar 13, 2024",
+		description: "A deep dive into essential strategies for building resilient tech products.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.22.25_c872376b.jpg"]
+	},
+	{
+		id: "gallery-9",
+		category: "summit",
+		title: "Community Outreach",
+		date: "Mar 13, 2024",
+		description: "Celebrating our rapidly growing ecosystem of student builders and creators.",
+		images: ["https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.22.26_978bafab.jpg"]
 	}
 ];
 
@@ -121,22 +144,18 @@ function Gallery() {
 							Loading Gallery Data... <i className="fa-solid fa-circle-notch fa-spin"></i>
 						</div>
 					) : (
-						<div className={styles['marquee-container']}>
-							{[1, 2, 3, 4, 5, 6].map((groupIndex) => (
-								<div className={styles['marquee-content']} aria-hidden={groupIndex > 1} key={groupIndex}>
-									{filteredGallery.map((item, idx) => (
-										<div
-											className={styles['gallery-item']}
-											key={item.id || idx}
-											onClick={() => openModal(item)}
-										>
-											<img src={item.images && item.images[0] ? item.images[0] : ""} alt={item.title} />
-											<div className={styles['gallery-overlay']}>
-												<div className={styles['overlay-title']}>{item.title}</div>
-												<div className={styles['overlay-meta']}>{item.date}</div>
-											</div>
-										</div>
-									))}
+						<div className={styles['grid-container']}>
+							{filteredGallery.map((item, idx) => (
+								<div
+									className={styles['gallery-item']}
+									key={item.id || idx}
+									onClick={() => openModal(item)}
+								>
+									<img src={item.images && item.images[0] ? item.images[0] : ""} alt={item.title} loading="lazy" />
+									<div className={styles['gallery-overlay']}>
+										<div className={styles['overlay-title']}>{item.title}</div>
+										<div className={styles['overlay-meta']}>{item.date}</div>
+									</div>
 								</div>
 							))}
 						</div>
@@ -168,16 +187,16 @@ function Gallery() {
 			{/* Modal for gallery images */}
 			{modal.open && (
 				<div className={styles.modal} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'fixed', inset: 0, background: 'rgba(10,10,30,0.95)', zIndex: 1000 }}>
-					<div className={styles['modal-content']} style={{ position: 'relative', maxWidth: '100vw', width: '90vw', maxHeight: '90vh', display: 'flex', flexDirection: 'column', background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
-						<button className={styles['modal-close']} style={{ position: 'absolute', top: 20, right: 20, width: 40, height: 40, background: 'rgba(255,255,255,0.9)', border: 'none', borderRadius: '50%', color: '#2E2A8F', fontSize: 28, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1001 }} onClick={closeModal}>&times;</button>
+					<div className={styles['modal-content']} style={{ position: 'relative', maxWidth: '100vw', width: '90vw', maxHeight: '90vh', display: 'flex', flexDirection: 'column', background: 'var(--card-bg)', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
+						<button className={styles['modal-close']} style={{ position: 'absolute', top: 20, right: 20, width: 40, height: 40, background: 'var(--nav-bg)', border: 'none', borderRadius: '50%', color: 'var(--navy)', fontSize: 28, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1001 }} onClick={closeModal}>&times;</button>
 						<img className={styles['modal-image']} src={modal.event.images[modal.photoIdx]} alt={modal.event.title} style={{ width: '100%', height: '60vh', objectFit: 'contain', background: '#000' }} />
-						<div className={styles['modal-info']} style={{ padding: '20px 30px', background: '#fff', color: '#222', borderTop: '4px solid #F4A238' }}>
+						<div className={styles['modal-info']} style={{ padding: '20px 30px', background: 'var(--card-bg)', color: 'inherit', borderTop: '4px solid var(--orange)' }}>
 							<div className={styles['modal-header-row']} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-								<h3 className={styles['modal-title']} style={{ fontSize: 24, fontWeight: 700, color: '#2E2A8F', margin: 0 }}>{modal.event.title}</h3>
-								<span className={styles['photo-counter']} style={{ fontSize: 13, background: '#eee', padding: '4px 10px', borderRadius: 12, color: '#555', fontWeight: 600 }}>{modal.photoIdx + 1} / {modal.event.images.length}</span>
+								<h3 className={styles['modal-title']} style={{ fontSize: 24, fontWeight: 700, color: 'var(--navy)', margin: 0 }}>{modal.event.title}</h3>
+								<span className={styles['photo-counter']} style={{ fontSize: 13, background: 'var(--border)', padding: '4px 10px', borderRadius: 12, color: 'var(--muted)', fontWeight: 600 }}>{modal.photoIdx + 1} / {modal.event.images.length}</span>
 							</div>
-							<p className={styles['modal-date']} style={{ fontSize: 14, color: '#F4A238', fontWeight: 600, margin: '0 0 12px', textTransform: 'uppercase', letterSpacing: 1 }}>{modal.event.date}</p>
-							<p className={styles['modal-description']} style={{ fontSize: 15, color: '#6b6b6b', lineHeight: 1.6, margin: 0 }}>{modal.event.description}</p>
+							<p className={styles['modal-date']} style={{ fontSize: 14, color: 'var(--orange)', fontWeight: 600, margin: '0 0 12px', textTransform: 'uppercase', letterSpacing: 1 }}>{modal.event.date}</p>
+							<p className={styles['modal-description']} style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>{modal.event.description}</p>
 						</div>
 						{modal.event.images.length > 1 && (
 							<>

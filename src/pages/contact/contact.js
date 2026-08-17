@@ -18,7 +18,7 @@ function Contact() {
 						<div className={styles['info-group']}>
 							<div className={styles['info-label']}>Email</div>
 							<div className={styles['info-content']}>
-								<a href="mailto:iicvvit@vvit.net">iicvvit@vvit.net</a><br />
+								<a href="mailto:iicVVITU@VVITU.net">iicVVITU@VVITU.net</a><br />
 							</div>
 						</div>
 						<div className={styles['info-group']}>
@@ -32,7 +32,7 @@ function Contact() {
 							<div className={styles['info-label']}>Office Location</div>
 							<div className={styles['info-content']}>
 								Institution's Innovation Council<br />
-								VVIT University<br />
+								VVITU University<br />
 								Namburu<br />
 								India
 							</div>
@@ -40,10 +40,10 @@ function Contact() {
 						<div className={styles['info-group']}>
 							<div className={styles['info-label']}>Follow Us</div>
 							<div className={styles['social-links']}>
-								<a href="https://www.linkedin.com/in/iic-vvitu-624755321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className={`${styles['social-link']} ${styles.linkedin}`} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+								<a href="https://www.linkedin.com/in/iic-VVITU-624755321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className={`${styles['social-link']} ${styles.linkedin}`} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
 									<i className={`fab fa-linkedin-in`}></i>
 								</a>
-								<a href="https://www.instagram.com/iic_vvitu/" className={`${styles['social-link']} ${styles.instagram}`} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+								<a href="https://www.instagram.com/iic_VVITU/" className={`${styles['social-link']} ${styles.instagram}`} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
 									<i className={`fab fa-instagram`}></i>
 								</a>
 							</div>
@@ -60,7 +60,7 @@ function Contact() {
 					<div className={styles['map-section']}>
 						<div className={styles['map-title']}>
 							<h2>Visit Us</h2>
-							<p>Located at VVIT University in Namburu, our innovation hub is easily accessible and equipped with modern facilities for collaboration and innovation.</p>
+							<p>Located at VVITU University in Namburu, our innovation hub is easily accessible and equipped with modern facilities for collaboration and innovation.</p>
 						</div>
 						<div className={styles['map-container']}>
 							<iframe
@@ -71,7 +71,7 @@ function Contact() {
 								allowFullScreen
 								loading="lazy"
 								referrerPolicy="no-referrer-when-downgrade"
-								title="VVIT University Map"
+								title="VVITU University Map"
 							></iframe>
 						</div>
 					</div>

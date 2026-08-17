@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+:root {
+  --navy: #2E2A8F;
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-hover: rgba(255, 255, 255, 0.8);
+  --glass-bg-light: rgba(255, 255, 255, 0.6);
+  --solid-bg: #FFFFFF;
+  --text: #1f2937;
+  --text-dark: #111827;
+  --panel-bg: var(--navy);
+}
+
 /* Dark Mode Variables and Overrides */
 body.dark-mode {
   --navy: #e2e8f0 !important;
@@ -21,6 +33,14 @@ body.dark-mode {
   --card-bg: #1e293b !important;
   --muted: #94a3b8 !important;
   --border: #334155 !important;
+  --nav-bg: rgba(15, 23, 42, 0.95) !important;
+  --glass-bg: rgba(30, 41, 59, 0.7) !important;
+  --glass-bg-hover: rgba(30, 41, 59, 0.8) !important;
+  --glass-bg-light: rgba(30, 41, 59, 0.6) !important;
+  --solid-bg: #1e293b !important;
+  --text: #f1f5f9 !important;
+  --text-dark: #f8fafc !important;
+  --panel-bg: #1e293b !important;
   background-color: #0f172a !important;
   color: #f8fafc !important;
 }

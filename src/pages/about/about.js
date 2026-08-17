@@ -6,7 +6,7 @@ function About() {
 		<div className={styles.wrap}>
 
 			<section className={styles['page-hero']}>
-				<h1>About VVIT IIC</h1>
+				<h1>About VVITU IIC</h1>
 				<p>Fostering a culture of innovation and entrepreneurship at Vasireddy Venkatadri Institute of Technology through comprehensive programs, world-class infrastructure, and strategic partnerships.</p>
 			</section>
 			<section className={styles['content-section']}>
@@ -87,7 +87,7 @@ function About() {
 			</section>
 			<section className={styles['content-section']}>
 				<h2 className={styles['section-title']}>World-Class Infrastructure</h2>
-				<p className={styles['text-block']}>VVIT has established cutting-edge facilities to nurture innovation and provide hands-on experience with the latest technologies.</p>
+				<p className={styles['text-block']}>VVITU has established cutting-edge facilities to nurture innovation and provide hands-on experience with the latest technologies.</p>
 				<div className={styles.timeline}>
 					<div className={styles['timeline-item']}>
 						<div className={styles['timeline-dot']}></div>
@@ -136,8 +136,8 @@ function About() {
 			<section className={styles['content-section']}>
 				<h2 className={styles['section-title']}>Recognition & Rankings</h2>
 				<div className={styles['text-block']}>
-					<p>VVIT has achieved significant recognition for its innovation efforts at both national and state levels. The institute secured a prestigious position in the Atal Ranking of Institutions on Innovation Achievements (ARIIA) 2020, ranking in Band-A (6th-25th position) among private self-financed colleges across India.</p>
-					<p style={{ marginTop: 16 }}>Out of 674 institutions that participated nationally, only 17 institutions from Andhra Pradesh received this honor, with VVIT being one of only three colleges from the state in its category. This recognition validates our commitment to fostering innovation and entrepreneurship.</p>
+					<p>VVITU has achieved significant recognition for its innovation efforts at both national and state levels. The institute secured a prestigious position in the Atal Ranking of Institutions on Innovation Achievements (ARIIA) 2020, ranking in Band-A (6th-25th position) among private self-financed colleges across India.</p>
+					<p style={{ marginTop: 16 }}>Out of 674 institutions that participated nationally, only 17 institutions from Andhra Pradesh received this honor, with VVITU being one of only three colleges from the state in its category. This recognition validates our commitment to fostering innovation and entrepreneurship.</p>
 				</div>
 			</section>
 

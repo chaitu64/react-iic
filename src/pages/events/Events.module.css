@@ -126,10 +126,10 @@ main {
   text-align: center;
   margin-bottom: 60px;
   padding: 50px 30px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--glass-bg-light);
   backdrop-filter: blur(5px);
   border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .hero-events h1 {
@@ -184,9 +184,9 @@ section {
 }
 
 .event-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--glass-bg-hover);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: var(--radius);
   padding: 0;
   display: flex;
@@ -208,7 +208,7 @@ section {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(46, 42, 143, 0.1);
   border-color: var(--orange);
-  background: white;
+  background: var(--solid-bg);
 }
 
 .date-badge {
@@ -274,7 +274,7 @@ section {
 
 .event-desc {
   font-size: 14px;
-  color: #555;
+  color: var(--muted);
   line-height: 1.6;
   margin: 0 0 16px 0;
 }
@@ -382,5 +382,38 @@ section {
 
   .footer p {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-events {
+    padding: 30px 15px;
+    margin-bottom: 40px;
+  }
+
+  .hero-events h1 {
+    font-size: 32px;
+  }
+
+  .hero-events p {
+    font-size: 16px;
+  }
+
+  .events-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .event-body {
+    padding: 16px;
+  }
+
+  .date-badge {
+    min-width: 60px;
+    height: 60px;
+  }
+
+  .date-day {
+    font-size: 20px;
   }
 }

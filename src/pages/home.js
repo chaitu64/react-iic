@@ -107,8 +107,8 @@ function Home() {
 				document.body
 			)}
 
-			<section className={styles.hero} aria-label="Welcome to VVIT Innovation Council">
-				<h1>Igniting Innovation at VVIT</h1>
+			<section className={styles.hero} aria-label="Welcome to VVITU Innovation Council">
+				<h1>Igniting Innovation at VVITU</h1>
 				<p className={styles.subtitle}>
 					Empowering students to transform ideas into reality. Join a vibrant community of creators, entrepreneurs, and problem-solvers shaping the future through technology and design.
 				</p>

@@ -106,10 +106,10 @@ nav a:hover {
   text-align: center;
   margin-bottom: 60px;
   padding: 50px 30px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--glass-bg-light);
   backdrop-filter: blur(5px);
   border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .hero-gallery h1 {
@@ -154,7 +154,7 @@ nav a:hover {
 }
 
 .filter-btn {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--glass-bg-hover);
   border: 1px solid var(--border);
   color: var(--muted);
   padding: 10px 26px;
@@ -180,49 +180,27 @@ nav a:hover {
 }
 
 .gallery-wrapper {
-  overflow: hidden;
-  width: 100vw;
-  max-width: 100%;
-  margin-bottom: 80px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 80px auto;
   position: relative;
-  display: flex;
+  display: block;
 }
 
-.marquee-container {
-  display: flex;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
-}
-
-.marquee-content {
-  display: flex;
-  flex-shrink: 0;
-  gap: 24px;
-  animation: scrollX 20s linear infinite;
-  animation-direction: normal;
-  /* Left to right scroll */
-}
-
-.marquee-container:hover .marquee-content {
-  animation-play-state: paused;
-}
-
-@keyframes scrollX {
-  from {
-    transform: translateX(calc(-100% - 24px));
-  }
-
-  to {
-    transform: translateX(0);
-  }
+  width: 100%;
 }
 
 .gallery-item {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius);
-  width: 320px;
-  height: 320px;
-  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  /* Creates a square */
   cursor: pointer;
   background: var(--card-bg);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -336,17 +314,9 @@ nav a:hover {
     font-size: 16px;
   }
 
-  .marquee-container {
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
-  }
-
-  .marquee-content {
-    gap: 16px;
-  }
-
-  .gallery-item {
-    width: 220px;
-    height: 220px;
   }
 
   .gallery-stats {

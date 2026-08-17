@@ -133,10 +133,10 @@ main {
   position: relative;
   padding: 80px 40px;
   margin-bottom: 60px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   border-radius: 24px;
-  border: 2px solid rgba(30, 58, 138, 0.1);
+  border: 2px solid rgba(148, 163, 184, 0.1);
   overflow: hidden;
 }
 
@@ -164,9 +164,9 @@ main {
 .stat-item {
   text-align: center;
   padding: 20px 30px;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--glass-bg-hover);
   border-radius: 16px;
-  border: 2px solid rgba(30, 58, 138, 0.1);
+  border: 2px solid rgba(148, 163, 184, 0.1);
 }
 
 .stat-number {
@@ -198,10 +198,10 @@ main {
   align-items: center;
   gap: 40px;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  border: 2px solid rgba(30, 58, 138, 0.1);
+  border: 2px solid rgba(148, 163, 184, 0.1);
 }
 
 .section-intro.reverse {
@@ -235,7 +235,7 @@ main {
   margin: 0;
 }
 
-.centered-wrapper {
+.grid-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -243,60 +243,25 @@ main {
   overflow: visible;
 }
 
-.marquee-wrapper {
-  overflow: hidden;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  position: relative;
-  display: flex;
-  padding: 20px 0;
-}
-
-.marquee-content {
-  display: flex;
+.grid-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
-  animation: scrollX 45s linear infinite;
-  white-space: nowrap;
-}
-
-.static-content {
-  animation: none !important;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.marquee-content:hover {
-  animation-play-state: paused;
-}
-
-.marquee-content.reverse-scroll {
-  animation-direction: reverse;
-}
-
-@keyframes scrollX {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
+  width: 100%;
 }
 
 .member-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 1);
+  background: var(--solid-bg);
   border-radius: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(30, 58, 138, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 320px;
-  min-width: 320px;
+  width: 100%;
   perspective: 1000px;
-  flex-shrink: 0;
   white-space: normal;
 }
 
@@ -320,6 +285,7 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
   transition: transform 0.5s ease;
 }
 
@@ -383,10 +349,51 @@ main {
 /* Using complex sibling selectors or simple pointer-events to simulate the cool DaisyUI 3D trick */
 /* We will use a standard smooth scale 3d effect for the wrapper */
 
+@media(max-width: 768px) {
+  .hero-teams {
+    padding: 40px 20px;
+    margin-bottom: 40px;
+  }
+
+  .hero-teams h1 {
+    font-size: 36px;
+  }
+
+  .hero-teams p {
+    font-size: 16px;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat-item {
+    width: 100%;
+  }
+
+  .section-intro {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .section-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+  }
+
+  .grid-content {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
 @media(max-width: 600px) {
   .member-card {
-    width: 280px;
-    min-width: 280px;
+    width: 100%;
+    min-width: auto;
   }
 }
 

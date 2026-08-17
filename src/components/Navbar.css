@@ -13,7 +13,7 @@ header {
 }
 
 header.scrolled {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--nav-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -206,7 +206,7 @@ nav a.active::after {
     top: 60px;
     left: 0;
     width: 100vw;
-    background: #fff;
+    background: var(--solid-bg);
     flex-direction: column;
     gap: 0;
     box-shadow: 0 4px 24px rgba(46, 42, 143, 0.08);

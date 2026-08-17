@@ -15,7 +15,7 @@
 
 .wrap {
 	min-height: 100vh;
-	background: #ffffff;
+	background: var(--bg);
 	color: var(--text);
 }
 
@@ -25,7 +25,7 @@
 ========================= */
 
 .header {
-	background: #ffffff;
+	background: var(--nav-bg);
 	border-bottom: 1px solid var(--border);
 	position: relative;
 	z-index: 10;
@@ -65,7 +65,7 @@
 
 .nav a {
 	text-decoration: none;
-	color: #333;
+	color: var(--text-dark, var(--text));
 	font-size: 14px;
 	font-weight: 600;
 	transition: 0.2s ease;
@@ -123,7 +123,7 @@
 
 	margin: 22px 0 0;
 
-	color: #666;
+	color: var(--muted);
 	font-size: 16px;
 	line-height: 1.7;
 }
@@ -153,7 +153,7 @@
 ========================= */
 
 .calendarCard {
-	background: #ffffff;
+	background: var(--card-bg);
 
 	border: 1px solid var(--border);
 	border-radius: 20px;
@@ -208,7 +208,7 @@
 
 	border: 1px solid var(--border);
 
-	background: #ffffff;
+	background: var(--solid-bg);
 
 	color: var(--navy);
 
@@ -221,9 +221,9 @@
 }
 
 .calendarControls button:hover {
-	background: var(--navy);
+	background: var(--panel-bg);
 	color: #ffffff;
-	border-color: var(--navy);
+	border-color: var(--panel-bg);
 }
 
 .calendarControls .todayButton {
@@ -257,7 +257,7 @@
 	text-transform: uppercase;
 	letter-spacing: 0.7px;
 
-	color: #888;
+	color: var(--muted);
 }
 
 
@@ -298,8 +298,8 @@
 }
 
 .calendarDay:hover {
-	background: var(--navy-light);
-	border-color: #dcdafa;
+	background: var(--glass-bg-hover, var(--navy-light));
+	border-color: var(--border, #dcdafa);
 }
 
 .dayNumber {
@@ -315,7 +315,7 @@
 	font-size: 14px;
 	font-weight: 600;
 
-	color: #444;
+	color: var(--text-dark, #444);
 }
 
 
@@ -324,7 +324,7 @@
 ========================= */
 
 .calendarDay.today .dayNumber {
-	background: var(--navy);
+	background: var(--panel-bg);
 	color: #ffffff;
 
 	font-weight: 800;
@@ -364,7 +364,7 @@
 }
 
 .calendarDay.hasEvent {
-	background: #fafaff;
+	background: var(--glass-bg-light);
 }
 
 
@@ -383,7 +383,7 @@
 	border-top: 1px solid var(--border);
 
 	font-size: 12px;
-	color: #777;
+	color: var(--muted);
 }
 
 .legend div {
@@ -416,7 +416,7 @@
 ========================= */
 
 .eventsPanel {
-	background: var(--navy);
+	background: var(--panel-bg);
 
 	border-radius: 20px;
 

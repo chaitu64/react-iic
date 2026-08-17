@@ -612,3 +612,116 @@ body::before {
     padding-left: 0;
   }
 }
+
+/* --- Popup Overlay Styles --- */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 30, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999999;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px;
+}
+
+.popup-content {
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  animation: popupFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popupFadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  transition: background 0.3s ease;
+}
+
+.popup-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.popup-badge {
+  display: inline-block;
+  background: #dcfce7;
+  color: #166534;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.popup-title {
+  color: var(--navy);
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.popup-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.popup-desc {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.popup-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), #F59A4C);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  font-size: 16px;
+}
+
+.popup-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(244, 162, 56, 0.3);
+}

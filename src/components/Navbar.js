@@ -1,13 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 function Navbar() {
     const [query, setQuery] = useState('');
     const [scrolled, setScrolled] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const currentPath = location.pathname;
+
+    useEffect(() => {
+        // Initialize theme from localStorage or system preference
+        const savedTheme = localStorage.getItem('app-theme');
+        if (savedTheme === 'dark') {
+            setIsDarkMode(true);
+            document.body.classList.add('dark-mode');
+        } else {
+            setIsDarkMode(false);
+            document.body.classList.remove('dark-mode');
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        if (isDarkMode) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('app-theme', 'light');
+            setIsDarkMode(false);
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('app-theme', 'dark');
+            setIsDarkMode(true);
+        }
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -50,16 +77,16 @@ function Navbar() {
                 </div>
 
                 <div className="nav-right">
-                    <nav id="main-nav">
-                        <Link to="/" className={currentPath === '/' ? 'active' : ''}>Home</Link>
-                        <Link to="/events" className={currentPath === '/events' ? 'active' : ''}>Events</Link>
-                        <Link to="/calender" className={currentPath === '/calender' ? 'active' : ''}>Calendar</Link>
-                        <Link to="/gallery" className={currentPath === '/gallery' ? 'active' : ''}>Gallery</Link>
-                        <Link to="/teams" className={currentPath === '/teams' ? 'active' : ''}>Teams</Link>
-                        <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''}>Contact</Link>
+                    <nav id="main-nav" className={menuOpen ? 'open' : ''}>
+                        <Link to="/" className={currentPath === '/' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Home</Link>
+                        <Link to="/events" className={currentPath === '/events' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Events</Link>
+                        <Link to="/calender" className={currentPath === '/calender' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Calendar</Link>
+                        <Link to="/gallery" className={currentPath === '/gallery' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Gallery</Link>
+                        <Link to="/teams" className={currentPath === '/teams' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Teams</Link>
+                        <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Contact</Link>
                     </nav>
 
-                    <div className="nav-search-container">
+                    <div className="nav-search-container" style={{ display: 'flex', alignItems: 'center' }}>
                         <form onSubmit={handleSearch} className="nav-search-form">
                             <input
                                 type="text"
@@ -75,10 +102,24 @@ function Navbar() {
                                 </svg>
                             </button>
                         </form>
+                        <button
+                            className="theme-toggle-btn"
+                            onClick={toggleTheme}
+                            aria-label="Toggle Dark Mode"
+                            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                        >
+                            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                        </button>
                     </div>
 
-                    <button className="nav-toggle" aria-label="Open navigation" aria-controls="main-nav" aria-expanded="false">
-                        <i className="fa fa-bars"></i>
+                    <button 
+                        className="nav-toggle" 
+                        aria-label="Open navigation" 
+                        aria-controls="main-nav" 
+                        aria-expanded={menuOpen}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
+                        {menuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>

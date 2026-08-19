@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  --navy: #2E2A8F;
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-hover: rgba(255, 255, 255, 0.8);
+  --glass-bg-light: rgba(255, 255, 255, 0.6);
+  --solid-bg: #FFFFFF;
+  --text: #1f2937;
+  --text-dark: #111827;
+  --panel-bg: var(--navy);
+}
+
+/* Dark Mode Variables and Overrides */
+body.dark-mode {
+  --navy: #e2e8f0 !important;
+  --orange: #f59e0b !important;
+  --purple: #a78bfa !important;
+  --bg: #0f172a !important;
+  --card-bg: #1e293b !important;
+  --muted: #94a3b8 !important;
+  --border: #334155 !important;
+  --nav-bg: rgba(15, 23, 42, 0.95) !important;
+  --glass-bg: rgba(30, 41, 59, 0.7) !important;
+  --glass-bg-hover: rgba(30, 41, 59, 0.8) !important;
+  --glass-bg-light: rgba(30, 41, 59, 0.6) !important;
+  --solid-bg: #1e293b !important;
+  --text: #f1f5f9 !important;
+  --text-dark: #f8fafc !important;
+  --panel-bg: #1e293b !important;
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+body.dark-mode::before {
+  opacity: 0.03 !important;
+}
+
+body.dark-mode .nav-search-form {
+  background: #1e293b !important;
+  border-color: #475569 !important;
+}
+
+body.dark-mode .nav-search-input {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .nav-search-input::placeholder {
+  color: #64748b !important;
+}
+
+body.dark-mode header.scrolled {
+  background: rgba(15, 23, 42, 0.95) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode nav a,
+body.dark-mode .brand {
+  color: #f8fafc !important;
+}
+
+body.dark-mode nav a:hover,
+body.dark-mode nav a.active {
+  color: var(--orange) !important;
+}
+
+body.dark-mode .event-card,
+body.dark-mode .left-event-card,
+body.dark-mode .about {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .hero-events {
+  background: rgba(30, 41, 59, 0.6) !important;
+}
+
+body.dark-mode .popup-content {
+  background: var(--card-bg) !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: var(--navy) !important;
+}
+
+body.dark-mode .hero h1 {
+  background: linear-gradient(135deg, var(--orange), var(--purple)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+body.dark-mode .event-title,
+body.dark-mode .popup-title {
+  color: var(--orange) !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: #2E2A8F;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(46, 42, 143, 0.1);
+}
+
+body.dark-mode .theme-toggle-btn {
+  color: var(--orange);
+}
+
+body.dark-mode .theme-toggle-btn:hover {
+  background: rgba(245, 158, 11, 0.1);
+}

@@ -245,7 +245,8 @@ main {
 
 .grid-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, 280px);
+  justify-content: center;
   gap: 30px;
   width: 100%;
 }
@@ -254,19 +255,23 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--solid-bg);
-  border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(148, 163, 184, 0.1);
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
+  width: 280px;
+  height: 380px;
+  margin: 0 auto;
   perspective: 1000px;
   white-space: normal;
+  overflow: hidden;
+  /* Force crop for the top corners of the image */
 }
 
 .member-card:hover {
-  box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   transform: translateY(-8px);
 }
 
@@ -275,10 +280,10 @@ main {
   padding: 0;
   display: block;
   width: 100%;
-  height: 240px;
-  border-radius: 24px 24px 0 0;
+  height: 210px;
+  border-radius: 20px 20px 0 0;
   overflow: hidden;
-  background: rgba(30, 58, 138, 0.02);
+  background: #f8f9fa;
 }
 
 .member-image {
@@ -286,43 +291,63 @@ main {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
+  /* Favor facial/head area crop */
   transition: transform 0.5s ease;
 }
 
 .member-card:hover .member-image {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .member-body {
-  padding: 24px;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex: 1;
+  background: #ffffff;
+  border-radius: 0 0 20px 20px;
 }
 
 .member-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--iic-blue);
-  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin: 0 0 8px;
+  letter-spacing: 0.2px;
 }
 
 .member-role {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--iic-orange);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #3b82f6;
+  text-transform: none;
+  letter-spacing: 0px;
+  margin-bottom: 24px;
+}
+
+.member-contact-btn {
+  background: transparent;
+  color: #557ba3;
+  border: 1px solid #d1d9e0;
+  padding: 8px 36px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.member-contact-btn:hover {
+  background: #f0f4f8;
+  color: #3b82f6;
+  border-color: #a0b9d1;
 }
 
 .member-bio {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
+  display: none;
+  /* Removed visually to match sleek 3-line reference card style */
 }
 
 .team-grid.leadership {
@@ -440,4 +465,201 @@ footer a:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* Expand/Collapse wrapper */
+.section-expand-wrapper {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.stack-expand-container {
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 10;
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  transform: translateY(0);
+}
+
+.stack-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  /* Lifts slightly out of the way as grid drops */
+}
+
+.stack-internal-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+  padding-top: 10px;
+}
+
+/* Stack Container */
+.stack-container {
+  position: relative;
+  width: 280px;
+  height: 380px;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+}
+
+.stack-container:hover {
+  transform: translateY(-8px);
+}
+
+.stack-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease;
+  background: var(--card-bg);
+}
+
+/* Match the requested staggered stack look - Left to Right */
+.stack-card-0 {
+  z-index: 3;
+  transform: translateX(-40px) scale(1);
+  box-shadow: 10px 0 24px rgba(0, 0, 0, 0.08);
+}
+
+.stack-card-1 {
+  z-index: 2;
+  transform: translateX(0) scale(0.96);
+  opacity: 0.95;
+  box-shadow: 8px 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.stack-card-2 {
+  z-index: 1;
+  transform: translateX(40px) scale(0.92);
+  opacity: 0.85;
+}
+
+.stack-container:hover .stack-card-0 {
+  transform: translateX(-65px) scale(1.02);
+}
+
+.stack-container:hover .stack-card-1 {
+  transform: translateX(10px) scale(0.96);
+}
+
+.stack-container:hover .stack-card-2 {
+  transform: translateX(85px) scale(0.92);
+}
+
+.stack-click-indicator {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--iic-blue);
+  font-weight: 600;
+  background: var(--iic-light);
+  padding: 8px 16px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.stack-container:hover .stack-click-indicator {
+  opacity: 1;
+}
+
+/* Grid Expand Container */
+.grid-expand-container {
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 5;
+  display: grid;
+  grid-template-rows: 0fr;
+  width: 100%;
+  opacity: 0;
+  transition: grid-template-rows 0.4s ease-out, opacity 0.4s ease-out;
+  pointer-events: none;
+}
+
+.grid-expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.grid-internal-wrap {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.collapse-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding-bottom: 20px;
+}
+
+.collapse-btn {
+  background: var(--iic-blue);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+}
+
+.collapse-btn:hover {
+  background: var(--iic-orange);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Enforce Left-to-Right Card Cascade Direction */
+.grid-expand-container .member-card {
+  opacity: 0;
+  transform: translateX(-60px);
+  /* Start shifted to the left */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease, box-shadow 0.3s ease;
+}
+
+.grid-expanded .member-card {
+  opacity: 1;
+  transform: translateX(0);
+  /* Settle in place firmly traversing to the right */
+}
+
+/* Ensure hover pops correctly without inheriting massive transition delays */
+.grid-expanded .member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15);
+  transition-delay: 0s !important;
+}
+
+/* Repeated wave logic (sweeps Left-to-Right simultaneously for all rows) */
+.grid-expanded .member-card:nth-child(4n + 1) {
+  transition-delay: 0.05s;
+}
+
+.grid-expanded .member-card:nth-child(4n + 2) {
+  transition-delay: 0.20s;
+}
+
+.grid-expanded .member-card:nth-child(4n + 3) {
+  transition-delay: 0.35s;
+}
+
+.grid-expanded .member-card:nth-child(4n + 0) {
+  transition-delay: 0.50s;
 }

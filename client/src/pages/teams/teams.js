@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from './Teams.module.css';
+import Stack from "../../components/Stack";
 
 const teamData = {
 	stats: { members: 71, departments: 5, events: 100 },
@@ -157,6 +158,14 @@ const teamData = {
 function Teams() {
 	const [fetchedTeams] = React.useState(teamData.team);
 	const [loading] = React.useState(false);
+	const [expandedSections, setExpandedSections] = React.useState({});
+
+	const toggleSection = (sectionName) => {
+		setExpandedSections(prev => ({
+			...prev,
+			[sectionName]: !prev[sectionName]
+		}));
+	};
 
 	// Backend fetch removed to allow for manual manual static image update
 
@@ -190,37 +199,90 @@ function Teams() {
 				)}
 
 				{!loading && fetchedTeams.map((section, idx) => {
+					const isExpanded = expandedSections[section.section];
 					return (
 						<div className={styles['team-section']} key={section.section}>
 							<div className={styles['section-intro'] + (section.reverse ? ` ${styles['reverse']}` : "")}>
-								<div className={styles['section-icon']}>{section.icon}</div>
 								<div className={styles['section-text']}>
 									<h2>{section.section}</h2>
 									<p>{section.description}</p>
 								</div>
 							</div>
 
-							<div className={styles['grid-wrapper']}>
-								<div className={styles['grid-content']}>
-									{section.members.map((member, mIdx) => (
-										<div className={`${styles['member-card']} hover-3d`} key={`${member.name}-${mIdx}`}>
-											<figure className={styles['member-figure']}>
-												<img
-													src={member.image || `https://i.pravatar.cc/300?u=${encodeURIComponent(member.name)}`}
-													alt={member.name}
-													className={styles['member-image']}
-													style={member.imgStyle || {}}
-													loading="lazy"
-												/>
-											</figure>
-											<div className={styles['member-body']}>
-												<h2 className={styles['member-name']}>{member.name}</h2>
-												<div className={styles['member-role']}>{member.role}</div>
-												<p className={styles['member-bio']}>{member.bio}</p>
+							<div className={styles['section-expand-wrapper']}>
+								{/* Stack Mode */}
+								<div className={`${styles['stack-expand-container']} ${isExpanded ? styles['stack-hidden'] : ''}`}>
+									<div className={styles['stack-internal-wrap']}>
+										<div className={styles['stack-container']}>
+											<Stack
+												randomRotation={true}
+												sensitivity={180}
+												sendToBackOnClick={true}
+												cards={section.members.slice(0, 5).map((member, sIdx) => (
+													<div className={styles['member-card']} style={{ border: 'none', boxShadow: 'none' }} key={`stack-${sIdx}`}>
+														<figure className={styles['member-figure']}>
+															<img
+																src={member.image || `https://i.pravatar.cc/300?u=${encodeURIComponent(member.name)}`}
+																alt={member.name}
+																className={styles['member-image']}
+																style={member.imgStyle || {}}
+																loading="lazy"
+															/>
+														</figure>
+														<div className={styles['member-body']}>
+															<h2 className={styles['member-name']}>{member.name}</h2>
+															<div className={styles['member-role']}>{member.role}</div>
+															<p className={styles['member-bio']}>{member.bio}</p>
+															{/* <button className={styles['member-contact-btn']}>message</button> */}
+														</div>
+													</div>
+												))}
+											/>
+											{/* Notice the onClick now lives strictly on the expand button so dragging/clicking the deck plays its own animation freely! */}
+											<div
+												className={styles['stack-click-indicator']}
+												onClick={() => toggleSection(section.section)}
+												style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 100 }}
+											>
+												View all {section.members.length} members
 											</div>
-											<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 										</div>
-									))}
+									</div>
+								</div>
+
+								{/* Grid Mode */}
+								<div className={`${styles['grid-expand-container']} ${isExpanded ? styles['grid-expanded'] : ''}`}>
+									<div className={styles['grid-internal-wrap']}>
+										<div className={styles['grid-wrapper']}>
+											<div className={styles['grid-content']}>
+												{section.members.map((member, mIdx) => (
+													<div className={`${styles['member-card']} hover-3d`} key={`${member.name}-${mIdx}`}>
+														<figure className={styles['member-figure']}>
+															<img
+																src={member.image || `https://i.pravatar.cc/300?u=${encodeURIComponent(member.name)}`}
+																alt={member.name}
+																className={styles['member-image']}
+																style={member.imgStyle || {}}
+																loading="lazy"
+															/>
+														</figure>
+														<div className={styles['member-body']}>
+															<h2 className={styles['member-name']}>{member.name}</h2>
+															<div className={styles['member-role']}>{member.role}</div>
+															<p className={styles['member-bio']}>{member.bio}</p>
+															<button className={styles['member-contact-btn']}>message</button>
+														</div>
+														<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+													</div>
+												))}
+											</div>
+										</div>
+										<div className={styles['collapse-btn-wrapper']}>
+											<button className={styles['collapse-btn']} onClick={() => toggleSection(section.section)}>
+												Collapse Section
+											</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

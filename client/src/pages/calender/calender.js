@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Calender.module.css';
+import events from '../../eventsdata/events.json';
 
 function Calender() {
 	const [currentDate, setCurrentDate] = useState(new Date());
+	const [showYearSelector, setShowYearSelector] = useState(false);
 
 	const monthNames = [
 		'January',
@@ -29,54 +31,6 @@ function Calender() {
 
 	const today = new Date();
 
-	const events = [
-		{
-			date: 5,
-			month: 7,
-			year: 2026,
-			title: 'Innovation Workshop',
-			description:
-				'Interactive session on innovation and creative problem solving.',
-			type: 'Workshop'
-		},
-		{
-			date: 10,
-			month: 7,
-			year: 2026,
-			title: 'Startup Bootcamp',
-			description:
-				'Learn the fundamentals of building and launching a startup.',
-			type: 'Bootcamp'
-		},
-		{
-			date: 15,
-			month: 7,
-			year: 2026,
-			title: 'Ideathon',
-			description:
-				'A collaborative event to develop innovative ideas and solutions.',
-			type: 'Competition'
-		},
-		{
-			date: 20,
-			month: 7,
-			year: 2026,
-			title: 'Entrepreneurship Talk',
-			description:
-				'Guest session with an entrepreneur and industry expert.',
-			type: 'Talk'
-		},
-		{
-			date: 25,
-			month: 7,
-			year: 2026,
-			title: 'IIC Community Meet',
-			description:
-				'Connect, collaborate and share ideas with the IIC community.',
-			type: 'Community'
-		}
-	];
-
 	const previousMonth = () => {
 		setCurrentDate(new Date(year, month - 1, 1));
 	};
@@ -85,8 +39,13 @@ function Calender() {
 		setCurrentDate(new Date(year, month + 1, 1));
 	};
 
-	const goToToday = () => {
-		setCurrentDate(new Date());
+	const yearOptions = Array.from(
+		new Set([year, ...events.map((event) => event.year)])
+	).sort((a, b) => a - b);
+
+	const selectYear = (selectedYear) => {
+		setCurrentDate(new Date(selectedYear, 0, 1));
+		setShowYearSelector(false);
 	};
 
 	const getEventForDate = (day) => {
@@ -163,12 +122,70 @@ function Calender() {
 									‹
 								</button>
 
-								<button
-									className={styles.todayButton}
-									onClick={goToToday}
-								>
-									Today
-								</button>
+								<div className={styles.yearSelector}>
+
+									<button
+										className={styles.yearSelectorButton}
+										onClick={() =>
+											setShowYearSelector(
+												!showYearSelector
+											)
+										}
+										aria-haspopup="listbox"
+										aria-expanded={showYearSelector}
+									>
+										<span>{year}</span>
+										<svg
+											width="10"
+											height="10"
+											viewBox="0 0 10 10"
+											aria-hidden="true"
+										>
+											<path
+												d="M1 3l4 4 4-4"
+												fill="none"
+												stroke="currentColor"
+												strokeWidth="1.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+										</svg>
+									</button>
+
+									{showYearSelector && (
+										<>
+											<div
+												className={styles.yearSelectorOverlay}
+												onClick={() =>
+													setShowYearSelector(false)
+												}
+											/>
+											<div
+												className={styles.yearOptions}
+												role="listbox"
+											>
+												{yearOptions.map((optionYear) => (
+													<button
+														key={optionYear}
+														className={`${styles.yearOption} ${
+															optionYear === year
+																? styles.yearOptionActive
+																: ''
+														}`}
+														onClick={() =>
+															selectYear(
+																optionYear
+															)
+														}
+													>
+														{optionYear}
+													</button>
+												))}
+											</div>
+										</>
+									)}
+
+								</div>
 
 								<button
 									onClick={nextMonth}
@@ -226,16 +243,22 @@ function Calender() {
 										</div>
 
 										<div className={styles.indicatorContainer}>
-											{isToday && (
+											{isToday && !event && (
 												<div
 													className={styles.todayIndicator}
 													title="Today"
 												/>
 											)}
-											{event && (
+											{event && !isToday && (
 												<div
 													className={styles.eventIndicator}
 													title={event.title}
+												/>
+											)}
+											{isToday && event && (
+												<div
+													className={styles.bothIndicator}
+													title={`Today · ${event.title}`}
 												/>
 											)}
 										</div>
@@ -265,18 +288,27 @@ function Calender() {
 					</div>
 
 
-					{/* UPCOMING EVENTS */}
+					{/* EVENTS OF THE MONTH */}
 					<aside className={styles.eventsPanel}>
 
 						<div className={styles.eventsPanelHeader}>
 
-							<p>WHAT'S HAPPENING</p>
+							<div className={styles.eventsPanelHeaderTop}>
 
-							<h2>Upcoming Events</h2>
+								<p>WHAT'S HAPPENING</p>
 
-							<span>
+								<span className={styles.countPill}>
+									{currentMonthEvents.length}
+								</span>
+
+							</div>
+
+							<h2>Events of the Month</h2>
+
+							<p className={styles.eventsSubtext}>
 								{currentMonthEvents.length} scheduled activities
-							</span>
+								this month
+							</p>
 
 						</div>
 
@@ -292,28 +324,20 @@ function Calender() {
 
 										<div className={styles.eventDate}>
 
-											<strong>
-												{event.date}
-											</strong>
-
-											<span>
+											<span className={styles.eventMonth}>
 												{monthNames[event.month].slice(0, 3)}
 											</span>
+
+											<strong className={styles.eventDay}>
+												{event.date}
+											</strong>
 
 										</div>
 
 
 										<div className={styles.eventDetails}>
 
-											<span className={styles.eventType}>
-												{event.type}
-											</span>
-
 											<h3>{event.title}</h3>
-
-											<p>
-												{event.description}
-											</p>
 
 										</div>
 
@@ -323,7 +347,7 @@ function Calender() {
 								<div className={styles.emptyEvents}>
 									<div className={styles.emptyIcon}>🗓️</div>
 									<div className={styles.emptyText}>
-										Currently no events scheduled for this month.
+										No events scheduled for this month.
 									</div>
 								</div>
 							)}

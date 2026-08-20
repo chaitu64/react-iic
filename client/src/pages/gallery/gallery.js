@@ -101,6 +101,76 @@ const galleryData = [
 			"https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/20211030_140219.jpg",
 			"https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Gallery/WhatsApp%20Image%202024-03-13%20at%2020.17.02_a7338a25.jpg"
 		]
+	},
+	{
+		id: "gallery-10",
+		category: "hackathon",
+		title: "SIH Internal Hackathon",
+		date: "Aug 27, 2026",
+		images: []
+	},
+	{
+		id: "gallery-11",
+		category: "workshop",
+		title: "Industrial Startup Visit (Neem Tree Toys)",
+		date: "Aug 9, 2026",
+		images: []
+	},
+	{
+		id: "gallery-12",
+		category: "hackathon",
+		title: "WASTE TO BUILD (Pitch 2 Product) – Idea Pitching Contest",
+		date: "May 25, 2026",
+		images: []
+	},
+	{
+		id: "gallery-13",
+		category: "workshop",
+		title: "Incubation Visit to KLU",
+		date: "Mar 25, 2026",
+		images: []
+	},
+	{
+		id: "gallery-14",
+		category: "summit",
+		title: "Prime Minister Budget Webinar 2026",
+		date: "Mar 9, 2026",
+		images: []
+	},
+	{
+		id: "gallery-15",
+		category: "hackathon",
+		title: "IDEATHON – Hack the Thought",
+		date: "Feb 5, 2026",
+		images: []
+	},
+	{
+		id: "gallery-16",
+		category: "workshop",
+		title: "Outreach to Uppalapadu",
+		date: "Jan 28, 2026",
+		images: []
+	},
+	{
+		id: "gallery-17",
+		category: "summit",
+		title: "Ministry of Education's Innovation Cell",
+		date: "Jan 26, 2026",
+		images: []
+	},
+	{
+		id: "gallery-18",
+		category: "workshop",
+		title: "Incubation Visit to SRM University",
+		date: "Dec 25, 2025",
+		images: []
+	},
+	{
+		id: "gallery-19",
+		category: "workshop",
+		title: "Incubation Visit to RVR&JC",
+		date: "Aug 22, 2026",
+		images: []
 	}
 ];
 
@@ -210,6 +280,7 @@ function Gallery() {
 							{filteredGallery.map((item, idx) => {
 								const totalImages = item.images ? item.images.length : 0;
 								const coverImage = item.images && item.images[0] ? item.images[0] : "";
+									const hasImages = totalImages > 0;
 
 								return (
 									<div

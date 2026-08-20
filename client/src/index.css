@@ -109,32 +109,3 @@ body.dark-mode .event-title,
 body.dark-mode .popup-title {
   color: var(--orange) !important;
 }
-
-/* Theme Toggle Button */
-.theme-toggle-btn {
-  background: none;
-  border: none;
-  color: #2E2A8F;
-  font-size: 20px;
-  cursor: pointer;
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.theme-toggle-btn:hover {
-  background: rgba(46, 42, 143, 0.1);
-}
-
-body.dark-mode .theme-toggle-btn {
-  color: var(--orange);
-}
-
-body.dark-mode .theme-toggle-btn:hover {
-  background: rgba(245, 158, 11, 0.1);
-}

@@ -12,7 +12,7 @@ const teamData = {
 				"Our faculty coordinators provide academic guidance and institutional support, bridging the gap between innovation initiatives and curriculum integration. They ensure IIC's alignment with educational objectives while fostering an entrepreneurial ecosystem.",
 			reverse: false,
 			members: [
-				{ name: "Dr. M.Y, Bhanu Murthy", role: "Faculty Coordinator", bio: "Guides innovation and entrepreneurship initiatives.", initials: "YMR", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/co-oridinators/WhatsApp%20Image%202026-08-17%20at%2011.37.27%20PM.jpeg" },
+				{ name: "Dr. M.Y. Bhanu Murthy", role: "Faculty Coordinator", bio: "Guides innovation and entrepreneurship initiatives.", initials: "YMR", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/co-oridinators/Screenshot%202026-08-20%20220331.png", imgStyle: { objectPosition: "center 10%", transform: "scale(1.25)" } },
 				{ name: "Dr. Krishna Prasad", role: "Faculty Coordinator", bio: "Facilitates institutional partnerships and R&D.", initials: "SS", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/co-oridinators/WhatsApp%20Image%202026-08-17%20at%2011.37.28%20PM.jpeg" },
 				{ name: "Ch. Kalyan", role: "Faculty Coordinator", bio: "Supports curriculum integration and student mentorship.", initials: "AA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/co-oridinators/WhatsApp%20Image%202026-08-17%20at%2011.37.28%20PM%20(1).jpeg" },
 			]
@@ -23,7 +23,7 @@ const teamData = {
 				"Student leaders who spearhead IIC activities and represent the innovation council. They coordinate between various teams, drive strategic initiatives, and ensure effective execution of all programs while maintaining a vibrant entrepreneurial culture on campus.",
 			reverse: true,
 			members: [
-				{ name: "Pavan Kalyan S", role: "President", bio: "Leads council and strategic initiatives.", initials: "PK", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Presidents/president.jpg" },
+				{ name: "Pavan Kalyan S", role: "President", bio: "Leads council and strategic initiatives.", initials: "PK", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Presidents/Screenshot%202026-08-20%20222053.png  " },
 				{ name: "Jessy Gladwin", role: "Vice President", bio: "Coordinates team activities and outreach.", initials: "JG", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Presidents/JESSY%20GLADWIN-%20vice.png" },
 				{ name: "Dinesh Reddy T", role: "Secretary", bio: "Ensures vibrant entrepreneurial culture.", initials: "TDR", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Presidents/Tangirala%20Dinesh%20Reddy%20-%20sec.jpg" }
 			]
@@ -69,7 +69,6 @@ const teamData = {
 				{ name: "Peeka Tarun Dev", role: "PR Member", bio: "Manages outreach programs.", initials: "PT", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/Polish_20260815_172757733%20-%20Peeka%20Tarun%20Dev.png" },
 				{ name: "Lohithaksha Sugguna", role: "PR Member", bio: "Handles event communications.", initials: "LS", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/Polish_20260815_183240338%20-%20LOHITHAKSHA%20SUGGUNA.png" },
 
-				{ name: "Teju Kakani", role: "PR Member", bio: "Supports stakeholder engagement.", initials: "TK", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/teju-1230705886%20-%20Teju%20Kakani.jpg" }
 			]
 		},
 		{
@@ -112,7 +111,8 @@ const teamData = {
 				{ name: "Kandula Meghana", role: "Events Member", bio: "Supports on-ground execution.", initials: "KM", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Kandula%20Meghana.png", imgStyle: { objectPosition: "center" } },
 				{ name: "Keerthana Varra", role: "Events Member", bio: "Event logistics assistant.", initials: "KV", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Kphoto_10MB-1%20-%20Keerthana%20Varra.jpg", imgStyle: { objectPosition: "center" } },
 				{ name: "Gayathri Veeranki", role: "Events Member", bio: "Coordinates with vendors.", initials: "GV", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/photo_10mb-3%20-%20Gayathri%20Veeranki.jpg", imgStyle: { objectPosition: "center" } },
-				{ name: "Spandana", role: "Events Member", bio: "Event day operations coordinator.", initials: "S", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Screenshot_2025-10-07-21-52-37-925_com.miui.gallery%20-%20Spandana%20Spandana.jpg", imgStyle: { objectPosition: "center" } }
+				{ name: "Spandana", role: "Events Member", bio: "Event day operations coordinator.", initials: "S", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Screenshot_2025-10-07-21-52-37-925_com.miui.gallery%20-%20Spandana%20Spandana.jpg", imgStyle: { objectPosition: "center" } },
+				{ name: "Aparna Devisetty", role: "Events Member", bio: "Supports event planning.", initials: "AD", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/IMG_20260816_083557%20-%20Aparna%20Devisetty.jpg", imgStyle: { objectPosition: "center 15%", transform: "scale(1.25)" } }
 			]
 		},
 		{

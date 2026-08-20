@@ -1,40 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 function Navbar() {
     const [query, setQuery] = useState('');
     const [scrolled, setScrolled] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const currentPath = location.pathname;
-
-    useEffect(() => {
-        // Initialize theme from localStorage or system preference
-        const savedTheme = localStorage.getItem('app-theme');
-        if (savedTheme === 'dark') {
-            setIsDarkMode(true);
-            document.body.classList.add('dark-mode');
-        } else {
-            setIsDarkMode(false);
-            document.body.classList.remove('dark-mode');
-        }
-    }, []);
-
-    const toggleTheme = () => {
-        if (isDarkMode) {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('app-theme', 'light');
-            setIsDarkMode(false);
-        } else {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('app-theme', 'dark');
-            setIsDarkMode(true);
-        }
-    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -102,14 +77,6 @@ function Navbar() {
                                 </svg>
                             </button>
                         </form>
-                        <button
-                            className="theme-toggle-btn"
-                            onClick={toggleTheme}
-                            aria-label="Toggle Dark Mode"
-                            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                        >
-                            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-                        </button>
                     </div>
 
                     <button

@@ -1,177 +1,387 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Events.module.css';
 
-const TEMPORARY_IMAGES = [
-	"https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800",
-	"https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=800",
-	"https://images.unsplash.com/photo-1515187029136-1c3905436df7?auto=format&fit=crop&q=80&w=800",
-	"https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+/* =========================
+   LIVE EVENT
+========================= */
+
+const LIVE_EVENT = {
+  image: '/images/poster.jpg',
+  registrationLink:
+    'https://docs.google.com/forms/d/e/1FAIpQLSfkqOn1rGzMeCQbjd0n6bO1KlhuayRpWkLEg48iVYa8trcsYA/closedform'
+};
+
+/* =========================
+   PAST EVENTS
+========================= */
+
+const PAST_EVENTS = [
+  /* ---------- HACKATHONS ---------- */
+
+  {
+    id: 'h1',
+    category: 'Hackathons',
+    title: 'SIH 2024',
+    image: '/events/hackathons/sih2024.jpeg',
+    description:
+      'Smart India Hackathon 2024, a platform where students worked on innovative solutions for real-world problem statements.'
+  },
+  {
+    id: 'h2',
+    category: 'Hackathons',
+    title: 'SIH 2025',
+    image: '/events/hackathons/sih2025.jpeg',
+    description:
+      'Smart India Hackathon 2025 encouraged students to collaborate, innovate, and develop technology-driven solutions.'
+  },
+
+  /* ---------- IDEATHONS ---------- */
+
+  {
+    id: 'i1',
+    category: 'Ideathons',
+    title: 'Anveshana',
+    image: '/events/ideathons/anveshana_ideathon.jpeg',
+    description:
+      'An ideathon focused on exploring innovative ideas and encouraging students to transform their thoughts into impactful solutions.'
+  },
+  {
+    id: 'i2',
+    category: 'Ideathons',
+    title: 'Hack The Thought',
+    image: '/events/ideathons/hackthethought_ideathon.jpeg',
+    description:
+      'A creative ideation event that encouraged participants to think differently and develop innovative concepts.'
+  },
+  {
+    id: 'i3',
+    category: 'Ideathons',
+    title: 'Ideathon 2021',
+    image: '/events/ideathons/ideathon2021.jpeg',
+    description:
+      'An ideathon conducted to provide students with an opportunity to present innovative ideas and problem-solving approaches.'
+  },
+  {
+    id: 'i4',
+    category: 'Ideathons',
+    title: 'Inter-Institutional Startup Competition',
+    image: '/events/ideathons/iiscideathon.jpeg',
+    description:
+      'An inter-institutional competition focused on startup ideas, innovation, entrepreneurship, and collaboration among students.'
+  },
+  {
+    id: 'i5',
+    category: 'Ideathons',
+    title: 'Innovate It',
+    image: '/events/ideathons/innovateit_ideathon.jpeg',
+    description:
+      'An ideathon conducted to discover and encourage innovative student ideas with the potential to solve real-world problems.'
+  },
+  {
+    id: 'i6',
+    category: 'Ideathons',
+    title: 'Waste to Build',
+    image: '/events/ideathons/wastetobuild.jpeg',
+    description:
+      'A sustainability-focused ideathon where participants explored innovative ways to transform waste materials into useful products.'
+  },
+
+  /* ---------- TECHNICAL EVENTS ---------- */
+
+  {
+    id: 't1',
+    category: 'Technical Events',
+    title: 'Invention Through Innovation',
+    image: '/events/technicalevents/te1.jpeg',
+    description:
+      'An innovation-focused event that encouraged students to explore creative ideas, inventions, and practical solutions.'
+  },
+  {
+    id: 't2',
+    category: 'Technical Events',
+    title: 'Innovation Experience',
+    image: '/events/technicalevents/te2.jpeg',
+    description:
+      'A multi-event innovation experience featuring activities such as Marketing Magics, Scavenger Hunt, Stock Wars, and other creative challenges.'
+  },
+  {
+    id: 't3',
+    category: 'Technical Events',
+    title: 'Innovation Intramurals',
+    image: '/events/technicalevents/te3.jpeg',
+    description:
+      'A two-day intramural event featuring innovation-based activities, mathematics, ideas, and engaging student challenges.'
+  },
+  {
+    id: 't4',
+    category: 'Technical Events',
+    title: 'Mind Mashrims',
+    image: '/events/technicalevents/te4.jpeg',
+    description:
+      'A technical and creative event designed to challenge students through engaging activities and innovative thinking.'
+  },
+  {
+    id: 't5',
+    category: 'Technical Events',
+    title: 'Stock Wars',
+    image: '/events/technicalevents/te5.jpeg',
+    description:
+      'A technical event related to stock markets, where participants explored investment strategies and decision-making.'
+  },
+  {
+    id: 't6',
+    category: 'Technical Events',
+    title: 'Innovation Hunt',
+    image: '/events/technicalevents/te6.jpeg',
+    description:
+      'An innovation-based event focused on exploring the journey from innovative ideas and investment towards entrepreneurship.'
+  },
+  {
+    id: 't7',
+    category: 'Technical Events',
+    title: 'Recall Masters',
+    image: '/events/technicalevents/te7.jpeg',
+    description:
+      'A challenging event designed to test participants’ memory, recall ability, observation, and quick thinking.'
+  },
+  {
+    id: 't8',
+    category: 'Technical Events',
+    title: 'Memory Wizards',
+    image: '/events/technicalevents/te8.jpeg',
+    description:
+      'An engaging memory-based competition that challenged students to demonstrate their recall and observation skills.'
+  },
+  {
+    id: 't9',
+    category: 'Technical Events',
+    title: 'Techmania',
+    image: '/events/technicalevents/te9.jpeg',
+    description:
+      'A technical event bringing together students through technology, innovation, creativity, and exciting challenges.'
+  }
 ];
 
-const DEFAULT_EVENTS = [
-	{
-		id: '1',
-		title: 'Intra Institutional startup competition',
-		date: '2026-07-15',
-		time: '10:00 AM',
-		location: 'Main Auditorium',
-		description: 'Institutional startup competition for students of VVITU',
-		category: 'Bootcamp',
-		image: 'https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/IICEvents/WhatsApp%20Image%202026-08-17%20at%2011.34.17%20PM%20(1).jpeg'
-	},
-	{
-		id: '2',
-		title: 'SIH 2024',
-		date: '2024-09-06',
-		time: '11:00 AM',
-		location: 'Seminar Hall B',
-		description: 'Smart India Hackathon 2024',
-		category: 'Seminar',
-		image: 'https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/IICEvents/WhatsApp%20Image%202026-08-17%20at%2011.34.17%20PM.jpeg'
-	},
-	{
-		id: '3',
-		title: 'SIH 2025',
-		date: '2025-09-19',
-		time: '02:00 PM',
-		location: 'Lab Complex 3',
-		description: 'Smart India Hackathon 2025',
-		category: 'Hackathon',
-		image: 'https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/IICEvents/WhatsApp%20Image%202026-08-17%20at%2011.34.18%20PM%20(1).jpeg'
-	},
-	{
-		id: '4',
-		title: 'Waste to Build',
-		date: '2026-07-15',
-		time: '09:00 AM',
-		location: 'Computer Lab 1',
-		description: 'Waste to Build is an event that focuses on sustainable development and innovation.',
-		category: 'Workshop',
-		image: 'https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/IICEvents/WhatsApp%20Image%202026-08-17%20at%2011.34.18%20PM%20(2).jpeg'
-	},
-	{
-		id: '5',
-		title: 'Innvoate it',
-		date: '2026-03-18',
-		time: '01:30 PM',
-		location: 'Main Auditorium',
-		description: 'Innvoate it is an event that focuses on innovation and creativity.',
-		category: 'Workshop',
-		image: 'https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/IICEvents/WhatsApp%20Image%202026-08-17%20at%2011.34.18%20PM%20(3).jpeg'
-	},
-	{
-		id: '7',
-		title: 'Tech mania',
-		date: '2023-12-22',
-		time: '03:00 PM',
-		location: 'Seminar Hall A',
-		description: 'Tech mania is an event that focuses on technology and innovation.',
-		category: 'Workshop',
-		image: 'https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/IICEvents/WhatsApp%20Image%202026-08-17%20at%2011.34.19%20PM.jpeg'
-	}
-];
+/* =========================
+   COMPONENT
+========================= */
 
 function Events() {
-	const [eventsData] = useState(DEFAULT_EVENTS);
-	const [loading] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('All Events');
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-	// Backend fetch removed in favor of static events data
+  const filters = [
+    'All Events',
+    'Hackathons',
+    'Ideathons',
+    'Technical Events'
+  ];
 
-	useEffect(() => {
-		if (window.location.hash) {
-			const el = document.getElementById(window.location.hash.slice(1));
-			if (el) {
-				setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-			}
-		}
-	}, []);
-	return (
-		<div className={styles.wrap}>
+  const filteredEvents =
+    activeFilter === 'All Events'
+      ? PAST_EVENTS
+      : PAST_EVENTS.filter(
+          (event) => event.category === activeFilter
+        );
 
+  /* =========================
+     HASH SCROLL
+  ========================= */
 
-			<main>
-				<div className={styles['hero-events']}>
-					<h1>Events Schedule</h1>
-					<p>Stay updated with our latest workshops, hackathons, and innovation sessions. Mark your calendars and join the innovation journey.</p>
-				</div>
+  useEffect(() => {
+    if (window.location.hash) {
+      const element = document.getElementById(
+        window.location.hash.slice(1)
+      );
 
-				<section id="ongoing" style={{ marginBottom: '60px' }}>
-					<div className={styles['section-header']}>
-						<h2>Ongoing Events</h2>
-						<div className={styles['section-line']}></div>
-					</div>
-					<div className={styles['events-grid']}>
-						<div className={styles['event-card']} id="sih2026" style={{ border: '2px solid #22c55e', boxShadow: '0 8px 30px rgba(34, 197, 94, 0.2)' }}>
-							<img
-								src="/images/poster.jpg"
-								alt="Smart India Hackathon 2026"
-								loading="lazy"
-								style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-								onError={(e) => { e.target.src = 'https://via.placeholder.com/600x400?text=SIH+2026'; }}
-							/>
-							<div className={styles['event-body']}>
-								<div className={styles['date-badge']} style={{ background: '#22c55e' }}>
-									<span className={styles['date-month']}>NOW</span>
-									<span className={styles['date-day']}>LIVE</span>
-								</div>
-								<div className={styles['event-content']}>
-									<h3 className={styles['event-title']} style={{ color: 'var(--navy)' }}>Smart India Hackathon 2026</h3>
-									<div className={styles['event-details']}>
-										<span className={styles['detail-item']}><i className={`fa-regular fa-clock`}></i> 24/7</span>
-										<span className={styles['detail-item']}><i className={`fa-solid fa-location-dot`}></i> VVITU Campus</span>
-									</div>
-									<p className={styles['event-desc']}>currently onging is SIH 2026. Participate and showcase your innovative skills! Join students nationwide in tackling real-world challenges.</p>
-									<span className={`${styles['status-tag']}`} style={{ background: '#dcfce7', color: '#166534' }}>Ongoing</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 100);
+      }
+    }
+  }, []);
 
-				<section id="past">
-					<div className={styles['section-header']}>
-						<h2>Past Events</h2>
-						<div className={styles['section-line']}></div>
-					</div>
-					<div className={styles['events-grid']}>
-						{/* Event cards from events.html */}
-						{eventsData.length > 0 ? (
-							eventsData.map((evt, idx) => (
-								<div className={styles['event-card']} key={evt.id || idx}>
-									<img
-										src={evt.image || TEMPORARY_IMAGES[idx % TEMPORARY_IMAGES.length]}
-										alt={evt.title || "Past Event"}
-										loading="lazy"
-										style={{ width: '100%', height: '300px', objectFit: 'cover', objectPosition: 'center' }}
-									/>
-									<div className={styles['event-body']}>
-										<div className={styles['event-content']}>
-											<h3 className={styles['event-title']}>{evt.title}</h3>
-											<div className={styles['event-details']}>
-												<span className={styles['detail-item']}><i className={`fa-regular fa-clock`}></i> {evt.time || "10:00 AM"}</span>
-												<span className={styles['detail-item']}><i className={`fa-solid fa-location-dot`}></i> {evt.location || "Main Auditorium"}</span>
-											</div>
-											<p className={styles['event-desc']}>{evt.description}</p>
-											<div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-												{evt.category && <span className={`${styles['status-tag']} ${styles['status-completed']}`} style={{ background: 'var(--glass-bg)', color: 'var(--navy)' }}>{evt.category}</span>}
-												<span className={`${styles['status-tag']} ${styles['status-completed']}`}>Completed</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							))
-						) : (
-							<div style={{ textAlign: 'center', width: '100%', padding: '40px', color: '#666' }}>
-								{loading ? <span>Loading Real-time Events... <i className="fa-solid fa-circle-notch fa-spin"></i></span> : "No events scheduled at the moment."}
-							</div>
-						)}
-					</div>
-				</section>
-			</main>
+  return (
+    <div className={styles.wrap}>
+      <main>
 
+        {/* ================= HERO ================= */}
 
-		</div>
-	);
+        <div className={styles['hero-events']}>
+          <h1>Events</h1>
+
+          <p>
+            Explore the latest activities, competitions, workshops,
+            and innovation initiatives of IIC VVITU.
+          </p>
+        </div>
+
+        {/* ================= LIVE EVENT ================= */}
+
+        <section id="ongoing">
+
+          <div className={styles['section-header']}>
+            <h2>Live Event</h2>
+            <div className={styles['section-line']} />
+          </div>
+
+          <div className={styles['live-event-wrapper']}>
+
+            <div className={styles['live-poster']}>
+
+              {/* LIVE - TOP LEFT */}
+
+              <div className={styles['live-badge']}>
+                <span className={styles.dot}></span>
+                LIVE
+              </div>
+
+              {/* ONGOING - TOP RIGHT */}
+
+              <div className={styles['status-badge']}>
+                ONGOING
+              </div>
+
+              <img
+                src={LIVE_EVENT.image}
+                alt="Live IIC Event"
+              />
+
+            </div>
+
+            <a
+              href={LIVE_EVENT.registrationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles['register-btn']}
+            >
+              Register Now
+            </a>
+
+          </div>
+
+        </section>
+
+        {/* ================= PAST EVENTS ================= */}
+
+        <section id="past">
+
+          <div className={styles['section-header']}>
+            <h2>Past Events</h2>
+            <div className={styles['section-line']} />
+          </div>
+
+          {/* ================= FILTERS ================= */}
+
+          <div className={styles['event-filters']}>
+
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                className={`${styles['filter-btn']} ${
+                  activeFilter === filter
+                    ? styles.active
+                    : ''
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+
+          </div>
+
+          {/* ================= EVENT IMAGES ================= */}
+
+          <div className={styles['poster-grid']}>
+
+            {filteredEvents.map((event) => (
+
+              <button
+                type="button"
+                className={styles['poster-card']}
+                key={event.id}
+                
+                aria-label={`View details for ${event.title}`}
+              >
+
+                <div className={styles['completed-badge']}>
+                  COMPLETED
+                </div>
+
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  loading="lazy"
+                />
+
+              </button>
+
+            ))}
+
+          </div>
+
+        </section>
+
+      </main>
+
+      {/* ================= EVENT DETAILS MODAL ================= */}
+
+      {selectedEvent && (
+
+        <div
+          className={styles['event-modal-overlay']}
+          onClick={() => setSelectedEvent(null)}
+        >
+
+          <div
+            className={styles['event-modal']}
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            <button
+              type="button"
+              className={styles['modal-close']}
+              onClick={() => setSelectedEvent(null)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+            <div className={styles['modal-image']}>
+              <img
+                src={selectedEvent.image}
+                alt={selectedEvent.title}
+              />
+            </div>
+
+            <div className={styles['modal-content']}>
+
+              <span className={styles['modal-category']}>
+                {selectedEvent.category}
+              </span>
+
+              <h2>{selectedEvent.title}</h2>
+
+              <p>
+                {selectedEvent.description}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+    </div>
+  );
 }
 
 export default Events;

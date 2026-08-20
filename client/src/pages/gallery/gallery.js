@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { 
-	Calendar, 
-	Image as ImageIcon, 
-	ChevronLeft, 
-	ChevronRight, 
-	X, 
+import {
+	Calendar,
+	Image as ImageIcon,
+	ChevronLeft,
+	ChevronRight,
+	X,
 	ArrowRight,
 	Sparkles
 } from "lucide-react";
@@ -280,7 +280,6 @@ function Gallery() {
 							{filteredGallery.map((item, idx) => {
 								const totalImages = item.images ? item.images.length : 0;
 								const coverImage = item.images && item.images[0] ? item.images[0] : "";
-									const hasImages = totalImages > 0;
 
 								return (
 									<div
@@ -290,13 +289,13 @@ function Gallery() {
 									>
 										{/* Left Side: Clean Image Poster */}
 										<div className={styles['card-poster']}>
-											<img 
-												src={coverImage} 
-												alt={item.title} 
-												loading="lazy" 
+											<img
+												src={coverImage}
+												alt={item.title}
+												loading="lazy"
 												className={styles['poster-img']}
 											/>
-											
+
 											{/* Top Right Photo Count Badge */}
 											{totalImages > 1 && (
 												<div className={styles['count-badge']}>
@@ -326,7 +325,7 @@ function Gallery() {
 
 											{/* Action Footer */}
 											<div className={styles['card-footer']}>
-												<button 
+												<button
 													className={styles['action-btn']}
 													onClick={(e) => {
 														e.stopPropagation();
@@ -344,7 +343,7 @@ function Gallery() {
 						</div>
 					)}
 				</div>
-					
+
 				{/* Numbers & Stats Banner */}
 				<section className={styles['gallery-stats']}>
 					<h2>IIC by the Numbers</h2>
@@ -371,19 +370,19 @@ function Gallery() {
 
 			{/* Interactive Lightbox / Full Poster Modal */}
 			{modal.open && modal.event && (
-				<div 
-					className={styles['modal-backdrop']} 
+				<div
+					className={styles['modal-backdrop']}
 					onClick={closeModal}
 					role="dialog"
 					aria-modal="true"
 				>
-					<div 
-						className={styles['modal-box']} 
+					<div
+						className={styles['modal-box']}
 						onClick={(e) => e.stopPropagation()}
 					>
 						{/* Close button */}
-						<button 
-							className={styles['modal-close-btn']} 
+						<button
+							className={styles['modal-close-btn']}
 							onClick={closeModal}
 							aria-label="Close modal"
 						>
@@ -392,24 +391,24 @@ function Gallery() {
 
 						{/* Modal Stage: Full High-Res Poster View */}
 						<div className={styles['modal-stage']}>
-							<img 
-								className={styles['modal-main-img']} 
-								src={modal.event.images[modal.photoIdx]} 
-								alt={modal.event.title} 
+							<img
+								className={styles['modal-main-img']}
+								src={modal.event.images[modal.photoIdx]}
+								alt={modal.event.title}
 							/>
 
 							{/* Previous and Next Navigation Arrows on Modal */}
 							{modal.event.images.length > 1 && (
 								<>
-									<button 
-										className={`${styles['modal-arrow']} ${styles['modal-arrow-left']}`} 
+									<button
+										className={`${styles['modal-arrow']} ${styles['modal-arrow-left']}`}
 										onClick={prevPhoto}
 										aria-label="Previous photo"
 									>
 										<ChevronLeft size={26} />
 									</button>
-									<button 
-										className={`${styles['modal-arrow']} ${styles['modal-arrow-right']}`} 
+									<button
+										className={`${styles['modal-arrow']} ${styles['modal-arrow-right']}`}
 										onClick={nextPhoto}
 										aria-label="Next photo"
 									>

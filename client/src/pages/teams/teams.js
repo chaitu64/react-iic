@@ -8,7 +8,6 @@ const teamData = {
 	team: [
 		{
 			section: "IIC Co-ordinators",
-			// icon: "🎓",
 			description:
 				"Our faculty coordinators provide academic guidance and institutional support, bridging the gap between innovation initiatives and curriculum integration. They ensure IIC's alignment with educational objectives while fostering an entrepreneurial ecosystem.",
 			reverse: false,
@@ -20,7 +19,6 @@ const teamData = {
 		},
 		{
 			section: "IIC Presidents",
-			// icon: "👑",
 			description:
 				"Student leaders who spearhead IIC activities and represent the innovation council. They coordinate between various teams, drive strategic initiatives, and ensure effective execution of all programs while maintaining a vibrant entrepreneurial culture on campus.",
 			reverse: true,
@@ -32,7 +30,6 @@ const teamData = {
 		},
 		{
 			section: "Social Media Department",
-			// icon: "👑",
 			description:
 				"The Social Media Department is the digital voice of IIC, responsible for creating engaging content that highlights innovation, entrepreneurship, and student achievements. They manage all social media platforms, ensuring consistent branding and effective communication with the IIC community.", reverse: true,
 			members: [
@@ -53,17 +50,10 @@ const teamData = {
 		},
 		{
 			section: "Public Relations",
-			// icon: "🤝",
 			description:
 				"Our PR team builds and maintains relationships with external stakeholders, media, industry partners, and alumni. They manage IIC's public image, coordinate outreach programs, and create strategic partnerships that enhance our institution's innovation ecosystem.",
 			reverse: false,
 			members: [
-				// { name: "Pranav", role: "PR Lead", bio: "Manages public image and outreach.", initials: "PN", image: "" },
-				// { name: "Jaya Gopal", role: "PR Member", bio: "Coordinates media and alumni relations.", initials: "JG", image: "" },
-				// { name: "Bhavya", role: "PR Member", bio: "Supports stakeholder engagement.", initials: "BM", image: "" },
-				// { name: "Sravani", role: "PR Member", bio: "Handles event communications.", initials: "S", image: "" },
-				// { name: "Yashwanth", role: "PR Member", bio: "Creates strategic partnerships.", initials: "YU", image: "" },
-				// { name: "Kiran", role: "PR Member", bio: "Manages outreach programs.", initials: "KN", image: "" },
 				{ name: "Yogyasree Palapala", role: "PR Member", bio: "Supports stakeholder engagement.", initials: "YP", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/564E9769-47DE-4E74-8960-2DFB51B29C9E%20-%20Yogyasree%20Palapala.png" },
 				{ name: "Nithish Kumar Ambati", role: "PR Member", bio: "Manages outreach programs.", initials: "NA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/file_00000000114c82088daf120fb8ee3ea8%20-%20Nithish%20Kumar%20Ambati.png" },
 				{ name: "Haasin", role: "PR Member", bio: "Handles event communications.", initials: "H", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/file_0000000060788211b9f9e066df65c37e%20-%20Haasin.png" },
@@ -84,15 +74,10 @@ const teamData = {
 		},
 		{
 			section: "Web Designing",
-			// icon: "💻",
 			description:
 				"The web designing team develops and maintains IIC's digital infrastructure. They create user-friendly websites, design interfaces, implement features, ensure responsive design, and provide technical solutions that enhance online user experience and accessibility.",
 			reverse: false,
 			members: [
-				// { name: "Chaitanya", role: "Web Lead", bio: "Develops and maintains digital infrastructure.", initials: "CC", image: "" },
-				// { name: "Jaya Harsha", role: "Web Member", bio: "Designs interfaces and features.", initials: "JH", image: "" },
-				// { name: "Sravani", role: "Web Member", bio: "Ensures responsive design.", initials: "S", image: "" },
-				// { name: "Vamsi", role: "Web Member", bio: "Enhances user experience.", initials: "V", image: "" },
 				{ name: "Leela Chaitanya", role: "Web Head", bio: "Develops digital infrastructure.", initials: "LC", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Web/WA_1786806535851%20-%20Leela%20Chaitanya.jpg" },
 				{ name: "Harsha Vardhan J", role: "Web Member", bio: "Ensures responsive design.", initials: "HJ", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Web/file_00000000166c8211aa55d23f66eef0da%20-%20Harsha%20vardhan%20J.png" },
 				{ name: "Harini Sai", role: "Web Member", bio: "Designs interfaces and features.", initials: "LC", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Web/Screenshot%202026-08-18%20004950.png", imgStyle: { transform: "scale(1.4)", objectPosition: "center 20%" } },
@@ -108,7 +93,6 @@ const teamData = {
 		},
 		{
 			section: "Events",
-			// icon: "🎉",
 			description:
 				"The events team conceptualizes and executes all IIC programs including hackathons, workshops, competitions, and seminars. They handle logistics, vendor coordination, participant management, and ensure every event creates memorable learning experiences that inspire innovation.",
 			reverse: true,
@@ -133,7 +117,6 @@ const teamData = {
 		},
 		{
 			section: "Review & Validation",
-			// icon: "✅",
 			description:
 				"The Review & Validation team is responsible for ensuring quality, reviewing content, and validating processes to maintain high standards across all IIC activities.",
 			reverse: true,
@@ -166,8 +149,6 @@ function Teams() {
 			[sectionName]: !prev[sectionName]
 		}));
 	};
-
-	// Backend fetch removed to allow for manual manual static image update
 
 	return (
 		<div className={styles.wrap}>
@@ -233,7 +214,6 @@ function Teams() {
 															<h2 className={styles['member-name']}>{member.name}</h2>
 															<div className={styles['member-role']}>{member.role}</div>
 															<p className={styles['member-bio']}>{member.bio}</p>
-															{/* <button className={styles['member-contact-btn']}>message</button> */}
 														</div>
 													</div>
 												))}
@@ -270,7 +250,6 @@ function Teams() {
 															<h2 className={styles['member-name']}>{member.name}</h2>
 															<div className={styles['member-role']}>{member.role}</div>
 															<p className={styles['member-bio']}>{member.bio}</p>
-															<button className={styles['member-contact-btn']}>message</button>
 														</div>
 														<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 													</div>

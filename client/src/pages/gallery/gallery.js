@@ -273,7 +273,7 @@ function Gallery() {
 						</div>
 					)}
 				</div>
-
+					
 				{/* Numbers & Stats Banner */}
 				<section className={styles['gallery-stats']}>
 					<h2>IIC by the Numbers</h2>

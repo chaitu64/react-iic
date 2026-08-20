@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import styles from './Home.module.css';
 import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
+import { BookOpen, UsersRound, Lightbulb, Terminal, Users } from 'lucide-react';
 
 function AnimatedTriangle({ src, alt }) {
 	const ref = useRef(null);
@@ -73,8 +74,11 @@ function Home() {
 	const [showPopup, setShowPopup] = useState(false);
 
 	useEffect(() => {
-		// Show popup on every enter/refresh
-		setShowPopup(true);
+		const hasVisited = localStorage.getItem('hasVisitedPopup');
+		if (!hasVisited) {
+			setShowPopup(true);
+			localStorage.setItem('hasVisitedPopup', 'true');
+		}
 	}, []);
 
 	useEffect(() => {
@@ -95,13 +99,14 @@ function Home() {
 				<div className={styles['popup-overlay']} onClick={() => setShowPopup(false)}>
 					<div className={styles['popup-content']} onClick={(e) => e.stopPropagation()}>
 						<button className={styles['popup-close']} onClick={() => setShowPopup(false)}>×</button>
-						<span className={styles['popup-badge']}>Ongoing Now</span>
-						<h2 className={styles['popup-title']}>Smart India Hackathon 2026</h2>
-						<img src="/images/poster.jpg" alt="SIH 2026" className={styles['popup-image']} onError={(e) => { e.target.src = 'https://via.placeholder.com/600x400?text=SIH+2026'; }} />
-						<p className={styles['popup-desc']}>currently onging is SIH 2026. Participate and showcase your innovative skills!</p>
-						<Link to="/events#sih2026" className={styles['popup-cta']} onClick={() => setShowPopup(false)}>
-							View Event Details
-						</Link>
+						<p className={styles['popup-subtitle']}>JOURNEY WITH PURPOSE</p>
+						<h2 className={styles['popup-title']}>
+							Adventure through<br />
+							<span className={styles['popup-title-italic']}>National parks</span>
+						</h2>
+						<button className={styles['popup-cta']} onClick={() => setShowPopup(false)}>
+							Plan your visit
+						</button>
 					</div>
 				</div>,
 				document.body
@@ -122,24 +127,24 @@ function Home() {
 			<AnimatedSection className={styles['activities-strip']}>
 				<h2 className={styles['activities-title']}><Link to="/gallery" style={{ color: 'inherit', textDecoration: 'none' }}>Key Activities of IIC</Link></h2>
 				<div className={styles['activities-row']}>
-					<Link to="/gallery" className={styles['activity-item']} style={{ textDecoration: 'none' }}>
-						<div className={styles['act-icon']}><i className={`fa-solid fa-clipboard-check`}></i></div>
+					<Link to="/gallery" className={styles['activity-item']} style={{ textDecoration: 'none' }} title="Workshops">
+						<div className={styles['act-icon']}><BookOpen size={40} strokeWidth={1.5} /></div>
 						<div className={styles['act-label']}>Workshops</div>
 					</Link>
-					<Link to="/teams" className={styles['activity-item']} style={{ textDecoration: 'none' }}>
-						<div className={styles['act-icon']}><i className={`fa-solid fa-person-rays`}></i></div>
+					<Link to="/teams" className={styles['activity-item']} style={{ textDecoration: 'none' }} title="Mentoring">
+						<div className={styles['act-icon']}><UsersRound size={40} strokeWidth={1.5} /></div>
 						<div className={styles['act-label']}>Mentoring</div>
 					</Link>
-					<Link to="/events" className={styles['activity-item']} style={{ textDecoration: 'none' }}>
-						<div className={styles['act-icon']}><i className={`fa-solid fa-lightbulb`}></i></div>
+					<Link to="/events" className={styles['activity-item']} style={{ textDecoration: 'none' }} title="Idea Competitions">
+						<div className={styles['act-icon']}><Lightbulb size={40} strokeWidth={1.5} /></div>
 						<div className={styles['act-label']}>Idea Competitions</div>
 					</Link>
-					<Link to="/events" className={styles['activity-item']} style={{ textDecoration: 'none' }}>
-						<div className={styles['act-icon']}><i className={`fa-solid fa-flask`}></i></div>
+					<Link to="/events" className={styles['activity-item']} style={{ textDecoration: 'none' }} title="Hackathons">
+						<div className={styles['act-icon']}><Terminal size={40} strokeWidth={1.5} /></div>
 						<div className={styles['act-label']}>Hackathons</div>
 					</Link>
-					<Link to="/teams" className={styles['activity-item']} style={{ textDecoration: 'none' }}>
-						<div className={styles['act-icon']}><i className={`fa-solid fa-users`}></i></div>
+					<Link to="/teams" className={styles['activity-item']} style={{ textDecoration: 'none' }} title="Team Building">
+						<div className={styles['act-icon']}><Users size={40} strokeWidth={1.5} /></div>
 						<div className={styles['act-label']}>Team Building</div>
 					</Link>
 				</div>

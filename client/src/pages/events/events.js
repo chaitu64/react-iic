@@ -6,7 +6,7 @@ import styles from './Events.module.css';
 ========================= */
 
 const LIVE_EVENT = {
-  image: '/images/poster.jpg',
+  image: 'https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SIH2026/Screenshot%202026-08-21%20161227_imgupscaler.ai_General_4K.jpg',
   registrationLink:
     'https://docs.google.com/forms/d/e/1FAIpQLSfkqOn1rGzMeCQbjd0n6bO1KlhuayRpWkLEg48iVYa8trcsYA/closedform'
 };

@@ -408,50 +408,6 @@ body::before {
   }
 }
 
-/* --- Responsive Navigation --- */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: var(--navy);
-  cursor: pointer;
-  margin-left: auto;
-  z-index: 200;
-}
-
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  nav {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100vw;
-    background: var(--solid-bg);
-    flex-direction: column;
-    gap: 0;
-    box-shadow: 0 4px 24px rgba(46, 42, 143, 0.08);
-    padding: 0 0 16px 0;
-  }
-
-  nav.open {
-    display: flex;
-  }
-
-  nav a {
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border);
-    font-size: 16px;
-  }
-
-  .header-inner {
-    position: relative;
-  }
-}
 
 /* --- Responsive Hero Section --- */
 @media (max-width: 480px) {
@@ -630,12 +586,12 @@ body::before {
 }
 
 .popup-content {
-  background: url("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+  background: var(--card-bg);
   width: 100%;
   max-width: 650px;
-  min-height: 420px;
-  border-radius: 8px;
-  padding: 60px 40px;
+  min-height: 440px;
+  border-radius: 12px;
+  padding: 0;
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -647,15 +603,60 @@ body::before {
   overflow: hidden;
 }
 
-.popup-content::before {
-  content: "";
+.popup-content>*:not(.sih-banner-container):not(.popup-close):not(::before) {
+  z-index: 2;
+  position: relative;
+}
+
+.sih-banner-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.25);
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
   z-index: 0;
+}
+
+.sih-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  /* Hardware acceleration */
+}
+
+.sih-text-overlay {
+  position: absolute;
+  /* Mask '2022' at the bottom right. Depending on the exact image aspect */
+  bottom: 8%;
+  right: 18%;
+  background: #e1e3e1;
+  /* The gray background color of the image */
+  color: #4b5e65;
+  /* Color of the text */
+  font-family: Arial, sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  padding: 0 10px;
+  letter-spacing: 2px;
+  /* If the text is centered differently, you can adjust these */
+}
+
+@media(max-width: 600px) {
+  .sih-text-overlay {
+    font-size: 2rem;
+    bottom: 8%;
+    right: 15%;
+  }
+}
+
+.popup-content::before {
+  display: none;
 }
 
 .popup-content>* {
@@ -679,7 +680,7 @@ body::before {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.6);
   border: none;
   border-radius: 50%;
   width: 32px;
@@ -691,7 +692,7 @@ body::before {
   justify-content: center;
   color: white;
   transition: background 0.3s ease;
-  z-index: 2;
+  z-index: 5;
 }
 
 .popup-close:hover {
@@ -711,11 +712,11 @@ body::before {
 
 .popup-title {
   color: white;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 48px;
-  font-weight: 400;
+  font-family: inherit;
+  font-size: 32px;
+  font-weight: 800;
   line-height: 1.2;
-  margin: 0 0 40px;
+  margin: 0 0 20px;
 }
 
 .popup-title-italic {
@@ -724,18 +725,31 @@ body::before {
 
 .popup-cta {
   display: inline-block;
-  background: #6bbcf8;
-  color: #1a1a1a;
   padding: 14px 40px;
   border-radius: 999px;
   font-weight: 600;
-  border: none;
   cursor: pointer;
   font-size: 15px;
-  transition: transform 0.3s ease, background 0.3s ease;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  /* Glassmorphism Styles */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: black;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .popup-cta:hover {
-  transform: translateY(-2px);
-  background: #5aaae6;
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 function Navbar() {
-    const [query, setQuery] = useState('');
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const navigate = useNavigate();
     const location = useLocation();
     const currentPath = location.pathname;
 
@@ -23,25 +21,6 @@ function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        const q = query.toLowerCase();
-        if (!q) return;
-
-        if (q.includes('event') || q.includes('hackathon') || q.includes('workshop')) {
-            navigate('/events');
-        } else if (q.includes('gallery') || q.includes('photo')) {
-            navigate('/gallery');
-        } else if (q.includes('team') || q.includes('president') || q.includes('member') || q.includes('faculty')) {
-            navigate('/teams');
-        } else if (q.includes('contact') || q.includes('join') || q.includes('touch')) {
-            navigate('/contact');
-        } else if (q.includes('calendar') || q.includes('upcoming') || q.includes('date')) {
-            navigate('/calender');
-        } else {
-            navigate('/gallery');
-        }
-    };
 
     return (
         <header className={scrolled ? 'scrolled' : ''}>
@@ -61,23 +40,6 @@ function Navbar() {
                         <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Contact</Link>
                     </nav>
 
-                    <div className="nav-search-container" style={{ display: 'flex', alignItems: 'center' }}>
-                        <form onSubmit={handleSearch} className="nav-search-form">
-                            <input
-                                type="text"
-                                className="nav-search-input"
-                                placeholder="Search..."
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                            />
-                            <button type="submit" className="nav-search-button" aria-label="Search">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                </svg>
-                            </button>
-                        </form>
-                    </div>
 
                     <button
                         className="nav-toggle"

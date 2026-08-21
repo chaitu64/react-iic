@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { 
-	Calendar, 
-	Image as ImageIcon, 
-	ChevronLeft, 
-	ChevronRight, 
-	X, 
+import {
+	Calendar,
+	Image as ImageIcon,
+	ChevronLeft,
+	ChevronRight,
+	X,
 	ArrowRight,
 	Sparkles
 } from "lucide-react";
@@ -107,70 +107,108 @@ const galleryData = [
 		category: "hackathon",
 		title: "SIH Internal Hackathon",
 		date: "Aug 27, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SIH2026/Screenshot%202026-08-21%20153415.png"
+		]
 	},
 	{
 		id: "gallery-11",
 		category: "workshop",
 		title: "Industrial Startup Visit (Neem Tree Toys)",
 		date: "Aug 9, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150032.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150124.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150053.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150107.png"
+		]
 	},
 	{
 		id: "gallery-12",
 		category: "hackathon",
 		title: "WASTE TO BUILD (Pitch 2 Product) – Idea Pitching Contest",
 		date: "May 25, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20153804.png"
+		]
 	},
 	{
 		id: "gallery-13",
 		category: "workshop",
 		title: "Incubation Visit to KLU",
 		date: "Mar 25, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151218.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151239.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151306.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151321.png"
+		]
 	},
 	{
 		id: "gallery-14",
 		category: "summit",
 		title: "Prime Minister Budget Webinar 2026",
 		date: "Mar 9, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/pm%20budget%20web/Screenshot%202026-08-21%20151613.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/pm%20budget%20web/Screenshot%202026-08-21%20151623.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/pm%20budget%20web/Screenshot%202026-08-21%20151638.png"
+		]
 	},
 	{
 		id: "gallery-15",
 		category: "hackathon",
 		title: "IDEATHON – Hack the Thought",
 		date: "Feb 5, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151912.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151927.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151942.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151957.png"
+		]
 	},
 	{
 		id: "gallery-16",
 		category: "workshop",
 		title: "Outreach to Uppalapadu",
 		date: "Jan 28, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Uppalapadu/Screenshot%202026-08-21%20152404.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Uppalapadu/Screenshot%202026-08-21%20152419.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Uppalapadu/Screenshot%202026-08-21%20152436.png"
+		]
 	},
 	{
 		id: "gallery-17",
 		category: "summit",
 		title: "Ministry of Education's Innovation Cell",
 		date: "Jan 26, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/MoE%20cell/Screenshot%202026-08-21%20152610.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/MoE%20cell/Screenshot%202026-08-21%20152622.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/MoE%20cell/Screenshot%202026-08-21%20152634.png"
+		]
 	},
 	{
 		id: "gallery-18",
 		category: "workshop",
 		title: "Incubation Visit to SRM University",
 		date: "Dec 25, 2025",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152904.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152936.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152922.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152951.png"
+		]
 	},
 	{
 		id: "gallery-19",
 		category: "workshop",
 		title: "Incubation Visit to RVR&JC",
 		date: "Aug 22, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/Screenshot%202026-08-21%20153626.png"
+		]
 	}
 ];
 
@@ -280,7 +318,6 @@ function Gallery() {
 							{filteredGallery.map((item, idx) => {
 								const totalImages = item.images ? item.images.length : 0;
 								const coverImage = item.images && item.images[0] ? item.images[0] : "";
-									const hasImages = totalImages > 0;
 
 								return (
 									<div
@@ -290,13 +327,13 @@ function Gallery() {
 									>
 										{/* Left Side: Clean Image Poster */}
 										<div className={styles['card-poster']}>
-											<img 
-												src={coverImage} 
-												alt={item.title} 
-												loading="lazy" 
+											<img
+												src={coverImage}
+												alt={item.title}
+												loading="lazy"
 												className={styles['poster-img']}
 											/>
-											
+
 											{/* Top Right Photo Count Badge */}
 											{totalImages > 1 && (
 												<div className={styles['count-badge']}>
@@ -326,7 +363,7 @@ function Gallery() {
 
 											{/* Action Footer */}
 											<div className={styles['card-footer']}>
-												<button 
+												<button
 													className={styles['action-btn']}
 													onClick={(e) => {
 														e.stopPropagation();
@@ -344,7 +381,7 @@ function Gallery() {
 						</div>
 					)}
 				</div>
-					
+
 				{/* Numbers & Stats Banner */}
 				<section className={styles['gallery-stats']}>
 					<h2>IIC by the Numbers</h2>
@@ -371,19 +408,19 @@ function Gallery() {
 
 			{/* Interactive Lightbox / Full Poster Modal */}
 			{modal.open && modal.event && (
-				<div 
-					className={styles['modal-backdrop']} 
+				<div
+					className={styles['modal-backdrop']}
 					onClick={closeModal}
 					role="dialog"
 					aria-modal="true"
 				>
-					<div 
-						className={styles['modal-box']} 
+					<div
+						className={styles['modal-box']}
 						onClick={(e) => e.stopPropagation()}
 					>
 						{/* Close button */}
-						<button 
-							className={styles['modal-close-btn']} 
+						<button
+							className={styles['modal-close-btn']}
 							onClick={closeModal}
 							aria-label="Close modal"
 						>
@@ -392,24 +429,24 @@ function Gallery() {
 
 						{/* Modal Stage: Full High-Res Poster View */}
 						<div className={styles['modal-stage']}>
-							<img 
-								className={styles['modal-main-img']} 
-								src={modal.event.images[modal.photoIdx]} 
-								alt={modal.event.title} 
+							<img
+								className={styles['modal-main-img']}
+								src={modal.event.images[modal.photoIdx]}
+								alt={modal.event.title}
 							/>
 
 							{/* Previous and Next Navigation Arrows on Modal */}
 							{modal.event.images.length > 1 && (
 								<>
-									<button 
-										className={`${styles['modal-arrow']} ${styles['modal-arrow-left']}`} 
+									<button
+										className={`${styles['modal-arrow']} ${styles['modal-arrow-left']}`}
 										onClick={prevPhoto}
 										aria-label="Previous photo"
 									>
 										<ChevronLeft size={26} />
 									</button>
-									<button 
-										className={`${styles['modal-arrow']} ${styles['modal-arrow-right']}`} 
+									<button
+										className={`${styles['modal-arrow']} ${styles['modal-arrow-right']}`}
 										onClick={nextPhoto}
 										aria-label="Next photo"
 									>

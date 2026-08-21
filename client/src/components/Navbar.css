@@ -53,20 +53,20 @@ header.scrolled .brand img {
   height: 50px;
 }
 
-nav {
+#main-nav {
   display: flex;
   gap: 32px;
   align-items: center;
 }
 
-nav a {
+#main-nav a {
   font-size: 14px;
   color: var(--muted);
   transition: color .2s ease;
   font-weight: 600;
 }
 
-nav a:hover {
+#main-nav a:hover {
   color: var(--navy)
 }
 
@@ -76,13 +76,13 @@ nav a:hover {
   gap: 32px;
 }
 
-nav a.active {
+#main-nav a.active {
   color: var(--orange);
   font-weight: 700;
   position: relative;
 }
 
-nav a.active::after {
+#main-nav a.active::after {
   content: '';
   position: absolute;
   bottom: -6px;
@@ -93,65 +93,7 @@ nav a.active::after {
   border-radius: 2px;
 }
 
-/* --- Search Bar --- */
-.nav-search-container {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-}
 
-.nav-search-form {
-  display: flex;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 4px;
-  background: #FAF9F7;
-  transition: all 0.3s ease;
-}
-
-.nav-search-form:focus-within {
-  border-color: var(--navy);
-  box-shadow: 0 4px 12px rgba(46, 42, 143, 0.1);
-  background: white;
-}
-
-.nav-search-input {
-  border: none;
-  background: transparent;
-  padding: 4px 12px;
-  font-size: 13px;
-  color: var(--navy);
-  width: 140px;
-  outline: none;
-  transition: width 0.3s ease;
-}
-
-.nav-search-input:focus {
-  width: 180px;
-}
-
-.nav-search-input::placeholder {
-  color: var(--muted);
-}
-
-.nav-search-button {
-  background: linear-gradient(135deg, var(--orange), #F59A4C);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.nav-search-button:hover {
-  transform: scale(1.05);
-}
 
 .nav-toggle {
   display: none;
@@ -165,13 +107,22 @@ nav a.active::after {
 }
 
 @media(max-width:768px) {
-  nav {
-    display: none
+  #main-nav {
+    display: none;
   }
 
   header {
-    padding: 16px 0;
-    margin-bottom: 8px
+    padding: 12px 16px;
+    margin-bottom: 4px;
+  }
+
+  .brand img {
+    height: 40px;
+    /* Scale down logo for mobile */
+  }
+
+  header.scrolled .brand img {
+    height: 35px;
   }
 
   .brand {
@@ -180,12 +131,9 @@ nav a.active::after {
 
   .header-inner {
     justify-content: flex-start;
-    padding: 0 20px;
-  }
-
-  .nav-search-container {
-    display: block;
-    margin-right: 12px;
+    padding: 0;
+    gap: 12px;
+    /* Reduce gap on mobile */
   }
 
   .nav-right {
@@ -200,27 +148,31 @@ nav a.active::after {
     margin-left: 0;
   }
 
-  nav {
+  #main-nav {
     display: none;
     position: absolute;
     top: 60px;
     left: 0;
     width: 100vw;
-    background: var(--solid-bg);
+    background: #ffffff;
+    /* Explicitly use white to prevent transparency bleed */
     flex-direction: column;
     gap: 0;
     box-shadow: 0 4px 24px rgba(46, 42, 143, 0.08);
     padding: 0 0 16px 0;
+    z-index: 1000;
   }
 
-  nav.open {
+  #main-nav.open {
     display: flex;
   }
 
-  nav a {
+  #main-nav a {
     padding: 16px 24px;
     border-bottom: 1px solid var(--border);
     font-size: 16px;
+    width: 100%;
+    text-align: center;
   }
 
   .header-inner {

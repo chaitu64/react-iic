@@ -107,70 +107,108 @@ const galleryData = [
 		category: "hackathon",
 		title: "SIH Internal Hackathon",
 		date: "Aug 27, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SIH2026/Screenshot%202026-08-21%20153415.png"
+		]
 	},
 	{
 		id: "gallery-11",
 		category: "workshop",
 		title: "Industrial Startup Visit (Neem Tree Toys)",
 		date: "Aug 9, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150032.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150124.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150053.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150107.png"
+		]
 	},
 	{
 		id: "gallery-12",
 		category: "hackathon",
 		title: "WASTE TO BUILD (Pitch 2 Product) – Idea Pitching Contest",
 		date: "May 25, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20153804.png"
+		]
 	},
 	{
 		id: "gallery-13",
 		category: "workshop",
 		title: "Incubation Visit to KLU",
 		date: "Mar 25, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151218.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151239.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151306.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/klu/Screenshot%202026-08-21%20151321.png"
+		]
 	},
 	{
 		id: "gallery-14",
 		category: "summit",
 		title: "Prime Minister Budget Webinar 2026",
 		date: "Mar 9, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/pm%20budget%20web/Screenshot%202026-08-21%20151613.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/pm%20budget%20web/Screenshot%202026-08-21%20151623.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/pm%20budget%20web/Screenshot%202026-08-21%20151638.png"
+		]
 	},
 	{
 		id: "gallery-15",
 		category: "hackathon",
 		title: "IDEATHON – Hack the Thought",
 		date: "Feb 5, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151912.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151927.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151942.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/ideathon/Screenshot%202026-08-21%20151957.png"
+		]
 	},
 	{
 		id: "gallery-16",
 		category: "workshop",
 		title: "Outreach to Uppalapadu",
 		date: "Jan 28, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Uppalapadu/Screenshot%202026-08-21%20152404.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Uppalapadu/Screenshot%202026-08-21%20152419.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Uppalapadu/Screenshot%202026-08-21%20152436.png"
+		]
 	},
 	{
 		id: "gallery-17",
 		category: "summit",
 		title: "Ministry of Education's Innovation Cell",
 		date: "Jan 26, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/MoE%20cell/Screenshot%202026-08-21%20152610.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/MoE%20cell/Screenshot%202026-08-21%20152622.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/MoE%20cell/Screenshot%202026-08-21%20152634.png"
+		]
 	},
 	{
 		id: "gallery-18",
 		category: "workshop",
 		title: "Incubation Visit to SRM University",
 		date: "Dec 25, 2025",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152904.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152936.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152922.png",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SRM%20University/Screenshot%202026-08-21%20152951.png"
+		]
 	},
 	{
 		id: "gallery-19",
 		category: "workshop",
 		title: "Incubation Visit to RVR&JC",
 		date: "Aug 22, 2026",
-		images: []
+		images: [
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/Screenshot%202026-08-21%20153626.png"
+		]
 	}
 ];
 

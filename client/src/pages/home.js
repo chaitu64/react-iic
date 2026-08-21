@@ -99,14 +99,19 @@ function Home() {
 				<div className={styles['popup-overlay']} onClick={() => setShowPopup(false)}>
 					<div className={styles['popup-content']} onClick={(e) => e.stopPropagation()}>
 						<button className={styles['popup-close']} onClick={() => setShowPopup(false)}>×</button>
-						<p className={styles['popup-subtitle']}>JOURNEY WITH PURPOSE</p>
-						<h2 className={styles['popup-title']}>
-							Adventure through<br />
-							<span className={styles['popup-title-italic']}>National parks</span>
-						</h2>
-						<button className={styles['popup-cta']} onClick={() => setShowPopup(false)}>
-							Plan your visit
-						</button>
+						{/* Background Image Container */}
+						<div className={styles['sih-banner-container']}>
+							<img
+								src="https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SIH2026/Screenshot%202026-08-21%20161227_imgupscaler.ai_General_4K.jpg"
+								alt="SIH Banner"
+								className={styles['sih-banner-img']}
+							/>
+						</div>
+
+
+						<Link to="/events" className={styles['popup-cta']} onClick={() => setShowPopup(false)}>
+							Register Now
+						</Link>
 					</div>
 				</div>,
 				document.body
@@ -154,7 +159,7 @@ function Home() {
 
 			<AnimatedSection className={styles.about} id="about">
 				<div className={styles['about-img']}>
-					<img src="/images/IIC-Guided-Activities.png" alt="IIC Guided Activities Pyramid" />
+					<img src="/images/IIC-Guided-Activities.png" alt="IIC Guided Activities Pyramid" loading="lazy" />
 				</div>
 				<div className={styles['about-content']}>
 					<div className={styles['about-label']}>Who We Are</div>
@@ -190,7 +195,7 @@ function Home() {
 			{/* Centered wide images */}
 			<div className={styles['about-wide-image-center']}>
 				<div className={styles['about-wide-image']}>
-					<img src="/images/policy-image.png" alt="Policy Approach & Action Plan" style={{ imageRendering: 'high-quality', filter: 'contrast(1.05) saturate(1.05)' }} />
+					<img src="/images/policy-image.png" alt="Policy Approach & Action Plan" loading="lazy" style={{ imageRendering: 'high-quality', filter: 'contrast(1.05) saturate(1.05)' }} />
 				</div>
 			</div>
 			<div className={styles['about-wide-image-center']}>

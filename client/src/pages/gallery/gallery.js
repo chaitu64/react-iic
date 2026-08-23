@@ -104,15 +104,6 @@ const galleryData = [
 	},
 	{
 		id: "gallery-10",
-		category: "hackathon",
-		title: "SIH Internal Hackathon",
-		date: "Aug 27, 2026",
-		images: [
-			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/SIH2026/Screenshot%202026-08-21%20153415.png"
-		]
-	},
-	{
-		id: "gallery-11",
 		category: "workshop",
 		title: "Industrial Startup Visit (Neem Tree Toys)",
 		date: "Aug 9, 2026",
@@ -124,7 +115,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-12",
+		id: "gallery-11",
 		category: "hackathon",
 		title: "WASTE TO BUILD (Pitch 2 Product) – Idea Pitching Contest",
 		date: "May 25, 2026",
@@ -133,7 +124,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-13",
+		id: "gallery-12",
 		category: "workshop",
 		title: "Incubation Visit to KLU",
 		date: "Mar 25, 2026",
@@ -145,7 +136,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-14",
+		id: "gallery-13",
 		category: "summit",
 		title: "Prime Minister Budget Webinar 2026",
 		date: "Mar 9, 2026",
@@ -156,7 +147,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-15",
+		id: "gallery-14",
 		category: "hackathon",
 		title: "IDEATHON – Hack the Thought",
 		date: "Feb 5, 2026",
@@ -168,7 +159,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-16",
+		id: "gallery-15",
 		category: "workshop",
 		title: "Outreach to Uppalapadu",
 		date: "Jan 28, 2026",
@@ -179,7 +170,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-17",
+		id: "gallery-16",
 		category: "summit",
 		title: "Ministry of Education's Innovation Cell",
 		date: "Jan 26, 2026",
@@ -190,7 +181,7 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-18",
+		id: "gallery-17",
 		category: "workshop",
 		title: "Incubation Visit to SRM University",
 		date: "Dec 25, 2025",
@@ -202,12 +193,16 @@ const galleryData = [
 		]
 	},
 	{
-		id: "gallery-19",
+		id: "gallery-18",
 		category: "workshop",
 		title: "Incubation Visit to RVR&JC",
 		date: "Aug 22, 2026",
 		images: [
-			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/Screenshot%202026-08-21%20153626.png"
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/WhatsApp%20Image%202026-08-23%20at%2012.08.58%20AM.jpeg",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/WhatsApp%20Image%202026-08-23%20at%2012.09.02%20AM.jpeg",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/WhatsApp%20Image%202026-08-23%20at%2012.09.05%20AM.jpeg",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/WhatsApp%20Image%202026-08-23%20at%2012.09.07%20AM.jpeg",
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/WhatsApp%20Image%202026-08-23%20at%2012.09.07.jpeg"
 		]
 	}
 ];

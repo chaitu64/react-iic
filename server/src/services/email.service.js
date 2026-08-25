@@ -15,9 +15,23 @@ export const sendCertificateEmail = async (teamLeadEmail) => {
         const mailOptions = {
             from: process.env.SMTP_USER,
             to: teamLeadEmail,
-            subject: "Collect Your Participants Certificate - SIH2026",
-            text: "collect your participants certificate from the pr panel at room rom u-108",
-            html: "<p>collect your participants certificate from the pr panel at room rom u-108</p>",
+            subject: "SIH 2026 Review Completed – Certificate Collection",
+            text: "🎉Congratulations! Your team's status is now completed. Please collect your certificates from the panel at U108 room no.",
+            html: `
+                <div style="font-family: sans-serif; color: #333;">
+                    <h2>Dear Participants,
+                    <br/>
+                    Congratulations! 🎉
+                    </h2>
+                    <p>Your team has successfully completed the SIH 2026 review.</p>
+                    <p>Please <strong>Please collect your SIH 2026 participation certificates from the IIC team at U108.</strong></p>
+                    <br/>
+                    <p>📍 Venue: U108</p>
+                    <p>📄 Certificates: SIH 2026</p>
+                    <p><strong>Carry this experience forward, keep learning, and continue taking on new challenges.</strong></p>
+                    <p>Best regards,<br/>IIC Web Team</p>
+                </div>
+            `,
         };
 
         const info = await transporter.sendMail(mailOptions);

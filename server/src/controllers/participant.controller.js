@@ -6,7 +6,8 @@ import { sendCertificateEmail } from "../services/email.service.js";
 const findEmailColumn = (row) => {
     const keys = Object.keys(row);
     for (const key of keys) {
-        if (key.toLowerCase().trim() === "emailid") {
+        const keyLower = key.toLowerCase().trim();
+        if (keyLower === "emailid" || keyLower.includes("email")) {
             return key;
         }
     }
@@ -31,6 +32,10 @@ export const uploadSpreadsheet = async (req, res) => {
             return res.status(400).json({ message: "Spreadsheet is empty" });
         }
 
+        if (data.length > 5000) {
+            return res.status(400).json({ message: "Spreadsheet is too large. Maximum 5000 rows allowed." });
+        }
+
         // Add the default status to all rows
         const processedData = data.map((row) => ({
             ...row,
@@ -38,15 +43,22 @@ export const uploadSpreadsheet = async (req, res) => {
         }));
 
 
-        
-        const recordsToInsert = processedData.map((row) => ({
-            raw_data: row,
-            status: row.status,
-            team_lead_email: row[findEmailColumn(row)] || null
-        }));
+        const recordsToInsert = processedData.map((row) => {
+            const emailKey = findEmailColumn(row);
+            return {
+                batch_id: parseInt(row['Batch ID'] || row['batchid'] || row['BatchId']),
+                team_lead_name: row['Name'] || row['name'] || 'Unknown',
+                register_number: row['Register Number'] || row['register_number'] || 'N/A',
+                branch: row['Branch'] || row['branch'] || 'N/A',
+                email: emailKey ? row[emailKey] : null,
+                faculty_assigned: row['Faculty Assigned'] || row['facult assigned'] || null,
+                review_date: row['Date of Review'] || row['date of review'] || null,
+                review_status: 'pending'
+            };
+        });
 
         const { data: insertedData, error } = await supabase
-            .from("participants")
+            .from("sih_2026_registrations")
             .insert(recordsToInsert)
             .select();
 
@@ -73,18 +85,16 @@ export const uploadSpreadsheet = async (req, res) => {
 export const getParticipants = async (req, res) => {
     try {
         const { data, error } = await supabase
-            .from("participants")
-            .select("*");
+            .from("sih_2026_registrations")
+            .select("*")
+            .order('batch_id', { ascending: true }); // Good practice to order by batch_id
 
         if (error) {
             return res.status(500).json({ message: "Error fetching participants", error });
         }
 
-        // Extract columns dynamically from the first record's raw_data if it exists
-        let columns = [];
-        if (data && data.length > 0 && data[0].raw_data) {
-            columns = Object.keys(data[0].raw_data);
-        }
+        // Return a mock columns array just in case the frontend relies on it
+        const columns = ['Batch ID', 'Name', 'Branch', 'Email', 'Faculty Assigned', 'Date of Review', 'Status'];
 
         return res.status(200).json({ participants: data, columns });
     } catch (error) {
@@ -94,7 +104,7 @@ export const getParticipants = async (req, res) => {
 
 export const updateStatus = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.params; // this is the batch_id from the frontend
         const { status } = req.body;
 
         if (!status || !["pending", "completed"].includes(status)) {
@@ -102,9 +112,9 @@ export const updateStatus = async (req, res) => {
         }
 
         const { data, error } = await supabase
-            .from("participants")
-            .update({ status })
-            .eq("id", id)
+            .from("sih_2026_registrations")
+            .update({ review_status: status })
+            .eq("batch_id", id)
             .select()
             .single();
 
@@ -117,8 +127,16 @@ export const updateStatus = async (req, res) => {
         }
 
         // Check if status is completed and send email
-        if (status === "completed" && data.team_lead_email) {
-            await sendCertificateEmail(data.team_lead_email);
+        if (status === "completed" && data.email) {
+            try {
+                await sendCertificateEmail(data.email);
+            } catch (emailError) {
+                console.error("Failed to send email:", emailError);
+                return res.status(200).json({
+                    message: "Status updated successfully, but failed to send certificate email.",
+                    participant: data
+                });
+            }
         }
 
         return res.status(200).json({ message: "Status updated successfully", participant: data });

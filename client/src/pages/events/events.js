@@ -39,7 +39,7 @@ const PAST_EVENTS = [
 
   /* ---------- IDEATHONS ---------- */
 
-  
+
   {
     id: 'i4',
     category: 'Ideathons',
@@ -155,17 +155,17 @@ function Events() {
   const filteredEvents =
     activeFilter === 'All Events'
       ? [...PAST_EVENTS].sort((a, b) => {
+        const dateA = a.date ? parseInt(a.date) : -Infinity;
+        const dateB = b.date ? parseInt(b.date) : -Infinity;
+        return dateB - dateA;
+      })
+      : [...PAST_EVENTS]
+        .filter((event) => event.category === activeFilter)
+        .sort((a, b) => {
           const dateA = a.date ? parseInt(a.date) : -Infinity;
           const dateB = b.date ? parseInt(b.date) : -Infinity;
           return dateB - dateA;
-        })
-      : [...PAST_EVENTS]
-          .filter((event) => event.category === activeFilter)
-          .sort((a, b) => {
-            const dateA = a.date ? parseInt(a.date) : -Infinity;
-            const dateB = b.date ? parseInt(b.date) : -Infinity;
-            return dateB - dateA;
-          });
+        });
 
   /* =========================
      HASH SCROLL
@@ -237,7 +237,7 @@ function Events() {
             </div>
 
             <a
-              
+              href={LIVE_EVENT.registrationLink}
               target="_blank"
               rel="noopener noreferrer"
               className={styles['register-btn']}
@@ -267,11 +267,10 @@ function Events() {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={`${styles['filter-btn']} ${
-                  activeFilter === filter
+                className={`${styles['filter-btn']} ${activeFilter === filter
                     ? styles.active
                     : ''
-                }`}
+                  }`}
               >
                 {filter}
               </button>
@@ -289,7 +288,7 @@ function Events() {
                 type="button"
                 className={styles['poster-card']}
                 key={event.id}
-                
+
                 aria-label={`View details for ${event.title}`}
               >
 

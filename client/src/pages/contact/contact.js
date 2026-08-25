@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 import styles from './Contact.module.css';
 function Contact() {
 	return (
@@ -38,16 +39,32 @@ function Contact() {
 							</div>
 						</div>
 						<div className={styles['info-group']}>
-							<div className={styles['info-label']}>Follow Us</div>
-							<div className={styles['social-links']}>
-								<a href="https://www.linkedin.com/in/iic-VVITU-624755321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className={`${styles['social-link']} ${styles.linkedin}`} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-									<i className={`fab fa-linkedin-in`}></i>
-								</a>
-								<a href="https://www.instagram.com/iic_VVITU/" className={`${styles['social-link']} ${styles.instagram}`} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-									<i className={`fab fa-instagram`}></i>
-								</a>
-							</div>
-						</div>
+  <div className={styles['info-label']}>Follow Us</div>
+
+  <div className={styles['social-links']}>
+
+    <a
+      href="https://www.linkedin.com/in/iic-VVITU-624755321/"
+      className={`${styles['social-link']} ${styles.linkedin}`}
+      aria-label="LinkedIn"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaLinkedinIn />
+    </a>
+
+    <a
+      href="https://www.instagram.com/iic_VVITU/"
+      className={`${styles['social-link']} ${styles.instagram}`}
+      aria-label="Instagram"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <FaInstagram />
+    </a>
+
+  </div>
+</div>
 						<div className={styles['info-group']}>
 							<div className={styles['info-label']}>Quick Links</div>
 							<div className={styles['info-content']}>

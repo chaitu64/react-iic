@@ -114,15 +114,7 @@ const galleryData = [
 			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20150107.png"
 		]
 	},
-	{
-		id: "gallery-11",
-		category: "hackathon",
-		title: "WASTE TO BUILD (Pitch 2 Product) – Idea Pitching Contest",
-		date: "May 25, 2026",
-		images: [
-			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/Screenshot%202026-08-21%20153804.png"
-		]
-	},
+
 	{
 		id: "gallery-12",
 		category: "workshop",

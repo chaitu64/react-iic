@@ -37,6 +37,7 @@ function Navbar() {
                         <Link to="/calender" className={currentPath === '/calender' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Calendar</Link>
                         <Link to="/gallery" className={currentPath === '/gallery' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Gallery</Link>
                         <Link to="/teams" className={currentPath === '/teams' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Teams</Link>
+                        <Link to="/sih2026" className={currentPath === '/sih2026' ? 'active' : ''} onClick={() => setMenuOpen(false)}>SIH 2026</Link>
                         <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Contact</Link>
                     </nav>
 

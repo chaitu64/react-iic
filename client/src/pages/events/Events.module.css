@@ -185,7 +185,7 @@ section {
   align-items: center;
   justify-content: center;
   padding: 12px 32px;
-  background: #16a34a;
+  background: #e66114;
   color: white;
   border-radius: 8px;
   font-weight: 600;
@@ -278,7 +278,7 @@ section {
   display: block;
   width: 100%;
   height: 360px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* ================= HOVER ================= */

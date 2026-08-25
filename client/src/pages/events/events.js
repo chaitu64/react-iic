@@ -23,6 +23,7 @@ const PAST_EVENTS = [
     category: 'Hackathons',
     title: 'SIH 2024',
     image: '/events/hackathons/sih2024.jpeg',
+    date: '2024',
     description:
       'Smart India Hackathon 2024, a platform where students worked on innovative solutions for real-world problem statements.'
   },
@@ -31,41 +32,20 @@ const PAST_EVENTS = [
     category: 'Hackathons',
     title: 'SIH 2025',
     image: '/events/hackathons/sih2025.jpeg',
+    date: '2025',
     description:
       'Smart India Hackathon 2025 encouraged students to collaborate, innovate, and develop technology-driven solutions.'
   },
 
   /* ---------- IDEATHONS ---------- */
 
-  {
-    id: 'i1',
-    category: 'Ideathons',
-    title: 'Anveshana',
-    image: '/events/ideathons/anveshana_ideathon.jpeg',
-    description:
-      'An ideathon focused on exploring innovative ideas and encouraging students to transform their thoughts into impactful solutions.'
-  },
-  {
-    id: 'i2',
-    category: 'Ideathons',
-    title: 'Hack The Thought',
-    image: '/events/ideathons/hackthethought_ideathon.jpeg',
-    description:
-      'A creative ideation event that encouraged participants to think differently and develop innovative concepts.'
-  },
-  {
-    id: 'i3',
-    category: 'Ideathons',
-    title: 'Ideathon 2021',
-    image: '/events/ideathons/ideathon2021.jpeg',
-    description:
-      'An ideathon conducted to provide students with an opportunity to present innovative ideas and problem-solving approaches.'
-  },
+  
   {
     id: 'i4',
     category: 'Ideathons',
     title: 'Inter-Institutional Startup Competition',
     image: '/events/ideathons/iiscideathon.jpeg',
+    date: '2023',
     description:
       'An inter-institutional competition focused on startup ideas, innovation, entrepreneurship, and collaboration among students.'
   },
@@ -74,16 +54,9 @@ const PAST_EVENTS = [
     category: 'Ideathons',
     title: 'Innovate It',
     image: '/events/ideathons/innovateit_ideathon.jpeg',
+    date: '2022',
     description:
       'An ideathon conducted to discover and encourage innovative student ideas with the potential to solve real-world problems.'
-  },
-  {
-    id: 'i6',
-    category: 'Ideathons',
-    title: 'Waste to Build',
-    image: '/events/ideathons/wastetobuild.jpeg',
-    description:
-      'A sustainability-focused ideathon where participants explored innovative ways to transform waste materials into useful products.'
   },
 
   /* ---------- TECHNICAL EVENTS ---------- */
@@ -93,6 +66,7 @@ const PAST_EVENTS = [
     category: 'Technical Events',
     title: 'Invention Through Innovation',
     image: '/events/technicalevents/te1.jpeg',
+    date: '2023',
     description:
       'An innovation-focused event that encouraged students to explore creative ideas, inventions, and practical solutions.'
   },
@@ -101,6 +75,7 @@ const PAST_EVENTS = [
     category: 'Technical Events',
     title: 'Innovation Experience',
     image: '/events/technicalevents/te2.jpeg',
+    date: '2022',
     description:
       'A multi-event innovation experience featuring activities such as Marketing Magics, Scavenger Hunt, Stock Wars, and other creative challenges.'
   },
@@ -179,10 +154,18 @@ function Events() {
 
   const filteredEvents =
     activeFilter === 'All Events'
-      ? PAST_EVENTS
-      : PAST_EVENTS.filter(
-          (event) => event.category === activeFilter
-        );
+      ? [...PAST_EVENTS].sort((a, b) => {
+          const dateA = a.date ? parseInt(a.date) : -Infinity;
+          const dateB = b.date ? parseInt(b.date) : -Infinity;
+          return dateB - dateA;
+        })
+      : [...PAST_EVENTS]
+          .filter((event) => event.category === activeFilter)
+          .sort((a, b) => {
+            const dateA = a.date ? parseInt(a.date) : -Infinity;
+            const dateB = b.date ? parseInt(b.date) : -Infinity;
+            return dateB - dateA;
+          });
 
   /* =========================
      HASH SCROLL
@@ -254,12 +237,12 @@ function Events() {
             </div>
 
             <a
-              href={LIVE_EVENT.registrationLink}
+              
               target="_blank"
               rel="noopener noreferrer"
               className={styles['register-btn']}
             >
-              Register Now
+              Registrations Closed
             </a>
 
           </div>

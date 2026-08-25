@@ -207,7 +207,7 @@ const galleryData = [
 		title: "Incubation Visit to RVR&JC",
 		date: "Aug 22, 2026",
 		images: [
-			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/Screenshot%202026-08-21%20153626.png"
+			"https://vspgdcjylvxjdgaugjwq.supabase.co/storage/v1/object/public/gallery/rvr&jc/WhatsApp%20Image%202026-08-23%20at%2012.09.02%20AM.jpeg"
 		]
 	}
 ];
@@ -228,8 +228,18 @@ function Gallery() {
 
 	const filteredGallery =
 		filter === "all"
-			? localGalleryData
-			: localGalleryData.filter((item) => item.category === filter);
+			? [...localGalleryData].sort((a, b) => {
+					const dateA = new Date(a.date);
+					const dateB = new Date(b.date);
+					return dateB - dateA;
+				})
+			: [...localGalleryData]
+					.filter((item) => item.category === filter)
+					.sort((a, b) => {
+							const dateA = new Date(a.date);
+							const dateB = new Date(b.date);
+							return dateB - dateA;
+					});
 
 	const openModal = useCallback((event, photoIdx = 0) => {
 		setModal({ open: true, event, photoIdx });
@@ -391,7 +401,7 @@ function Gallery() {
 							<p>Photos Captured</p>
 						</div>
 						<div className={styles['stat-item']}>
-							<h3>12</h3>
+							<h3>17</h3>
 							<p>Events Hosted</p>
 						</div>
 						<div className={styles['stat-item']}>

@@ -9,7 +9,10 @@ export const verifyAdmin = (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || "default_secret");
+        if (!process.env.JWT_SECRET) {
+            throw new Error("JWT_SECRET is not configured");
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         if (decoded.role !== "admin") {
             return res.status(403).json({ message: "Forbidden: Admin access required" });
         }

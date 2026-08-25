@@ -1,22 +1,88 @@
 import React, { useState } from 'react';
 import styles from './sih2026.module.css';
 
-const initialSih2026Data = [
-  { id: 'B001', name: 'Team Alpha', branch: 'CSE', faculty: 'Dr. Ravi Kumar', date: '25-08-2026', status: 'Pending' },
-  { id: 'B002', name: 'Team Innovators', branch: 'IT', faculty: 'Dr. Priya Sharma', date: '27-08-2026', status: 'Completed' },
-  { id: 'B003', name: 'Code Warriors', branch: 'CSE', faculty: 'Dr. Suresh', date: '29-08-2026', status: 'Pending' },
-  { id: 'B004', name: 'Digital Mavericks', branch: 'ECE', faculty: 'Dr. Ananya Reddy', date: '24-08-2026', status: 'Pending' },
-  { id: 'B005', name: 'Future Techies', branch: 'EEE', faculty: 'Dr. Sandeep Kumar', date: '26-08-2026', status: 'Completed' },
-  { id: 'B006', name: 'Pixel Perfect', branch: 'CSE', faculty: 'Dr. Lakshmi Devi', date: '28-08-2026', status: 'Pending' },
-  { id: 'B007', name: 'Cyber Shield', branch: 'IT', faculty: 'Dr. Rajesh Gupta', date: '30-08-2026', status: 'Pending' },
-  { id: 'B008', name: 'Quantum Leap', branch: 'ECE', faculty: 'Dr. Meera Joshi', date: '23-08-2026', status: 'Completed' },
-  { id: 'B009', name: 'Data Wizards', branch: 'CSE', faculty: 'Dr. Venkat Rao', date: '31-08-2026', status: 'Pending' },
-  { id: 'B010', name: 'AI Pioneers', branch: 'EEE', faculty: 'Dr. Priyanka Singh', date: '22-08-2026', status: 'Pending' }
-];
 
-function Sih2026({ isAdmin = false }) {
+
+function Sih2026({ initialIsAdmin = false }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [teams, setTeams] = useState(initialSih2026Data);
+  const [teams, setTeams] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
+
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  // 1. Frontend API Fetching
+  const fetchParticipants = React.useCallback(async () => {
+    try {
+      const token = localStorage.getItem("token") || "";
+      const response = await fetch("http://localhost:5000/api/admin/participants", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const apiTeams = data.participants.map(p => {
+          return {
+            id: p.batch_id ? `B${p.batch_id.toString().padStart(3, '0')}` : p.id.toString(), // Format batch_id gracefully
+            name: p.team_lead_name || 'Unknown Team',
+            branch: p.branch || 'N/A',
+            emailid: p.email || 'N/A',
+            faculty: p.faculty_assigned || 'N/A',
+            date: p.review_date || p.reviewed_at?.split('T')[0] || 'N/A',
+            status: (p.review_status || '').toLowerCase() === 'completed' ? 'Completed' : 'Pending',
+            originalBatchId: p.batch_id // store original id to send to backend for status updates
+          };
+        });
+
+        setTeams(apiTeams);
+      }
+    } catch (error) {
+      console.error("Error fetching participants:", error);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (localStorage.getItem('isAdmin') === 'true' && localStorage.getItem('token')) {
+      setIsAdmin(true);
+    }
+    fetchParticipants();
+  }, [fetchParticipants]);
+
+  const handleUpload = async () => {
+    if (!file) return alert("Please select an Excel or CSV file first.");
+
+    setUploading(true);
+    const token = localStorage.getItem("token") || "";
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/admin/upload", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        alert("Spreadsheet uploaded successfully!");
+        setFile(null); // Clear input
+        document.getElementById('excel-upload-input').value = ""; // Reset file input
+        fetchParticipants(); // Refresh table data
+      } else {
+        const errorData = await response.json();
+        alert(`Upload failed: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Something went wrong during the upload.");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const filteredData = teams.filter(team =>
     team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -24,27 +90,88 @@ function Sih2026({ isAdmin = false }) {
     team.branch.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleStatusChange = (id, newStatus) => {
-    setTeams(prevTeams =>
-      prevTeams.map(team =>
-        team.id === id ? { ...team, status: newStatus } : team
-      )
-    );
+  const [updatingStatusId, setUpdatingStatusId] = useState(null);
+
+  const handleStatusChange = async (id, newStatus) => {
+
+    setUpdatingStatusId(id);
+    const token = localStorage.getItem("token") || "";
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/admin/participants/${id}/status`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: newStatus.toLowerCase() }) // Send 'completed' or 'pending'
+      });
+
+      if (response.ok) {
+        setTeams(prevTeams =>
+          prevTeams.map(team => (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team)
+        );
+
+        if (newStatus === "Completed") {
+          alert("Status changed and Certificate Email sent to Team Lead successfully!");
+        }
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to update status: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error("Status update error:", error);
+      alert("Network error: Could not update status.");
+    } finally {
+      setUpdatingStatusId(null);
+    }
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>SIH 2026</h1>
 
-      {/* Top-right Search Bar */}
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="Search teams, ID, branch..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.searchInput}
-        />
+      {/* Controls Container (Upload + Search) */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
+
+        {/* Admin Upload Section */}
+        {isAdmin ? (
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <input
+              type="file"
+              id="excel-upload-input"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <button
+              onClick={handleUpload}
+              disabled={uploading || !file}
+              style={{
+                background: uploading ? '#ccc' : '#2E2A8F',
+                color: 'white',
+                padding: '8px 16px',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: (uploading || !file) ? 'not-allowed' : 'pointer'
+              }}
+            >
+              {uploading ? 'Uploading...' : 'Upload Excel'}
+            </button>
+          </div>
+        ) : (
+          <div></div> /* Empty div to maintain flex spacing if not admin */
+        )}
+
+        {/* Top-right Search Bar */}
+        <div className={styles.searchContainer} style={{ margin: 0, alignSelf: 'auto' }}>
+          <input
+            type="text"
+            placeholder="Search teams, ID, branch..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
       </div>
 
       {/* Table Container */}
@@ -55,6 +182,7 @@ function Sih2026({ isAdmin = false }) {
               <th>Batch ID</th>
               <th>Name</th>
               <th>Branch</th>
+              <th>Email ID</th>
               <th>Faculty Assigned</th>
               <th>Date of Review</th>
               <th>Status</th>
@@ -68,25 +196,25 @@ function Sih2026({ isAdmin = false }) {
                   <td data-label="Batch ID">{team.id}</td>
                   <td data-label="Name" className={styles.teamName}>{team.name}</td>
                   <td data-label="Branch">{team.branch}</td>
+                  <td data-label="Email ID">{team.emailid}</td>
                   <td data-label="Faculty Assigned">{team.faculty}</td>
                   <td data-label="Date of Review">{team.date}</td>
                   <td data-label="Status">
                     {isAdmin ? (
                       <select
                         value={team.status}
-                        onChange={(e) => handleStatusChange(team.id, e.target.value)}
-                        className={`${styles.statusDropdown} ${
-                          team.status === 'Completed' ? styles.completed : styles.pending
-                        }`}
+                        onChange={(e) => handleStatusChange(team.originalBatchId || team.id, e.target.value)}
+                        disabled={updatingStatusId === (team.originalBatchId || team.id)}
+                        className={`${styles.statusDropdown} ${team.status === 'Completed' ? styles.completed : styles.pending
+                          }`}
                       >
                         <option value="Pending">Pending</option>
                         <option value="Completed">Completed</option>
                       </select>
                     ) : (
                       <span
-                        className={`${styles.statusBadge} ${
-                          team.status === 'Completed' ? styles.completed : styles.pending
-                        }`}
+                        className={`${styles.statusBadge} ${team.status === 'Completed' ? styles.completed : styles.pending
+                          }`}
                       >
                         {team.status}
                       </span>

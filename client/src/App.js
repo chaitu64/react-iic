@@ -12,6 +12,7 @@ const Gallery = React.lazy(() => import('./pages/gallery/gallery'));
 const Teams = React.lazy(() => import('./pages/teams/teams'));
 const About = React.lazy(() => import('./pages/about/about'));
 const SIH2026 = React.lazy(() => import('./pages/sih 2026/sih2026'));
+const AdminLogin = React.lazy(() => import('./pages/adminLogin/AdminLogin'));
 const PageNotFound = React.lazy(() => import('./pages/PageNotFound'));
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/sih2026" element={<SIH2026 />} />
+            <Route path="/admin-portal-login" element={<AdminLogin />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

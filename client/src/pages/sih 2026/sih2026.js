@@ -31,7 +31,9 @@ function Sih2026() {
           name: participant.team_lead_name || 'Unknown Team',
           branch: participant.branch || 'N/A',
           register_number: participant.register_number || 'N/A',
+          email: participant.email || 'N/A',
           faculty: participant.faculty_assigned || 'N/A',
+          iic_coordinator: participant.iic_coordinator_assigned || 'N/A',
           date: participant.review_date || participant.reviewed_at?.split('T')[0] || 'N/A',
           status: participant.review_status?.toLowerCase() === 'completed' ? 'Completed' : 'Pending',
           originalBatchId: participant.batch_id
@@ -85,7 +87,9 @@ function Sih2026() {
     team.id?.toLowerCase().includes(search) ||
     team.branch?.toLowerCase().includes(search) ||
     team.register_number?.toLowerCase().includes(search) ||
-    team.faculty?.toLowerCase().includes(search)
+    team.faculty?.toLowerCase().includes(search) ||
+    team.email?.toLowerCase().includes(search) ||
+    team.iic_coordinator?.toLowerCase().includes(search)
   );
 });
 
@@ -143,7 +147,9 @@ function Sih2026() {
               <th>Name</th>
               <th>Branch</th>
               <th>Register Number</th>
+              <th>Registered Mail</th>
               <th>Faculty Assigned</th>
+              <th>IIC Co-ordinator</th>
               <th>Date of Review</th>
               <th>Review Status</th>
             </tr>
@@ -152,7 +158,7 @@ function Sih2026() {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan="7" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
+                <td colSpan="9" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
                   Loading participants...
                 </td>
               </tr>
@@ -163,7 +169,9 @@ function Sih2026() {
                   <td data-label="Name" className={styles.teamName}>{team.name}</td>
                   <td data-label="Branch">{team.branch}</td>
                   <td data-label="Register Number">{team.register_number}</td>
+                  <td data-label="Registered Mail">{team.email}</td>
                   <td data-label="Faculty Assigned">{team.faculty}</td>
+                  <td data-label="IIC Co-ordinator">{team.iic_coordinator}</td>
                   <td data-label="Date of Review">{team.date}</td>
                   <td data-label="Status">
                     {isAdmin ? (
@@ -191,7 +199,7 @@ function Sih2026() {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className={styles.noData}>
+                <td colSpan="9" className={styles.noData}>
                   No matching teams found.
                 </td>
               </tr>

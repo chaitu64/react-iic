@@ -33,12 +33,12 @@ const teamData = {
 			description:
 				"The Social Media Department is the digital voice of IIC, responsible for creating engaging content that highlights innovation, entrepreneurship, and student achievements. They manage all social media platforms, ensuring consistent branding and effective communication with the IIC community.", reverse: true,
 			members: [
-				{ name: "Jithendra Soorisetti", role: "SM Member", bio: "Creates engaging content.", initials: "JS", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/1000149909%20-%20Jithendra%20Soorisetti.jpg" },
+				{ name: "Jaii Purii", role: "SM Head", bio: "Manages social media platforms.", initials: "JP", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/IMG-20260306-WA0188%20-%20Jaii%20Purii.jpg" },
 				{ name: "Sujan Atchala", role: "SM Member", bio: "Manages social media platforms.", initials: "SA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/DSC00585%20-%20Sujan%20Atchala.jpg" },
 				{ name: "Chandra Lekha Chillakuri", role: "SM Member", bio: "Ensures consistent branding.", initials: "CC", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/DSC_0318%20-%20Chandra%20lekha%20Chillakuri.jpg" },
 				{ name: "Thanuja Venuthurumilli", role: "SM Member", bio: "Handles digital communication.", initials: "TV", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/file_000000002fd88211806020004ed11fa4%20-%20Thanuja%20Venuthurumilli.png" },
 				{ name: "Rebel Mahi", role: "SM Member", bio: "Creates engaging content.", initials: "RM", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/file_00000000d4e48208a13ca3651a7e3cda%20-%20REBEL%20MAHI.png" },
-				{ name: "Jaii Purii", role: "SM Member", bio: "Manages social media platforms.", initials: "JP", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/IMG-20260306-WA0188%20-%20Jaii%20Purii.jpg" },
+				{ name: "Jithendra Soorisetti", role: "SM Member", bio: "Creates engaging content.", initials: "JS", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/1000149909%20-%20Jithendra%20Soorisetti.jpg" },
 				{ name: "Kodamala Anupama", role: "SM Member", bio: "Ensures consistent branding.", initials: "KA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/IMG-20260710-WA0122%20-%20Kodamala%20Anupama.jpg" },
 				{ name: "Murali", role: "SM Member", bio: "Handles digital communication.", initials: "M", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/IMG_20260512_201444%20-%20thelateral%209.jpg", imgStyle: { objectFit: "contain", objectPosition: "center" } },
 				{ name: "Alasandalapalli Naga Jayanth", role: "SM Member", bio: "Creates engaging content.", initials: "AJ", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/SMD/IMG_20260813_104903%20-%20Alasandalapalli%20Naga%20jayanth.jpg" },
@@ -55,7 +55,7 @@ const teamData = {
 			reverse: false,
 			members: [
 				{ name: "Yogyasree Palapala", role: "PR Member", bio: "Supports stakeholder engagement.", initials: "YP", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/564E9769-47DE-4E74-8960-2DFB51B29C9E%20-%20Yogyasree%20Palapala.png" },
-				{ name: "Nithish Kumar Ambati", role: "PR Member", bio: "Manages outreach programs.", initials: "NA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/file_00000000114c82088daf120fb8ee3ea8%20-%20Nithish%20Kumar%20Ambati.png" },
+				{ name: "Nithish Kumar Ambati", role: "PR Head", bio: "Manages outreach programs.", initials: "NA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/file_00000000114c82088daf120fb8ee3ea8%20-%20Nithish%20Kumar%20Ambati.png" },
 				{ name: "Haasin", role: "PR Member", bio: "Handles event communications.", initials: "H", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/file_0000000060788211b9f9e066df65c37e%20-%20Haasin.png" },
 				{ name: "Rohit Lam", role: "PR Member", bio: "Coordinates media relations.", initials: "RL", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/file_00000000653082089da49b97f5412b94%20-%20Rohit%20Lam.png" },
 				{ name: "Suguna Prakash Gajjalakonda", role: "PR Member", bio: "Creates strategic partnerships.", initials: "SG", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/PR/id_img%20-%20Suguna%20prakash%20Gajjalakonda.png" },
@@ -96,7 +96,7 @@ const teamData = {
 				"The events team conceptualizes and executes all IIC programs including hackathons, workshops, competitions, and seminars. They handle logistics, vendor coordination, participant management, and ensure every event creates memorable learning experiences that inspire innovation.",
 			reverse: true,
 			members: [
-				{ name: "Chaitanya", role: "Events Member", bio: "Supports event planning.", initials: "CVB", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Screenshot%202026-08-18%20005149.png", imgStyle: { objectPosition: "center" } },
+				{ name: "Chaitanya", role: "Events Head", bio: "Supports event planning.", initials: "CVB", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Screenshot%202026-08-18%20005149.png", imgStyle: { objectPosition: "center" } },
 				{ name: "Dharani Jagarlamudi", role: "Events Member", bio: "Supports event logistics.", initials: "DJ", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/20260816_113331%20-%20Dharani%20Jagarlamudi.jpg", imgStyle: { objectPosition: "center" } },
 				{ name: "Likitha Boppudi", role: "Events Member", bio: "Helps organize activities.", initials: "LB", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/Screenshot%202026-08-17%20225555.png", imgStyle: { objectPosition: "center" } },
 				{ name: "Prasanna Kumari", role: "Events Member", bio: "Coordinates participant experience.", initials: "PK", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/Events/compressed_1786792866129%20-%20Prasanna%20Kumari.jpg", imgStyle: { objectPosition: "center" } },
@@ -123,7 +123,7 @@ const teamData = {
 			members: [
 				{ name: "Lekhana Chowdary Talluri", role: "Review & Validation", bio: "Ensures quality and validates processes.", initials: "LT", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/d45f8fd8-8900-4661-aada-59be1c0d9798%20-%20Lekhana%20chowdary%20Talluri.jpeg", imgStyle: { objectPosition: "center" } },
 				{ name: "Lakshmi Appikatla", role: "Review & Validation", bio: "Reviews activities to maintain high standards.", initials: "LA", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/file_0000000091888211af1f52284578601f%20-%20Lakshmi%20Appikatla.png", imgStyle: { objectPosition: "center" } },
-				{ name: "Abhi Battula", role: "Review & Validation", bio: "Ensures quality and validates processes.", initials: "AB", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/file_00000000a0d482119a4b5b6ae9534e22%20-%20Abhi%20Battula.png", imgStyle: { objectPosition: "center" } },
+				{ name: "Abhi Battula", role: "Review & Validation Head", bio: "Ensures quality and validates processes.", initials: "AB", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/file_00000000a0d482119a4b5b6ae9534e22%20-%20Abhi%20Battula.png", imgStyle: { objectPosition: "center" } },
 				{ name: "Srujana Nanduri", role: "Review & Validation", bio: "Reviews activities to maintain high standards.", initials: "SN", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/file_00000000c0e882119e1ea1866146ddce%20-%20Srujana%20Nanduri.png", imgStyle: { objectPosition: "center" } },
 				{ name: "Avinash Kaja", role: "Review & Validation", bio: "Ensures quality and validates processes.", initials: "AK", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/IMG_20260815_172624%20-%20Avinash%20Kaja.png", imgStyle: { objectPosition: "center" } },
 				{ name: "Mohana Vaddi", role: "Review & Validation", bio: "Reviews activities to maintain high standards.", initials: "MV", image: "https://pgoezyvozcnkfiwrknmx.supabase.co/storage/v1/object/public/R&V/IMG_20260816_082036%20-%20mohana26%20vaddi.jpg", imgStyle: { objectPosition: "center" } },
@@ -155,7 +155,7 @@ function Teams() {
 
 			<main>
 				<div className={styles['hero-teams']}>
-					<h1>IIC Teams 2025</h1>
+					<h1>IIC Teams 2026</h1>
 					<p>Meet the passionate faculty and student teams driving innovation, entrepreneurship, and impactful events at VVITU IIC.</p>
 					<div className={styles['hero-stats']}>
 						<div className={styles['stat-item']}>

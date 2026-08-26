@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './sih2026.module.css';
+import { supabase } from '../../lib/supabase';
 
-
-
-function Sih2026({ initialIsAdmin = false }) {
+function Sih2026() {
   const [searchTerm, setSearchTerm] = useState('');
   const [teams, setTeams] = useState([]);
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
@@ -41,57 +40,23 @@ function Sih2026({ initialIsAdmin = false }) {
     }
   }, []);
 
-  React.useEffect(() => {
-    if (localStorage.getItem('isAdmin') === 'true' && localStorage.getItem('token')) {
-      setIsAdmin(true);
-    }
-    fetchParticipants();
-  }, [fetchParticipants]);
+      const { data, error } = await supabase
+        .from('sih_2026_registrations')
+        .select('*')
+        .order('batch_id', { ascending: true });
 
 
 
-  const filteredData = teams.filter(team =>
-    team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    team.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    team.branch.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = teams.filter((team) => {
+    const search = searchTerm.toLowerCase();
 
-  const [updatingStatusId, setUpdatingStatusId] = useState(null);
-
-  const handleStatusChange = async (id, newStatus) => {
-
-    setUpdatingStatusId(id);
-    const token = localStorage.getItem("token") || "";
-
-    try {
-      const response = await fetch(`http://localhost:5000/api/admin/participants/${id}/status`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ status: newStatus.toLowerCase() }) // Send 'completed' or 'pending'
-      });
-
-      if (response.ok) {
-        setTeams(prevTeams =>
-          prevTeams.map(team => (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team)
-        );
-
-        if (newStatus === "Completed") {
-          alert("Status changed and Certificate Email sent to Team Lead successfully!");
-        }
-      } else {
-        const errorData = await response.json();
-        alert(`Failed to update status: ${errorData.message}`);
-      }
-    } catch (error) {
-      console.error("Status update error:", error);
-      alert("Network error: Could not update status.");
-    } finally {
-      setUpdatingStatusId(null);
-    }
-  };
+    return (
+      team.team_lead_name?.toLowerCase().includes(search) ||
+      String(team.batch_id || '').toLowerCase().includes(search) ||
+      team.branch?.toLowerCase().includes(search) ||
+      team.register_number?.toLowerCase().includes(search)
+    );
+  });
 
   const handleLogout = () => {
     localStorage.removeItem('isAdmin');
@@ -139,7 +104,6 @@ function Sih2026({ initialIsAdmin = false }) {
         </div>
       </div>
 
-      {/* Table Container */}
       <div className={styles.tableWrapper}>
         <table className={styles.dataTable}>
           <thead>
@@ -147,7 +111,7 @@ function Sih2026({ initialIsAdmin = false }) {
               <th>Batch ID</th>
               <th>Name</th>
               <th>Branch</th>
-              <th>Email ID</th>
+              <th>Register Number</th>
               <th>Faculty Assigned</th>
               <th>Date of Review</th>
               <th>Status</th>

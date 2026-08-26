@@ -7,11 +7,7 @@ function Sih2026({ initialIsAdmin = false }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [teams, setTeams] = useState([]);
   const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
-
-  const [file, setFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
-
-  // 1. Frontend API Fetching
+  const [isLoading, setIsLoading] = useState(true);  // 1. Frontend API Fetching
   const fetchParticipants = React.useCallback(async () => {
     try {
       const token = localStorage.getItem("token") || "";
@@ -40,6 +36,8 @@ function Sih2026({ initialIsAdmin = false }) {
       }
     } catch (error) {
       console.error("Error fetching participants:", error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -50,39 +48,7 @@ function Sih2026({ initialIsAdmin = false }) {
     fetchParticipants();
   }, [fetchParticipants]);
 
-  const handleUpload = async () => {
-    if (!file) return alert("Please select an Excel or CSV file first.");
 
-    setUploading(true);
-    const token = localStorage.getItem("token") || "";
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await fetch("http://localhost:5000/api/admin/upload", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
-        body: formData
-      });
-
-      if (response.ok) {
-        alert("Spreadsheet uploaded successfully!");
-        setFile(null); // Clear input
-        document.getElementById('excel-upload-input').value = ""; // Reset file input
-        fetchParticipants(); // Refresh table data
-      } else {
-        const errorData = await response.json();
-        alert(`Upload failed: ${errorData.message}`);
-      }
-    } catch (error) {
-      console.error("Upload error:", error);
-      alert("Something went wrong during the upload.");
-    } finally {
-      setUploading(false);
-    }
-  };
 
   const filteredData = teams.filter(team =>
     team.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -127,43 +93,42 @@ function Sih2026({ initialIsAdmin = false }) {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('token');
+    setIsAdmin(false);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>SIH 2026</h1>
 
-      {/* Controls Container (Upload + Search) */}
+      {/* Controls Container: Logout (Left) and Search (Right) */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
 
-        {/* Admin Upload Section */}
-        {isAdmin ? (
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-            <input
-              type="file"
-              id="excel-upload-input"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              onChange={(e) => setFile(e.target.files[0])}
-            />
+        {/* Left Side Container (Admin Logout) */}
+        <div>
+          {isAdmin && (
             <button
-              onClick={handleUpload}
-              disabled={uploading || !file}
+              onClick={handleLogout}
               style={{
-                background: uploading ? '#ccc' : '#2E2A8F',
+                background: '#dc3545', // standard red danger color
                 color: 'white',
-                padding: '8px 16px',
+                padding: '10px 20px',
                 border: 'none',
                 borderRadius: '8px',
-                cursor: (uploading || !file) ? 'not-allowed' : 'pointer'
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
               }}
             >
-              {uploading ? 'Uploading...' : 'Upload Excel'}
+              Logout Admin
             </button>
-          </div>
-        ) : (
-          <div></div> /* Empty div to maintain flex spacing if not admin */
-        )}
+          )}
+        </div>
 
-        {/* Top-right Search Bar */}
-        <div className={styles.searchContainer} style={{ margin: 0, alignSelf: 'auto' }}>
+        {/* Right Side Container (Search Bar) */}
+        <div className={styles.searchContainer} style={{ margin: 0 }}>
           <input
             type="text"
             placeholder="Search teams, ID, branch..."
@@ -190,9 +155,15 @@ function Sih2026({ initialIsAdmin = false }) {
           </thead>
 
           <tbody>
-            {filteredData.length > 0 ? (
+            {isLoading ? (
+              <tr>
+                <td colSpan="7" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
+                  Loading participants...
+                </td>
+              </tr>
+            ) : filteredData.length > 0 ? (
               filteredData.map((team) => (
-                <tr key={team.id}>
+                <tr key={team.id} style={{ transition: 'all 0.2s ease' }}>
                   <td data-label="Batch ID">{team.id}</td>
                   <td data-label="Name" className={styles.teamName}>{team.name}</td>
                   <td data-label="Branch">{team.branch}</td>
@@ -207,6 +178,7 @@ function Sih2026({ initialIsAdmin = false }) {
                         disabled={updatingStatusId === (team.originalBatchId || team.id)}
                         className={`${styles.statusDropdown} ${team.status === 'Completed' ? styles.completed : styles.pending
                           }`}
+                        style={{ cursor: updatingStatusId === (team.originalBatchId || team.id) ? 'wait' : 'pointer' }}
                       >
                         <option value="Pending">Pending</option>
                         <option value="Completed">Completed</option>
@@ -224,7 +196,7 @@ function Sih2026({ initialIsAdmin = false }) {
               ))
             ) : (
               <tr>
-                <td colSpan="6" className={styles.noData}>
+                <td colSpan="7" className={styles.noData}>
                   No matching teams found.
                 </td>
               </tr>

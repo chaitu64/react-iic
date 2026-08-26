@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import styles from './sih2026.module.css';
+import { supabase } from '../../lib/supabase';
 
 function Sih2026() {
   const [searchTerm, setSearchTerm] = useState('');
   const [teams, setTeams] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
 
   useEffect(() => {
     setIsAdmin(localStorage.getItem('isAdmin') === 'true' && Boolean(localStorage.getItem('token')));
 
     const fetchParticipants = async () => {
       try {
-        const token = localStorage.getItem('token') || '';
-        const response = await fetch('http://localhost:5000/api/admin/participants', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        setLoadError('');
+        const { data, error } = await supabase
+          .from('sih_2026_registrations')
+          .select('*')
+          .order('batch_id', { ascending: true });
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch participants: ${response.status}`);
+        if (error) {
+          throw error;
         }
 
-        const result = await response.json();
-        setTeams((result.participants || []).map((participant) => ({
+        setTeams((data || []).map((participant) => ({
           id: participant.batch_id
             ? `B${participant.batch_id.toString().padStart(3, '0')}`
-            : participant.id.toString(),
+            : String(participant.id || 'N/A'),
           name: participant.team_lead_name || 'Unknown Team',
           branch: participant.branch || 'N/A',
           register_number: participant.register_number || 'N/A',
@@ -40,6 +40,7 @@ function Sih2026() {
         })));
       } catch (error) {
         console.error('Error fetching participants:', error);
+        setLoadError('Unable to load participant details right now.');
       } finally {
         setIsLoading(false);
       }
@@ -161,6 +162,10 @@ function Sih2026() {
                 <td colSpan="9" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
                   Loading participants...
                 </td>
+              </tr>
+            ) : loadError ? (
+              <tr>
+                <td colSpan="9" className={styles.noData}>{loadError}</td>
               </tr>
             ) : filteredData.length > 0 ? (
               filteredData.map((team) => (

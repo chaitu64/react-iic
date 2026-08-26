@@ -193,9 +193,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     padding: 8px 0;
     border-bottom: 1px solid #f0f0f0;
     font-size: 0.9rem;
+  }
+
+  .dataTable td {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .dataTable td:last-child {
@@ -204,6 +210,7 @@
   }
 
   .dataTable td::before {
+    flex: 0 0 42%;
     content: attr(data-label);
     font-weight: 600;
     color: var(--muted);
@@ -211,6 +218,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     padding-right: 12px;
+  }
+
+  .dataTable td {
+    color: var(--text, #1f2937);
   }
 
   .statusDropdown,

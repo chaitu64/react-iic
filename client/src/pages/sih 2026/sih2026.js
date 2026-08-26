@@ -24,6 +24,7 @@ function Sih2026() {
           return {
             id: p.batch_id ? `B${p.batch_id.toString().padStart(3, '0')}` : p.id.toString(),
             name: p.team_lead_name || 'Unknown Team',
+            email: p.email || p.team_lead_email || 'N/A',
             branch: p.branch || 'N/A',
             register_number: p.register_number || 'N/A',
             faculty: p.faculty_assigned || 'N/A',
@@ -90,6 +91,7 @@ function Sih2026() {
 
     return (
       team.name.toLowerCase().includes(search) ||
+      team.email.toLowerCase().includes(search) ||
       team.id.toLowerCase().includes(search) ||
       team.branch.toLowerCase().includes(search) ||
       team.register_number.toLowerCase().includes(search)
@@ -148,6 +150,7 @@ function Sih2026() {
             <tr>
               <th>Batch ID</th>
               <th>Name</th>
+              <th>Email</th>
               <th>Branch</th>
               <th>Register Number</th>
               <th>Faculty Assigned</th>
@@ -168,6 +171,7 @@ function Sih2026() {
                 <tr key={team.id} style={{ transition: 'all 0.2s ease' }}>
                   <td data-label="Batch ID">{team.id}</td>
                   <td data-label="Name" className={styles.teamName}>{team.name}</td>
+                  <td data-label="Email">{team.email}</td>
                   <td data-label="Branch">{team.branch}</td>
                   <td data-label="Register Number">{team.register_number}</td>
                   <td data-label="Faculty Assigned">{team.faculty}</td>

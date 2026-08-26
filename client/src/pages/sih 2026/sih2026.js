@@ -5,36 +5,47 @@ import { supabase } from '../../lib/supabase';
 function Sih2026() {
   const [searchTerm, setSearchTerm] = useState('');
   const [teams, setTeams] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchTeams();
-  }, []);
-
-  const fetchTeams = async () => {
+  const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
+  const [isLoading, setIsLoading] = useState(true);  // 1. Frontend API Fetching
+  const fetchParticipants = React.useCallback(async () => {
     try {
-      setLoading(true);
+      const token = localStorage.getItem("token") || "";
+      const response = await fetch("http://localhost:5000/api/admin/participants", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const apiTeams = data.participants.map(p => {
+          return {
+            id: p.batch_id ? `B${p.batch_id.toString().padStart(3, '0')}` : p.id.toString(), // Format batch_id gracefully
+            name: p.team_lead_name || 'Unknown Team',
+            branch: p.branch || 'N/A',
+            emailid: p.email || 'N/A',
+            faculty: p.faculty_assigned || 'N/A',
+            date: p.review_date || p.reviewed_at?.split('T')[0] || 'N/A',
+            status: (p.review_status || '').toLowerCase() === 'completed' ? 'Completed' : 'Pending',
+            originalBatchId: p.batch_id // store original id to send to backend for status updates
+          };
+        });
+
+        setTeams(apiTeams);
+      }
+    } catch (error) {
+      console.error("Error fetching participants:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
       const { data, error } = await supabase
         .from('sih_2026_registrations')
         .select('*')
         .order('batch_id', { ascending: true });
 
-      if (error) {
-        console.error('Supabase error:', error);
-        throw error;
-      }
 
-      console.log('SIH registrations:', data);
-
-      setTeams(data || []);
-    } catch (error) {
-      console.error('Failed to fetch SIH registrations:', error);
-      setTeams([]);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const filteredData = teams.filter((team) => {
     const search = searchTerm.toLowerCase();
@@ -47,18 +58,50 @@ function Sih2026() {
     );
   });
 
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('token');
+    setIsAdmin(false);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>SIH 2026</h1>
 
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          placeholder="Search name, batch ID, branch..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.searchInput}
-        />
+      {/* Controls Container: Logout (Left) and Search (Right) */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
+
+        {/* Left Side Container (Admin Logout) */}
+        <div>
+          {isAdmin && (
+            <button
+              onClick={handleLogout}
+              style={{
+                background: '#dc3545', // standard red danger color
+                color: 'white',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+            >
+              Logout Admin
+            </button>
+          )}
+        </div>
+
+        {/* Right Side Container (Search Bar) */}
+        <div className={styles.searchContainer} style={{ margin: 0 }}>
+          <input
+            type="text"
+            placeholder="Search teams, ID, branch..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
       </div>
 
       <div className={styles.tableWrapper}>
@@ -76,52 +119,42 @@ function Sih2026() {
           </thead>
 
           <tbody>
-            {loading ? (
+            {isLoading ? (
               <tr>
-                <td colSpan="7" className={styles.noData}>
-                  Loading teams...
+                <td colSpan="7" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
+                  Loading participants...
                 </td>
               </tr>
             ) : filteredData.length > 0 ? (
               filteredData.map((team) => (
-                <tr key={team.id}>
-                  <td data-label="Batch ID">
-                    {team.batch_id}
-                  </td>
-
-                  <td
-                    data-label="Name"
-                    className={styles.teamName}
-                  >
-                    {team.team_lead_name}
-                  </td>
-
-                  <td data-label="Branch">
-                    {team.branch || 'N/A'}
-                  </td>
-
-                  <td data-label="Register Number">
-                    {team.register_number || 'N/A'}
-                  </td>
-
-                  <td data-label="Faculty Assigned">
-                    {team.faculty_assigned || 'Not Assigned'}
-                  </td>
-
-                  <td data-label="Date of Review">
-                    {team.review_date || 'Not Available'}
-                  </td>
-
+                <tr key={team.id} style={{ transition: 'all 0.2s ease' }}>
+                  <td data-label="Batch ID">{team.id}</td>
+                  <td data-label="Name" className={styles.teamName}>{team.name}</td>
+                  <td data-label="Branch">{team.branch}</td>
+                  <td data-label="Email ID">{team.emailid}</td>
+                  <td data-label="Faculty Assigned">{team.faculty}</td>
+                  <td data-label="Date of Review">{team.date}</td>
                   <td data-label="Status">
-                    <span
-                      className={`${styles.statusBadge} ${
-                        team.review_status?.toLowerCase() === 'completed'
-                          ? styles.completed
-                          : styles.pending
-                      }`}
-                    >
-                      {team.review_status || 'Pending'}
-                    </span>
+                    {isAdmin ? (
+                      <select
+                        value={team.status}
+                        onChange={(e) => handleStatusChange(team.originalBatchId || team.id, e.target.value)}
+                        disabled={updatingStatusId === (team.originalBatchId || team.id)}
+                        className={`${styles.statusDropdown} ${team.status === 'Completed' ? styles.completed : styles.pending
+                          }`}
+                        style={{ cursor: updatingStatusId === (team.originalBatchId || team.id) ? 'wait' : 'pointer' }}
+                      >
+                        <option value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                      </select>
+                    ) : (
+                      <span
+                        className={`${styles.statusBadge} ${team.status === 'Completed' ? styles.completed : styles.pending
+                          }`}
+                      >
+                        {team.status}
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))

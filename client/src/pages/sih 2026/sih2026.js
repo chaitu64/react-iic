@@ -5,32 +5,33 @@ import { supabase } from '../../lib/supabase';
 function Sih2026() {
   const [searchTerm, setSearchTerm] = useState('');
   const [teams, setTeams] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);  // 1. Frontend API Fetching
   const fetchParticipants = React.useCallback(async () => {
     try {
-      const token = localStorage.getItem("token") || "";
-      const response = await fetch("http://localhost:5000/api/admin/participants", {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      });
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('sih_2026_registrations')
+        .select('*')
+        .order('batch_id', { ascending: true });
 
-      if (response.ok) {
-        const data = await response.json();
-        const apiTeams = data.participants.map(p => {
+      if (error) {
+        throw error;
+      }
+
+      if (data) {
+        const apiTeams = data.map(p => {
           return {
-            id: p.batch_id ? `B${p.batch_id.toString().padStart(3, '0')}` : p.id.toString(), // Format batch_id gracefully
+            id: p.batch_id ? `B${p.batch_id.toString().padStart(3, '0')}` : p.id.toString(),
             name: p.team_lead_name || 'Unknown Team',
             branch: p.branch || 'N/A',
-            emailid: p.email || 'N/A',
+            register_number: p.register_number || 'N/A',
             faculty: p.faculty_assigned || 'N/A',
             date: p.review_date || p.reviewed_at?.split('T')[0] || 'N/A',
             status: (p.review_status || '').toLowerCase() === 'completed' ? 'Completed' : 'Pending',
-            originalBatchId: p.batch_id // store original id to send to backend for status updates
+            originalBatchId: p.batch_id
           };
         });
-
         setTeams(apiTeams);
       }
     } catch (error) {
@@ -40,10 +41,47 @@ function Sih2026() {
     }
   }, []);
 
-      const { data, error } = await supabase
-        .from('sih_2026_registrations')
-        .select('*')
-        .order('batch_id', { ascending: true });
+  useEffect(() => {
+    if (localStorage.getItem('isAdmin') === 'true' && localStorage.getItem('token')) {
+      setIsAdmin(true);
+    }
+    fetchParticipants();
+  }, [fetchParticipants]);
+
+  const [updatingStatusId, setUpdatingStatusId] = useState(null);
+
+  const handleStatusChange = async (id, newStatus) => {
+    setUpdatingStatusId(id);
+    const token = localStorage.getItem("token") || "";
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/admin/participants/${id}/status`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ status: newStatus.toLowerCase() })
+      });
+
+      if (response.ok) {
+        setTeams(prevTeams =>
+          prevTeams.map(team => (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team)
+        );
+        if (newStatus === "Completed") {
+          alert("Status changed and Certificate Email sent to Team Lead successfully!");
+        }
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to update status: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error("Status update error:", error);
+      alert("Network error: Could not update status.");
+    } finally {
+      setUpdatingStatusId(null);
+    }
+  };
 
 
 
@@ -51,10 +89,10 @@ function Sih2026() {
     const search = searchTerm.toLowerCase();
 
     return (
-      team.team_lead_name?.toLowerCase().includes(search) ||
-      String(team.batch_id || '').toLowerCase().includes(search) ||
-      team.branch?.toLowerCase().includes(search) ||
-      team.register_number?.toLowerCase().includes(search)
+      team.name.toLowerCase().includes(search) ||
+      team.id.toLowerCase().includes(search) ||
+      team.branch.toLowerCase().includes(search) ||
+      team.register_number.toLowerCase().includes(search)
     );
   });
 
@@ -131,7 +169,7 @@ function Sih2026() {
                   <td data-label="Batch ID">{team.id}</td>
                   <td data-label="Name" className={styles.teamName}>{team.name}</td>
                   <td data-label="Branch">{team.branch}</td>
-                  <td data-label="Email ID">{team.emailid}</td>
+                  <td data-label="Register Number">{team.register_number}</td>
                   <td data-label="Faculty Assigned">{team.faculty}</td>
                   <td data-label="Date of Review">{team.date}</td>
                   <td data-label="Status">

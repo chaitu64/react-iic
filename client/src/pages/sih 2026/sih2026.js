@@ -55,7 +55,7 @@ function Sih2026() {
     setUpdatingStatusId(id);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/participants/${id}/status`, {
+      const response = await fetch(`https://react-iic.onrender.com/api/admin/participants/${id}/status`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token') || ''}`,

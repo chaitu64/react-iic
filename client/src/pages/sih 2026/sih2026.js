@@ -64,17 +64,21 @@ function Sih2026() {
         body: JSON.stringify({ status: newStatus.toLowerCase() })
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        const responseData = await response.json();
+        setTeams(prevTeams =>
+          prevTeams.map(team => (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team)
+        );
+        if (newStatus === "Completed") {
+          alert(responseData.message || "Status changed and Certificate Email sent to Team Lead successfully!");
+        }
+      } else {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update status');
+        alert(`Failed to update status: ${errorData.message}`);
       }
-
-      setTeams((previousTeams) => previousTeams.map((team) => (
-        (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team
-      )));
     } catch (error) {
-      console.error('Status update error:', error);
-      window.alert(error.message || 'Network error: Could not update status.');
+      console.error("Status update error:", error);
+      alert("Network error: Could not update status.");
     } finally {
       setUpdatingStatusId(null);
     }

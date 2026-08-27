@@ -12,10 +12,6 @@ function Sih2026() {
   const [facultyList, setFacultyList] = useState(["N/A"]);
   const [coordinatorList, setCoordinatorList] = useState(["N/A"]);
 
-  // const getCount = (field, value) => {
-  //   return teams.filter(t => t[field] === value).length;
-  // };
-
   const fetchParticipants = React.useCallback(async () => {
     try {
       setIsLoading(true);
@@ -179,7 +175,7 @@ function Sih2026() {
             className={styles.searchInput}
           />
         </div>
-      </div>
+      </div >
 
       <div className={styles.tableWrapper}>
         <table className={styles.dataTable}>
@@ -194,8 +190,8 @@ function Sih2026() {
               <th>IIC Co-ordinator</th>
               <th>Date of Review</th>
               <th>Status</th>
-            </tr>
-          </thead>
+            </tr >
+          </thead >
 
           <tbody>
             {isLoading ? (
@@ -270,7 +266,7 @@ function Sih2026() {
                       </span>
                     )}
                   </td>
-                </tr>
+                </tr >
               ))
             ) : (
               <tr>
@@ -278,11 +274,12 @@ function Sih2026() {
                   No matching teams found.
                 </td>
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+            )
+            }
+          </tbody >
+        </table >
+      </div >
+    </div >
   );
 }
 

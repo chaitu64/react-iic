@@ -1,5 +1,4 @@
 import { supabase } from "../config/supabase.js";
-import { sendCertificateEmail } from "../services/email.service.js";
 
 export const getParticipants = async (req, res) => {
     try {
@@ -45,22 +44,47 @@ export const updateStatus = async (req, res) => {
             return res.status(404).json({ message: "Participant not found" });
         }
 
-        // Check if status is completed and send email
-        if (status === "completed" && data.email) {
-            try {
-                await sendCertificateEmail(data.email);
-            } catch (emailError) {
-                console.error("Failed to send email:", emailError);
-                return res.status(200).json({
-                    message: "Status updated successfully, but failed to send certificate email.",
-                    participant: data
-                });
-            }
-        }
-
-        return res.status(200).json({ message: "Status updated successfully", participant: data });
+        return res.status(200).json({
+            message: "Status updated successfully",
+            participant: data
+        });
     } catch (error) {
         console.error("Update status error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+export const updateField = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { field, value } = req.body;
+
+        const allowedFields = ["faculty_assigned", "iic_coordinator_assigned"];
+        if (!allowedFields.includes(field)) {
+            return res.status(400).json({ message: "Invalid field provided" });
+        }
+
+        const { data, error } = await supabase
+            .from("sih_2026_registrations")
+            .update({ [field]: value })
+            .eq("batch_id", id)
+            .select()
+            .single();
+
+        if (error) {
+            return res.status(500).json({ message: "Error updating field", error });
+        }
+
+        if (!data) {
+            return res.status(404).json({ message: "Participant not found" });
+        }
+
+        return res.status(200).json({
+            message: "Successfully updated",
+            participant: data
+        });
+    } catch (error) {
+        console.error("Update field error:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };

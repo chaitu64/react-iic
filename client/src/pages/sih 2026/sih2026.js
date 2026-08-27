@@ -69,8 +69,11 @@ function Sih2026() {
         setTeams(prevTeams =>
           prevTeams.map(team => (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team)
         );
-        if (newStatus === "Completed") {
+        // Show an alert regardless of status just to confirm to the user the API call succeeded
+        if (newStatus.toLowerCase() === "completed") {
           alert(responseData.message || "Status changed and Certificate Email sent to Team Lead successfully!");
+        } else {
+          alert(responseData.message || `Status successfully updated to ${newStatus}`);
         }
       } else {
         const errorData = await response.json();

@@ -56,7 +56,8 @@ function Sih2026() {
     const token = localStorage.getItem("token") || "";
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/participants/${id}/status`, {
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const response = await fetch(`${API_URL}/admin/participants/${id}/status`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${token}`,

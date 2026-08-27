@@ -46,9 +46,19 @@ export const updateStatus = async (req, res) => {
         }
 
         // Check if status is completed and send email
-        if (status === "completed" && data.email) {
+                // Check if status is completed and send email
+        let emailSentStatus = false;
+        const recipientEmail = data.email || data.team_lead_email;
+        if (status === "completed" && recipientEmail) {
             try {
-                await sendCertificateEmail(data.email);
+                const emailSent = await sendCertificateEmail(recipientEmail);
+                emailSentStatus = emailSent;
+                if (!emailSent) {
+                    return res.status(200).json({
+                        message: "Status updated, but failed to send certificate email (SMTP error).",
+                        participant: data
+                    });
+                }
             } catch (emailError) {
                 console.error("Failed to send email:", emailError);
                 return res.status(200).json({
@@ -58,9 +68,7 @@ export const updateStatus = async (req, res) => {
             }
         }
 
-        return res.status(200).json({ message: "Status updated successfully", participant: data });
-    } catch (error) {
-        console.error("Update status error:", error);
-        return res.status(500).json({ message: "Internal server error" });
-    }
-};
+        return res.status(200).json({
+            message: emailSentStatus ? "Status updated and email sent successfully" : "Status updated successfully",
+            participant: data
+        });

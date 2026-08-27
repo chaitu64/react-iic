@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './sih2026.module.css';
-import { supabase } from '../../lib/supabase';
 
 function Sih2026() {
   const [searchTerm, setSearchTerm] = useState('');
   const [teams, setTeams] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);  // 1. Frontend API Fetching
-  const fetchParticipants = React.useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from('sih_2026_registrations')
-        .select('*')
-        .order('batch_id', { ascending: true });
-
-      if (error) {
-        throw error;
-      }
+  const [isLoading, setIsLoading] = useState(true);
 
       if (data) {
         const apiTeams = data.map(p => {
@@ -33,62 +21,70 @@ function Sih2026() {
             originalBatchId: p.batch_id
           };
         });
-        setTeams(apiTeams);
-      }
-    } catch (error) {
-      console.error("Error fetching participants:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
 
-  useEffect(() => {
-    if (localStorage.getItem('isAdmin') === 'true' && localStorage.getItem('token')) {
-      setIsAdmin(true);
-    }
+        if (!response.ok) {
+          throw new Error(`Failed to fetch participants: ${response.status}`);
+        }
+
+        const result = await response.json();
+        setTeams((result.participants || []).map((participant) => ({
+          id: participant.batch_id
+            ? `B${participant.batch_id.toString().padStart(3, '0')}`
+            : participant.id.toString(),
+          name: participant.team_lead_name || 'Unknown Team',
+          branch: participant.branch || 'N/A',
+          register_number: participant.register_number || 'N/A',
+          email: participant.email || 'N/A',
+          faculty: participant.faculty_assigned || 'N/A',
+          iic_coordinator: participant.iic_coordinator_assigned || 'N/A',
+          date: participant.review_date || participant.reviewed_at?.split('T')[0] || 'N/A',
+          status: participant.review_status?.toLowerCase() === 'completed' ? 'Completed' : 'Pending',
+          originalBatchId: participant.batch_id
+        })));
+      } catch (error) {
+        console.error('Error fetching participants:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchParticipants();
-  }, [fetchParticipants]);
+  }, []);
 
   const [updatingStatusId, setUpdatingStatusId] = useState(null);
 
   const handleStatusChange = async (id, newStatus) => {
     setUpdatingStatusId(id);
-    const token = localStorage.getItem("token") || "";
 
     try {
       const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       const response = await fetch(`${API_URL}/admin/participants/${id}/status`, {
         method: "PUT",
         headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
+          Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ status: newStatus.toLowerCase() })
       });
 
-      if (response.ok) {
-        setTeams(prevTeams =>
-          prevTeams.map(team => (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team)
-        );
-        if (newStatus === "Completed") {
-          alert("Status changed and Certificate Email sent to Team Lead successfully!");
-        }
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        alert(`Failed to update status: ${errorData.message}`);
+        throw new Error(errorData.message || 'Failed to update status');
       }
+
+      setTeams((previousTeams) => previousTeams.map((team) => (
+        (team.originalBatchId || team.id) === id ? { ...team, status: newStatus } : team
+      )));
     } catch (error) {
-      console.error("Status update error:", error);
-      alert("Network error: Could not update status.");
+      console.error('Status update error:', error);
+      window.alert(error.message || 'Network error: Could not update status.');
     } finally {
       setUpdatingStatusId(null);
     }
   };
 
-
-
   const filteredData = teams.filter((team) => {
-    const search = searchTerm.toLowerCase();
+  const search = searchTerm.trim().toLowerCase();
 
     return (
       team.name.toLowerCase().includes(search) ||
@@ -154,16 +150,18 @@ function Sih2026() {
               <th>Email</th>
               <th>Branch</th>
               <th>Register Number</th>
+              <th>Registered Mail</th>
               <th>Faculty Assigned</th>
+              <th>IIC Co-ordinator</th>
               <th>Date of Review</th>
-              <th>Status</th>
+              <th>Review Status</th>
             </tr>
           </thead>
 
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan="7" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
+                <td colSpan="9" className={styles.noData} style={{ padding: '40px', fontSize: '1.2rem', color: '#6b7280' }}>
                   Loading participants...
                 </td>
               </tr>
@@ -175,7 +173,9 @@ function Sih2026() {
                   <td data-label="Email">{team.email}</td>
                   <td data-label="Branch">{team.branch}</td>
                   <td data-label="Register Number">{team.register_number}</td>
+                  <td data-label="Registered Mail">{team.email}</td>
                   <td data-label="Faculty Assigned">{team.faculty}</td>
+                  <td data-label="IIC Co-ordinator">{team.iic_coordinator}</td>
                   <td data-label="Date of Review">{team.date}</td>
                   <td data-label="Status">
                     {isAdmin ? (
@@ -203,7 +203,7 @@ function Sih2026() {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className={styles.noData}>
+                <td colSpan="9" className={styles.noData}>
                   No matching teams found.
                 </td>
               </tr>

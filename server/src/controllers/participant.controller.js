@@ -71,3 +71,8 @@ export const updateStatus = async (req, res) => {
             message: emailSentStatus ? "Status updated and email sent successfully" : "Status updated successfully",
             participant: data
         });
+    } catch (error) {
+        console.error("Update status error:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};

@@ -131,6 +131,26 @@
   cursor: pointer;
 }
 
+.fieldDropdown {
+  padding: 6px 12px;
+  border-radius: 20px;
+  /* Matched fully to statusDropdown Pill */
+  font-size: 0.85rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  background-color: rgba(46, 42, 143, 0.05);
+  /* Very slight navy tint like the completed button */
+  border: 1px solid rgba(46, 42, 143, 0.2);
+  color: var(--navy);
+  transition: all 0.2s ease;
+}
+
+.fieldDropdown:hover {
+  background-color: rgba(46, 42, 143, 0.1);
+  border-color: rgba(46, 42, 143, 0.3);
+}
+
 .pending {
   background-color: rgba(244, 162, 56, 0.15);
   color: #965200;

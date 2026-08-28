@@ -73,7 +73,7 @@ function Sih2026() {
     setUpdatingStatusId(id);
     const token = localStorage.getItem("token") || "";
     try {
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_URL = process.env.REACT_APP_API_URL || "https://react-iic.onrender.com/api";
       const response = await fetch(`${API_URL}/admin/participants/${id}/status`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
@@ -102,7 +102,7 @@ function Sih2026() {
     setUpdatingStatusId(id);
     const token = localStorage.getItem("token") || "";
     try {
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+      const API_URL = process.env.REACT_APP_API_URL || "https://react-iic.onrender.com/api";
       const response = await fetch(`${API_URL}/admin/participants/${id}/field`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },

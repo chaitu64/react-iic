@@ -15,7 +15,7 @@ function AdminLogin() {
         setError('');
 
         try {
-            const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+            const API_URL = process.env.REACT_APP_API_URL || "https://react-iic.onrender.com/api";
             const response = await fetch(`${API_URL}/admin/login`, {
                 method: "POST",
                 headers: {

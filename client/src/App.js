@@ -2,8 +2,8 @@ import React, { Suspense } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-
-// Lazy load page components to slice bundle size via route-based code splitting
+import ProtectedRoute from './components/ProtectedRoute';
+// Lazy load page components
 const Home = React.lazy(() => import('./pages/home'));
 const Calender = React.lazy(() => import('./pages/calender/calender'));
 const Contact = React.lazy(() => import('./pages/contact/contact'));
@@ -13,13 +13,32 @@ const Teams = React.lazy(() => import('./pages/teams/teams'));
 const About = React.lazy(() => import('./pages/about/about'));
 const SIH2026 = React.lazy(() => import('./pages/sih 2026/sih2026'));
 const AdminLogin = React.lazy(() => import('./pages/adminLogin/AdminLogin'));
+const AdminChallenges = React.lazy(() =>
+  import('./pages/AdminChallenges/AdminChallenges')
+);
 const PageNotFound = React.lazy(() => import('./pages/PageNotFound'));
 
 function App() {
   return (
     <Router>
       <Layout>
-        <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#2E2A8F', fontSize: '1.2rem', fontWeight: 600 }}>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                color: '#2E2A8F',
+                fontSize: '1.2rem',
+                fontWeight: 600
+              }}
+            >
+              Loading...
+            </div>
+          }
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/calender" element={<Calender />} />
@@ -28,7 +47,22 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/sih2026" element={<SIH2026 />} />
-            <Route path="/admin-portal-login" element={<AdminLogin />} />
+
+            <Route
+              path="/admin-portal-login"
+              element={<AdminLogin />}
+            />
+
+            {/* SIH Challenge Admin Review Portal */}
+            <Route
+               path="/admin-challenges"
+               element={
+               <ProtectedRoute>
+              <AdminChallenges />
+              </ProtectedRoute>
+              }
+/>
+
             <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

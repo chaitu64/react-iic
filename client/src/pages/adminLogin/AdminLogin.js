@@ -7,53 +7,34 @@ function AdminLogin() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
         setLoading(true);
         setError('');
 
         try {
-            const response = await fetch(
-                "http://localhost:5000/api/admin/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email,
-                        password
-                    })
-                }
-            );
-
-            const data = await response.json();
+            const API_URL = process.env.REACT_APP_API_URL || "https://react-iic.onrender.com/api";
+            const response = await fetch(`${API_URL}/admin/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
 
             if (response.ok) {
-                console.log("Login response:", data);
-
+                const data = await response.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('isAdmin', 'true');
-
-                navigate('/admin-challenges');
-
+                navigate('/sih2026'); // Redirects back to the SIH page
             } else {
-                setError(
-                    data.message || "Invalid credentials"
-                );
+                const errorData = await response.json();
+                setError(errorData.message || "Invalid credentials");
             }
-
         } catch (err) {
-            console.error("Login error:", err);
-
-            setError(
-                "Server error. Ensure backend is running."
-            );
-
+            setError("Server error. Ensure backend is running.");
         } finally {
             setLoading(false);
         }
@@ -63,52 +44,28 @@ function AdminLogin() {
         <div className={styles.container}>
             <div className={styles.loginCard}>
                 <h2>Admin Authentication</h2>
-
-                <form
-                    onSubmit={handleLogin}
-                    className={styles.form}
-                >
-                    {error && (
-                        <div className={styles.error}>
-                            {error}
-                        </div>
-                    )}
-
+                <form onSubmit={handleLogin} className={styles.form}>
+                    {error && <div className={styles.error}>{error}</div>}
                     <div className={styles.inputGroup}>
                         <label>Admin Email ID</label>
-
                         <input
                             type="text"
                             value={email}
-                            onChange={(e) =>
-                                setEmail(e.target.value)
-                            }
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
-
                     <div className={styles.inputGroup}>
                         <label>Password</label>
-
                         <input
                             type="password"
                             value={password}
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
-
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className={styles.submitBtn}
-                    >
-                        {loading
-                            ? 'Authenticating...'
-                            : 'Login securely'
-                        }
+                    <button type="submit" disabled={loading} className={styles.submitBtn}>
+                        {loading ? 'Authenticating...' : 'Login securely'}
                     </button>
                 </form>
             </div>

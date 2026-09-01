@@ -15,7 +15,7 @@ function AdminLogin() {
         setError('');
 
         try {
-            const API_URL = process.env.REACT_APP_API_URL || "https://react-iic.onrender.com/api";
+            const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
             const response = await fetch(`${API_URL}/admin/login`, {
                 method: "POST",
                 headers: {
@@ -28,7 +28,7 @@ function AdminLogin() {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('isAdmin', 'true');
-                navigate('/sih2026'); // Redirects back to the SIH page
+                navigate('/admin-challenges'); // Redirects to the Admin dashboard
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || "Invalid credentials");

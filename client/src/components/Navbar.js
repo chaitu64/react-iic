@@ -38,17 +38,17 @@ function Navbar() {
                         <Link to="/gallery" className={currentPath === '/gallery' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Gallery</Link>
                         <Link to="/teams" className={currentPath === '/teams' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Teams</Link>
                         <Link
-                            to="/sih2026"
-                            className={`nav-live-link ${currentPath === '/sih2026' ? 'active' : ''}`}
+                            to="/challenge"
+                            className={`nav-live-link ${currentPath === '/challenge' ? 'active' : ''}`}
                             onClick={() => setMenuOpen(false)}
-                            title="SIH 2026 is LIVE NOW — Click to view details and teams"
-                            aria-label="Smart India Hackathon 2026 - Live Now"
+                            title="Challenge is LIVE NOW — Click to view details and teams"
+                            aria-label="Challenge - Live Now"
                         >
                             <span className="live-indicator" aria-hidden="true">
                                 <span className="live-ping"></span>
                                 <span className="live-dot"></span>
                             </span>
-                            <span className="live-label">SIH 2026</span>
+                            <span className="live-label">Challenge</span>
                             <span className="live-tag">LIVE</span>
                         </Link>
                         <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Contact</Link>

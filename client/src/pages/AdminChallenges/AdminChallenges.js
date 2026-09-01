@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './adminChallenges.module.css';
 
-const API_URL = 'https://react-iic.onrender.com/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 function AdminChallenges() {
   const [challenges, setChallenges] = useState([]);
@@ -9,6 +10,13 @@ function AdminChallenges() {
   const [updatingId, setUpdatingId] = useState(null);
   const [message, setMessage] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
+    navigate('/admin-portal-login');
+  };
 
   // ======================================================
   // FETCH ALL CHALLENGES FROM DATABASE
@@ -105,9 +113,9 @@ function AdminChallenges() {
         previousChallenges.map((challenge) =>
           challenge.id === id
             ? {
-                ...challenge,
-                web_team_review_status: status
-              }
+              ...challenge,
+              web_team_review_status: status
+            }
             : challenge
         )
       );
@@ -172,9 +180,9 @@ function AdminChallenges() {
         previousChallenges.map((challenge) =>
           challenge.id === id
             ? {
-                ...challenge,
-                faculty_review_status: status
-              }
+              ...challenge,
+              faculty_review_status: status
+            }
             : challenge
         )
       );
@@ -342,14 +350,23 @@ function AdminChallenges() {
         </div>
 
 
-        <button
-          className={styles.refreshButton}
-          onClick={() => fetchChallenges()}
-          disabled={isLoading}
-        >
-          <span>↻</span>
-          {isLoading ? 'Refreshing...' : 'Refresh Data'}
-        </button>
+        <div className={styles.headerActions}>
+          <button
+            className={styles.refreshButton}
+            onClick={() => fetchChallenges()}
+            disabled={isLoading}
+          >
+            <span>↻</span>
+            {isLoading ? 'Refreshing...' : 'Refresh Data'}
+          </button>
+
+          <button
+            className={styles.logoutButton}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
 
       </div>
 
@@ -358,11 +375,10 @@ function AdminChallenges() {
 
       {message && (
         <div
-          className={`${styles.message} ${
-            message.type === 'success'
-              ? styles.successMessage
-              : styles.errorMessage
-          }`}
+          className={`${styles.message} ${message.type === 'success'
+            ? styles.successMessage
+            : styles.errorMessage
+            }`}
         >
           {message.type === 'success' ? '✓ ' : '⚠ '}
           {message.text}
@@ -489,9 +505,8 @@ function AdminChallenges() {
 
 
                   <span
-                    className={`${styles.statusBadge} ${
-                      getStatusClass(overallStatus)
-                    }`}
+                    className={`${styles.statusBadge} ${getStatusClass(overallStatus)
+                      }`}
                   >
                     {overallStatus}
                   </span>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './adminChallenges.module.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://react-iic.onrender.com/api';
 
 function AdminChallenges() {
   const [challenges, setChallenges] = useState([]);

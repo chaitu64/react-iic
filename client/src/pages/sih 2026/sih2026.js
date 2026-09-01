@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './sih2026.module.css';
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://react-iic.onrender.com/api';
 function Sih2026() {
   const [batchId, setBatchId] = useState('');
   const [email, setEmail] = useState('');

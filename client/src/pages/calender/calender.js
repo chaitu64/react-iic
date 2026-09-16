@@ -71,6 +71,10 @@ function Calender() {
 		(event) => event.month === month && event.year === year
 	);
 
+	const sortedEvents = [...events].sort(
+		(a,b)=> new Date(a.date) - new Date(b.date)
+	);
+
 	return (
 		<main>
 

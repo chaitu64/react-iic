@@ -218,15 +218,15 @@ function Events() {
 
               {/* LIVE - TOP LEFT */}
 
-              <div className={styles['live-badge']}>
+              {/* <div className={styles['live-badge']}>
                 <span className={styles.dot}></span>
-                LIVE
-              </div>
+                COMPLETED
+              </div> */}
 
               {/* ONGOING - TOP RIGHT */}
 
               <div className={styles['status-badge']}>
-                ONGOING
+                COMPLETED
               </div>
 
               <img

@@ -37,7 +37,7 @@ function Navbar() {
                         <Link to="/calender" className={currentPath === '/calender' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Calendar</Link>
                         <Link to="/gallery" className={currentPath === '/gallery' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Gallery</Link>
                         <Link to="/teams" className={currentPath === '/teams' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Teams</Link>
-                        <Link
+                        {/* <Link
                             to="/challenge"
                             className={`nav-live-link ${currentPath === '/challenge' ? 'active' : ''}`}
                             onClick={() => setMenuOpen(false)}
@@ -50,7 +50,7 @@ function Navbar() {
                             </span>
                             <span className="live-label">Challenge</span>
                             <span className="live-tag">LIVE</span>
-                        </Link>
+                        </Link> */}
                         <Link to="/contact" className={currentPath === '/contact' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Contact</Link>
                     </nav>
 

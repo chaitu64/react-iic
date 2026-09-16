@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import ProtectedRoute from './components/ProtectedRoute';
+// import ProtectedRoute from './components/ProtectedRoute';
 // Lazy load page components
 const Home = React.lazy(() => import('./pages/home'));
 const Calender = React.lazy(() => import('./pages/calender/calender'));
@@ -11,11 +11,11 @@ const Events = React.lazy(() => import('./pages/events/events'));
 const Gallery = React.lazy(() => import('./pages/gallery/gallery'));
 const Teams = React.lazy(() => import('./pages/teams/teams'));
 const About = React.lazy(() => import('./pages/about/about'));
-const SIH2026 = React.lazy(() => import('./pages/sih 2026/sih2026'));
+// const SIH2026 = React.lazy(() => import('./pages/sih 2026/sih2026'));
 const AdminLogin = React.lazy(() => import('./pages/adminLogin/AdminLogin'));
-const AdminChallenges = React.lazy(() =>
-  import('./pages/AdminChallenges/AdminChallenges')
-);
+// const AdminChallenges = React.lazy(() =>
+//   import('./pages/AdminChallenges/AdminChallenges')
+// );
 const PageNotFound = React.lazy(() => import('./pages/PageNotFound'));
 
 function App() {
@@ -46,22 +46,22 @@ function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/teams" element={<Teams />} />
-            <Route path="/challenge" element={<SIH2026 />} />
+            {/* <Route path="/challenge" element={<SIH2026 />} /> */}
 
-            <Route
+             <Route
               path="/admin-portal-login"
               element={<AdminLogin />}
-            />
+            /> 
 
-            {/* SIH Challenge Admin Review Portal */}
+            {/* SIH Challenge Admin Review Portal
             <Route
                path="/admin-challenges"
                element={
                <ProtectedRoute>
               <AdminChallenges />
               </ProtectedRoute>
-              }
-/>
+              } 
+/>*/}
 
             <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />

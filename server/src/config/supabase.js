@@ -1,9 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
-import dotenv from "dotenv";
 
-dotenv.config();
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
 
-const supabaseUrl = process.env.SUPABASE_URL || "YOUR_SUPABASE_URL_HERE";
-const supabaseKey = process.env.SUPABASE_KEY || "YOUR_SUPABASE_KEY_HERE";
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error("Missing Supabase environment variables");
+}
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+console.log("Supabase URL loaded:", supabaseUrl);
+console.log("Supabase key exists:", !!supabaseKey);
+console.log(
+  "Supabase key starts with:",
+  supabaseKey.substring(0, 15)
+);
+
+export const supabase = createClient(
+  supabaseUrl,
+  supabaseKey
+);

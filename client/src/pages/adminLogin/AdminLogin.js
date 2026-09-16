@@ -28,7 +28,7 @@ function AdminLogin() {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('isAdmin', 'true');
-                navigate('/sih2026'); // Redirects back to the SIH page
+                navigate('/admin-challenges'); // Redirects to the Admin dashboard
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || "Invalid credentials");
